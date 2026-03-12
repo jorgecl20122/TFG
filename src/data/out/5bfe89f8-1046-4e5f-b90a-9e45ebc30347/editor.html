@@ -1,0 +1,2629 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>Editor de transcripción</title>
+
+<style>
+
+body {font-family: Arial; margin:40px;}
+
+table {border-collapse: collapse; width:100%;}
+
+td,th {
+border:1px solid #ddd;
+padding:8px;
+}
+
+td[contenteditable] {
+background:#fafafa;
+}
+
+button {
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Editor de transcripción</h1>
+
+<audio id="media" controls src="/uploads/5bfe89f8-1046-4e5f-b90a-9e45ebc30347_GlobalNewsPodcast-20260303-IsraelHitsTehranAndBeirutWithSimultaneousStrikes.mp3"></audio>
+
+<table>
+
+<tr>
+<th>Inicio</th>
+<th>Fin</th>
+<th>Texto</th>
+<th>Acciones</th>
+</tr>
+
+
+        <tr>
+        <td>00:00:00</td>
+        <td>00:03:60</td>
+        <td contenteditable="true">This is the Global News Podcast from the BBC World Service.</td>
+        <td>
+            <button onclick="playSegment(0.0, 3.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:05:52</td>
+        <td>00:10:24</td>
+        <td contenteditable="true">I'm Celia Hatton and it's 1600 GMT on Tuesday, the 3rd of March.</td>
+        <td>
+            <button onclick="playSegment(5.5200000000000005, 10.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:10:24</td>
+        <td>00:12:24</td>
+        <td contenteditable="true">These are our main stories.</td>
+        <td>
+            <button onclick="playSegment(10.24, 12.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:12:24</td>
+        <td>00:16:96</td>
+        <td contenteditable="true">Israel says it's carrying out simultaneous strikes in Tehran and Beirut.</td>
+        <td>
+            <button onclick="playSegment(12.24, 16.96)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:17:51</td>
+        <td>00:22:32</td>
+        <td contenteditable="true">With the US-Israeli war with Iran threatening the oil and gas supply chain,</td>
+        <td>
+            <button onclick="playSegment(17.52, 22.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:22:32</td>
+        <td>00:26:32</td>
+        <td contenteditable="true">it's not only Middle Eastern countries facing an uncertain future.</td>
+        <td>
+            <button onclick="playSegment(22.32, 26.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:26:39</td>
+        <td>00:30:96</td>
+        <td contenteditable="true">South Korean needs oil and gas to run its power generators and also to feed its enormous</td>
+        <td>
+            <button onclick="playSegment(26.4, 30.96)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:30:96</td>
+        <td>00:34:39</td>
+        <td contenteditable="true">petrochemical industry to huge part of the South Korean economy.</td>
+        <td>
+            <button onclick="playSegment(30.96, 34.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:34:39</td>
+        <td>00:39:03</td>
+        <td contenteditable="true">And we go to Nigeria to look at deep divisions within the Anglican Church</td>
+        <td>
+            <button onclick="playSegment(34.4, 39.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:39:03</td>
+        <td>00:42:96</td>
+        <td contenteditable="true">over the appointment of the first female archbishop of Canterbury.</td>
+        <td>
+            <button onclick="playSegment(39.04, 42.96)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:46:00</td>
+        <td>00:52:79</td>
+        <td contenteditable="true">Day 4 of the US-Israeli war with Iran and day 4 too of the fallout from that conflict.</td>
+        <td>
+            <button onclick="playSegment(46.0, 52.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:52:79</td>
+        <td>00:55:92</td>
+        <td contenteditable="true">We're focusing this edition on what's happening in the region,</td>
+        <td>
+            <button onclick="playSegment(52.8, 55.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:55:92</td>
+        <td>01:01:67</td>
+        <td contenteditable="true">but also how the war is being viewed far away from its original Iranian targets.</td>
+        <td>
+            <button onclick="playSegment(55.92, 61.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:02:32</td>
+        <td>01:07:43</td>
+        <td contenteditable="true">Israel has launched a new wave of air strikes on Tehran and on the Lebanese capital Beirut.</td>
+        <td>
+            <button onclick="playSegment(62.32, 67.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:08:00</td>
+        <td>01:10:15</td>
+        <td contenteditable="true">The Israeli military has held a briefing.</td>
+        <td>
+            <button onclick="playSegment(68.0, 70.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:10:15</td>
+        <td>01:12:31</td>
+        <td contenteditable="true">The Davsh Shashani is a spokesperson.</td>
+        <td>
+            <button onclick="playSegment(70.16, 72.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:12:31</td>
+        <td>01:19:12</td>
+        <td contenteditable="true">Our forces, along with the US Armed Forces, continue degrading their Iranian regime's military capabilities.</td>
+        <td>
+            <button onclick="playSegment(72.32, 79.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:19:12</td>
+        <td>01:23:28</td>
+        <td contenteditable="true">We have focused on targeting ballistic missile launchers, command and control centers,</td>
+        <td>
+            <button onclick="playSegment(79.12, 83.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:23:35</td>
+        <td>01:28:07</td>
+        <td contenteditable="true">underground bunkers and, of course, key Iranian regime leadership figures.</td>
+        <td>
+            <button onclick="playSegment(83.36, 88.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:28:87</td>
+        <td>01:33:68</td>
+        <td contenteditable="true">Overnight, I'd have troops were positioned in southern Lebanon at several points near the border</td>
+        <td>
+            <button onclick="playSegment(88.88, 93.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:33:68</td>
+        <td>01:40:07</td>
+        <td contenteditable="true">area. It's part of an enhanced forward defense posture. Let me be clear, this is not a ground</td>
+        <td>
+            <button onclick="playSegment(93.68, 100.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:40:07</td>
+        <td>01:44:64</td>
+        <td contenteditable="true">maneuver into Lebanon. It is a tactical step to create an additional layer of security for the</td>
+        <td>
+            <button onclick="playSegment(100.08, 104.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:44:64</td>
+        <td>01:50:71</td>
+        <td contenteditable="true">residents of northern Israel. Hundreds of people have fled their homes in Beirut, and Israel has</td>
+        <td>
+            <button onclick="playSegment(104.64, 110.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:50:79</td>
+        <td>01:56:23</td>
+        <td contenteditable="true">warned that thousands of people in villages near the border must also go. The Lebanese armies</td>
+        <td>
+            <button onclick="playSegment(110.8, 116.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:56:23</td>
+        <td>02:02:07</td>
+        <td contenteditable="true">reported to be pulling back from positions in the south. Our correspondent, Lena Sinjab, is in Beirut.</td>
+        <td>
+            <button onclick="playSegment(116.24, 122.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:03:68</td>
+        <td>02:09:84</td>
+        <td contenteditable="true">I've just come down to the promenade on the seaside of Beirut. This is an area that's</td>
+        <td>
+            <button onclick="playSegment(123.68, 129.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:10:71</td>
+        <td>02:20:15</td>
+        <td contenteditable="true">normally known for people enjoying the seaside, but now it's filled with families that</td>
+        <td>
+            <button onclick="playSegment(130.72, 140.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:20:15</td>
+        <td>02:28:47</td>
+        <td contenteditable="true">fled from southern Beirut. You can see them lining up with their cars, with their clothes, with</td>
+        <td>
+            <button onclick="playSegment(140.16, 148.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:28:47</td>
+        <td>02:38:00</td>
+        <td contenteditable="true">their bags. They fled from the bombing. We're not far from south of Beirut. In fact, you can hear</td>
+        <td>
+            <button onclick="playSegment(148.48, 158.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:38:00</td>
+        <td>02:46:24</td>
+        <td contenteditable="true">the bombing here by the seaside, and sometimes you can even hear the drones, the Israeli drones that</td>
+        <td>
+            <button onclick="playSegment(158.0, 166.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:46:71</td>
+        <td>02:56:32</td>
+        <td contenteditable="true">roving over the city and attacking targets in south of Beirut. People here are angry, are frustrated.</td>
+        <td>
+            <button onclick="playSegment(166.72, 176.32000000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:56:32</td>
+        <td>03:04:96</td>
+        <td contenteditable="true">They've lived through this in 2024, when Israel launched its full-fledged attack on Hezbollah,</td>
+        <td>
+            <button onclick="playSegment(176.32000000000002, 184.96)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:04:96</td>
+        <td>03:11:84</td>
+        <td contenteditable="true">eliminating its top leaders and crippling the group. And now they're living it again.</td>
+        <td>
+            <button onclick="playSegment(184.96, 191.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:11:84</td>
+        <td>03:19:20</td>
+        <td contenteditable="true">They're homes that have been destroyed in 2024 are still in rubble, and now they have to flee again.</td>
+        <td>
+            <button onclick="playSegment(191.84, 199.20000000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:20:48</td>
+        <td>03:26:00</td>
+        <td contenteditable="true">Lena Sinjab in Beirut are a Middle East correspondent, Yolan Nell, has in Jerusalem. She too</td>
+        <td>
+            <button onclick="playSegment(200.48000000000002, 206.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:26:00</td>
+        <td>03:32:71</td>
+        <td contenteditable="true">took us back to 2024. You have to go back to the 2024 ceasefire deal that was supposed to have</td>
+        <td>
+            <button onclick="playSegment(206.0, 212.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:32:71</td>
+        <td>03:39:43</td>
+        <td contenteditable="true">ended a year of intense cross-border fighting between Israel and Hezbollah, the Lebanese armed group.</td>
+        <td>
+            <button onclick="playSegment(212.72, 219.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:39:43</td>
+        <td>03:46:00</td>
+        <td contenteditable="true">That went on in parallel to the war in Gaza. Now that really only sort of partial withdrawal of</td>
+        <td>
+            <button onclick="playSegment(219.44, 226.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:46:00</td>
+        <td>03:51:68</td>
+        <td contenteditable="true">Israeli forces. They did remain in some positions in the very south of Lebanon, but gradually the</td>
+        <td>
+            <button onclick="playSegment(226.0, 231.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:51:68</td>
+        <td>03:59:28</td>
+        <td contenteditable="true">Lebanese army was supposed to be taking over there and pushing out any remnants of Hezbollah stopping</td>
+        <td>
+            <button onclick="playSegment(231.68, 239.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:59:28</td>
+        <td>04:06:63</td>
+        <td contenteditable="true">them from regrouping there. But now what the Israeli military is basically saying is that it's</td>
+        <td>
+            <button onclick="playSegment(239.28, 246.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:06:63</td>
+        <td>04:12:31</td>
+        <td contenteditable="true">trying to present this not as a new ground incursion, but creating a buffer zone to protect the</td>
+        <td>
+            <button onclick="playSegment(246.64, 252.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:12:31</td>
+        <td>04:18:80</td>
+        <td contenteditable="true">Israeli citizens who live in the north of the country from Hezbollah attacks. Remember that</td>
+        <td>
+            <button onclick="playSegment(252.32, 258.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:18:80</td>
+        <td>04:24:80</td>
+        <td contenteditable="true">some 60,000 people had to leave their homes in the north of Israel, and some of them have only</td>
+        <td>
+            <button onclick="playSegment(258.8, 264.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:24:80</td>
+        <td>04:32:71</td>
+        <td contenteditable="true">recently gone back because of that fighting that went on there previously. And there are concerns</td>
+        <td>
+            <button onclick="playSegment(264.8, 272.71999999999997)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:32:80</td>
+        <td>04:38:96</td>
+        <td contenteditable="true">that Israeli military has said about a kind of cross-border raid, attempts by Hezbollah to conduct</td>
+        <td>
+            <button onclick="playSegment(272.8, 278.96000000000004)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:38:96</td>
+        <td>04:44:32</td>
+        <td contenteditable="true">such a raid, or indeed, you know, that they could get closer to the border to continue with their</td>
+        <td>
+            <button onclick="playSegment(278.96000000000004, 284.32000000000005)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:44:32</td>
+        <td>04:49:76</td>
+        <td contenteditable="true">rocket fire because they have already been in the north of Israel since Hezbollah really sort of</td>
+        <td>
+            <button onclick="playSegment(284.32000000000005, 289.76000000000005)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:49:76</td>
+        <td>04:56:80</td>
+        <td contenteditable="true">announced that it was entering into this new conflict. And of course, you take into consideration</td>
+        <td>
+            <button onclick="playSegment(289.76000000000005, 296.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:56:87</td>
+        <td>05:03:28</td>
+        <td contenteditable="true">here that had been in many ways anticipated because Hezbollah is so financially and ideologically</td>
+        <td>
+            <button onclick="playSegment(296.88, 303.28000000000003)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:03:28</td>
+        <td>05:07:28</td>
+        <td contenteditable="true">linked to Iran, there have been these rocket and drone attacks have been going on,</td>
+        <td>
+            <button onclick="playSegment(303.28000000000003, 307.28000000000003)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:08:00</td>
+        <td>05:12:72</td>
+        <td contenteditable="true">affecting people in the north of Israel, some people, you know, suffering minor injuries there</td>
+        <td>
+            <button onclick="playSegment(308.0, 312.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:12:72</td>
+        <td>05:18:63</td>
+        <td contenteditable="true">today, people rushing into their air raid shelters once again. You'll end just to focus on the wider</td>
+        <td>
+            <button onclick="playSegment(312.72, 318.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:18:63</td>
+        <td>05:24:48</td>
+        <td contenteditable="true">conflict for a moment. There's been a lot of talk about the strategic objectives of this war.</td>
+        <td>
+            <button onclick="playSegment(318.64, 324.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:24:48</td>
+        <td>05:30:16</td>
+        <td contenteditable="true">What do you think the Israelis really want to achieve? What they have been saying consistently,</td>
+        <td>
+            <button onclick="playSegment(324.48, 330.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:30:16</td>
+        <td>05:36:96</td>
+        <td contenteditable="true">when they've been laying out the case for war, is that they want to target all aspects of the threat</td>
+        <td>
+            <button onclick="playSegment(330.16, 336.96000000000004)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:36:96</td>
+        <td>05:45:04</td>
+        <td contenteditable="true">that they see as very sort of real and immediate to them from Iran. And so that is why they talk about,</td>
+        <td>
+            <button onclick="playSegment(336.96000000000004, 345.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:45:04</td>
+        <td>05:50:24</td>
+        <td contenteditable="true">you know, not just Iran's nuclear program as much of the world has been talking about the potential</td>
+        <td>
+            <button onclick="playSegment(345.04, 350.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:50:24</td>
+        <td>05:56:87</td>
+        <td contenteditable="true">threat from that, but also its ballistic missile program and also the proxies, including Hezbollah,</td>
+        <td>
+            <button onclick="playSegment(350.24, 356.88)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:56:87</td>
+        <td>06:05:19</td>
+        <td contenteditable="true">including Hamas and Islamic Jihad in Gaza, including Iraqi ship militia, that, you know, Iran has</td>
+        <td>
+            <button onclick="playSegment(356.88, 365.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:05:19</td>
+        <td>06:11:28</td>
+        <td contenteditable="true">all around this region. And the case has really very much been sort of laid out that Iran after,</td>
+        <td>
+            <button onclick="playSegment(365.2, 371.28000000000003)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:12:40</td>
+        <td>06:18:56</td>
+        <td contenteditable="true">you know, what's happened with the war that's gone on in Gaza, where Hamas and Islamic Jihad have been</td>
+        <td>
+            <button onclick="playSegment(372.40000000000003, 378.56)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:19:36</td>
+        <td>06:27:12</td>
+        <td contenteditable="true">so weakened. After the 12-day war that Israel started with Iran last summer with the US joining</td>
+        <td>
+            <button onclick="playSegment(379.36, 387.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:27:12</td>
+        <td>06:32:07</td>
+        <td contenteditable="true">in at the end where nuclear and military sites were really attacked, that this was a moment of</td>
+        <td>
+            <button onclick="playSegment(387.12, 392.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:32:07</td>
+        <td>06:39:43</td>
+        <td contenteditable="true">weakness for Iran. And then the fact that, you know, the US Israel's closest ally came so fully</td>
+        <td>
+            <button onclick="playSegment(392.08, 399.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:39:43</td>
+        <td>06:46:80</td>
+        <td contenteditable="true">on board with these attacks, that is what really sort of, you know, strengthen the position. And you</td>
+        <td>
+            <button onclick="playSegment(399.44, 406.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:46:87</td>
+        <td>06:54:48</td>
+        <td contenteditable="true">see in Israel strong support among Israelis, despite all the disruption that there is to their daily</td>
+        <td>
+            <button onclick="playSegment(406.88, 414.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:54:48</td>
+        <td>07:01:92</td>
+        <td contenteditable="true">lives at the moment. Yulanael. In Iran, the United States says its forces have destroyed revolutionary</td>
+        <td>
+            <button onclick="playSegment(414.48, 421.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:01:92</td>
+        <td>07:07:92</td>
+        <td contenteditable="true">guard command and control facilities, as well as air defense capabilities and missile and drone</td>
+        <td>
+            <button onclick="playSegment(421.92, 427.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:07:92</td>
+        <td>07:13:36</td>
+        <td contenteditable="true">launch sites. The Israeli military says it is bombed the presidential office in Tehran.</td>
+        <td>
+            <button onclick="playSegment(427.92, 433.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:13:92</td>
+        <td>07:20:40</td>
+        <td contenteditable="true">Iran's Red Crescent says 787 people have been killed in the country since the air strikes began</td>
+        <td>
+            <button onclick="playSegment(433.92, 440.40000000000003)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:20:40</td>
+        <td>07:26:96</td>
+        <td contenteditable="true">on Saturday. The authorities in Tehran are staying defiant and they say the gates of hell will</td>
+        <td>
+            <button onclick="playSegment(440.40000000000003, 446.96000000000004)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:26:96</td>
+        <td>07:34:72</td>
+        <td contenteditable="true">open more and more on the US and Israel. Gondje Habibi Azad from BBC Persian spoke to Clive Myri</td>
+        <td>
+            <button onclick="playSegment(446.96000000000004, 454.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:34:72</td>
+        <td>07:41:04</td>
+        <td contenteditable="true">about the messages the service had been receiving from people inside Iran. Clive is reporting from</td>
+        <td>
+            <button onclick="playSegment(454.72, 461.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:41:04</td>
+        <td>07:46:80</td>
+        <td contenteditable="true">Israel at the moment. It's very difficult to know exactly what's going on inside Iran because of</td>
+        <td>
+            <button onclick="playSegment(461.04, 466.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:46:80</td>
+        <td>07:52:72</td>
+        <td contenteditable="true">the internet outage, but some people managed to connect momentarily to tell the outside board about</td>
+        <td>
+            <button onclick="playSegment(466.8, 472.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:52:72</td>
+        <td>07:59:36</td>
+        <td contenteditable="true">what's going on. From what I've heard today, Isfahan has been the center of the attacks.</td>
+        <td>
+            <button onclick="playSegment(472.72, 479.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:59:36</td>
+        <td>08:05:84</td>
+        <td contenteditable="true">Tehran has been calmer than yesterday and it seems like the strikes went that much as yesterday.</td>
+        <td>
+            <button onclick="playSegment(479.36, 485.84000000000003)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:05:83</td>
+        <td>08:13:03</td>
+        <td contenteditable="true">I've heard that children are really afraid of what's going on and how the situation is unfolding,</td>
+        <td>
+            <button onclick="playSegment(485.84, 493.03999999999996)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:13:03</td>
+        <td>08:18:00</td>
+        <td contenteditable="true">but some people, some anti-satplish men ones that I've been talking to are cheerful about some</td>
+        <td>
+            <button onclick="playSegment(493.03999999999996, 498.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:18:00</td>
+        <td>08:27:19</td>
+        <td contenteditable="true">of the strikes. And so far, Iran's Red Crescent Society has said that 787 people have been killed.</td>
+        <td>
+            <button onclick="playSegment(498.0, 507.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:27:19</td>
+        <td>08:33:75</td>
+        <td contenteditable="true">They haven't made a distinction between civilians and the officials and military officials that</td>
+        <td>
+            <button onclick="playSegment(507.2, 513.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:33:75</td>
+        <td>08:40:79</td>
+        <td contenteditable="true">have been killed during the strikes. And I've also heard from Tehran that the prices for some</td>
+        <td>
+            <button onclick="playSegment(513.76, 520.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:40:79</td>
+        <td>08:47:36</td>
+        <td contenteditable="true">essentials have increased and people are some of them are stucking up because they don't know</td>
+        <td>
+            <button onclick="playSegment(520.8, 527.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:47:36</td>
+        <td>08:54:15</td>
+        <td contenteditable="true">how long the war is going to continue. We've actually been trying to put together a film looking</td>
+        <td>
+            <button onclick="playSegment(527.36, 534.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:54:15</td>
+        <td>09:01:91</td>
+        <td contenteditable="true">at how civilians on this side of the border, Gondje, are coping with the continual air strikes</td>
+        <td>
+            <button onclick="playSegment(534.16, 541.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:02:00</td>
+        <td>09:08:55</td>
+        <td contenteditable="true">and air raid sirens and so on. That was something that so many that I talked to before the war,</td>
+        <td>
+            <button onclick="playSegment(542.0, 548.56)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:08:55</td>
+        <td>09:13:67</td>
+        <td contenteditable="true">were complaining about, about not having any bunkers or anything that they could shelter in.</td>
+        <td>
+            <button onclick="playSegment(548.56, 553.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:13:67</td>
+        <td>09:18:55</td>
+        <td contenteditable="true">Iranian officials had said that some parking lots were ready for people to take shelter in,</td>
+        <td>
+            <button onclick="playSegment(553.68, 558.56)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:18:55</td>
+        <td>09:23:51</td>
+        <td contenteditable="true">but we didn't see any reports or anything of it. They have asked people to stay at home and</td>
+        <td>
+            <button onclick="playSegment(558.56, 563.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:23:51</td>
+        <td>09:30:00</td>
+        <td contenteditable="true">just be there, but at the same time, like some of these infrastructures, like the bases,</td>
+        <td>
+            <button onclick="playSegment(563.52, 570.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:30:00</td>
+        <td>09:36:48</td>
+        <td contenteditable="true">are located where nearby people's houses as well. We have seen some distractions to the hospitals.</td>
+        <td>
+            <button onclick="playSegment(570.0, 576.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:36:48</td>
+        <td>09:43:51</td>
+        <td contenteditable="true">We have verified videos of that. Although Israel's defense forces has said that they have also seen</td>
+        <td>
+            <button onclick="playSegment(576.48, 583.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:43:51</td>
+        <td>09:48:63</td>
+        <td contenteditable="true">reports of a partial damage to a hospital and Tehran Gandhi hospital, but they said that they're</td>
+        <td>
+            <button onclick="playSegment(583.52, 588.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:48:63</td>
+        <td>09:55:60</td>
+        <td contenteditable="true">not targeting hospitals. And this is a situation right now people are staying at home and</td>
+        <td>
+            <button onclick="playSegment(588.64, 595.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:55:68</td>
+        <td>09:59:75</td>
+        <td contenteditable="true">watching to see what will happen. I have seen that some people have said that their windows were</td>
+        <td>
+            <button onclick="playSegment(595.6800000000001, 599.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:59:75</td>
+        <td>10:04:87</td>
+        <td contenteditable="true">shattered, that their walls have been like rattling and the houses have been rattling and this has</td>
+        <td>
+            <button onclick="playSegment(599.76, 604.88)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:04:87</td>
+        <td>10:10:15</td>
+        <td contenteditable="true">been the situation and they can hear fighter jets just passing through their heads like when they're</td>
+        <td>
+            <button onclick="playSegment(604.88, 610.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:10:15</td>
+        <td>10:17:36</td>
+        <td contenteditable="true">at home. Gondje, Habibiazad from BBC Persians speaking to Clive Myri. Now we're going to leave</td>
+        <td>
+            <button onclick="playSegment(610.16, 617.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:17:36</td>
+        <td>10:23:44</td>
+        <td contenteditable="true">the US-Israel war with around four a few minutes. Clergy from a conservative wing of the</td>
+        <td>
+            <button onclick="playSegment(617.36, 623.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:23:44</td>
+        <td>10:29:36</td>
+        <td contenteditable="true">Anglican Church have gathered for a meeting in Nigeria where they'll choose a rival leader for</td>
+        <td>
+            <button onclick="playSegment(623.44, 629.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:29:36</td>
+        <td>10:35:44</td>
+        <td contenteditable="true">the first female archbishop of Canterbury, Sarah Malali. Nearly 500 bishops are meeting in the</td>
+        <td>
+            <button onclick="playSegment(629.36, 635.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:35:44</td>
+        <td>10:41:68</td>
+        <td contenteditable="true">capital, Abuja, but the appointment of archbishop Malali has deepened divisions in the Anglican</td>
+        <td>
+            <button onclick="playSegment(635.44, 641.6800000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:41:68</td>
+        <td>10:49:12</td>
+        <td contenteditable="true">Church. Subconservative Christians insist only men should serve as bishops. BBC's Lebotosecco</td>
+        <td>
+            <button onclick="playSegment(641.6800000000001, 649.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:49:12</td>
+        <td>11:02:72</td>
+        <td contenteditable="true">reports from the Nigerian city of Lagos. Sunday service in Lagos, the same litigian prayers</td>
+        <td>
+            <button onclick="playSegment(649.12, 662.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:02:72</td>
+        <td>11:09:44</td>
+        <td contenteditable="true">as many Anglicans, but the global church is far from united. Here in Nigeria the selection of</td>
+        <td>
+            <button onclick="playSegment(662.72, 669.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:09:44</td>
+        <td>11:15:51</td>
+        <td contenteditable="true">a woman as archbishop of Canterbury defies opinion. Ever since I was born in the Anglican, I've never</td>
+        <td>
+            <button onclick="playSegment(669.44, 675.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:15:60</td>
+        <td>11:22:79</td>
+        <td contenteditable="true">had such before. And I don't think it's Christianly. Despite that, because when you look at the gospel in</td>
+        <td>
+            <button onclick="playSegment(675.6, 682.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:22:79</td>
+        <td>11:28:55</td>
+        <td contenteditable="true">the Bible, when you see the passage of God, there was no woman there. That is my own about it.</td>
+        <td>
+            <button onclick="playSegment(682.8, 688.56)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:28:55</td>
+        <td>11:34:39</td>
+        <td contenteditable="true">So a woman being the head of archbishop of Canterbury in England, I don't think it's going to go well.</td>
+        <td>
+            <button onclick="playSegment(688.56, 694.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:34:39</td>
+        <td>11:44:15</td>
+        <td contenteditable="true">God created us male and female, but the work of God is an individual thing. If you are called,</td>
+        <td>
+            <button onclick="playSegment(694.4, 704.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:44:15</td>
+        <td>11:49:83</td>
+        <td contenteditable="true">you can be a man, you can be a woman. You need to fulfill the call of the Lord.</td>
+        <td>
+            <button onclick="playSegment(704.16, 709.8399999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:51:27</td>
+        <td>11:56:71</td>
+        <td contenteditable="true">This week, conservative clergy from around the world will meet in Nigeria's capital Abuja.</td>
+        <td>
+            <button onclick="playSegment(711.28, 716.7199999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:56:71</td>
+        <td>12:01:19</td>
+        <td contenteditable="true">There they'll vote in a rival to lead them in a direct challenge to Sarah Malali.</td>
+        <td>
+            <button onclick="playSegment(716.7199999999999, 721.1999999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:01:75</td>
+        <td>12:07:51</td>
+        <td contenteditable="true">The group, known as Gaffcon, was formed in 2008 following theological differences over the</td>
+        <td>
+            <button onclick="playSegment(721.76, 727.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:07:51</td>
+        <td>12:14:07</td>
+        <td contenteditable="true">issue of same-sex unions. Gaffcon says it has not left the Anglican Church, rather that it</td>
+        <td>
+            <button onclick="playSegment(727.52, 734.0799999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:14:24</td>
+        <td>12:20:63</td>
+        <td contenteditable="true">is the true church. This week's vote will only deepen divisions as Professor Dermott McCulloch</td>
+        <td>
+            <button onclick="playSegment(734.24, 740.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:20:63</td>
+        <td>12:25:44</td>
+        <td contenteditable="true">retired professor of the history of the church at the University of Oxford explains.</td>
+        <td>
+            <button onclick="playSegment(740.64, 745.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:25:44</td>
+        <td>12:32:08</td>
+        <td contenteditable="true">Well, this is a bid for Sism. It's a bid for putting substance into the increasingly threatening</td>
+        <td>
+            <button onclick="playSegment(745.44, 752.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:32:08</td>
+        <td>12:37:75</td>
+        <td contenteditable="true">noises of the Gaffcon group over the last 15 years or however, the long there been an existence.</td>
+        <td>
+            <button onclick="playSegment(752.08, 757.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:38:72</td>
+        <td>12:46:31</td>
+        <td contenteditable="true">And they put it in very imperialist, colonialist language. They want to be the Anglican</td>
+        <td>
+            <button onclick="playSegment(758.72, 766.3199999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:46:31</td>
+        <td>12:51:12</td>
+        <td contenteditable="true">Communion, rather than just a bit of it, which is what they are now.</td>
+        <td>
+            <button onclick="playSegment(766.3199999999999, 771.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:52:55</td>
+        <td>12:57:84</td>
+        <td contenteditable="true">And that's a very aggressive thing to do. This is a set of leaders, all male,</td>
+        <td>
+            <button onclick="playSegment(772.56, 777.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:58:63</td>
+        <td>13:06:08</td>
+        <td contenteditable="true">going to a conference in Africa to assert an identity which no longer satisfies</td>
+        <td>
+            <button onclick="playSegment(778.64, 786.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:06:87</td>
+        <td>13:14:16</td>
+        <td contenteditable="true">most of many Anglican churches, that is, an all male Episcopate calling the shots.</td>
+        <td>
+            <button onclick="playSegment(786.88, 794.1600000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:14:16</td>
+        <td>13:20:87</td>
+        <td contenteditable="true">Perhaps the solution lies with the youth. 34-year-old Alexander Ollicinde explains that the connection</td>
+        <td>
+            <button onclick="playSegment(794.1600000000001, 800.88)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:20:87</td>
+        <td>13:26:72</td>
+        <td contenteditable="true">to Canterbury is important to him, in spite of its sometimes more liberal theological stance.</td>
+        <td>
+            <button onclick="playSegment(800.88, 806.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:27:68</td>
+        <td>13:33:12</td>
+        <td contenteditable="true">The connectivity to the Vingranis, it's my best to meet. I'm very much forward to</td>
+        <td>
+            <button onclick="playSegment(807.6800000000001, 813.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:33:12</td>
+        <td>13:39:75</td>
+        <td contenteditable="true">the pursuit of the same, right by, like, the activity of Anika, no, no, the Trichotvin climate,</td>
+        <td>
+            <button onclick="playSegment(813.12, 819.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:39:75</td>
+        <td>13:43:91</td>
+        <td contenteditable="true">the Chitokling region, for me, business, and look forward to that.</td>
+        <td>
+            <button onclick="playSegment(819.76, 823.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:43:91</td>
+        <td>13:49:67</td>
+        <td contenteditable="true">Common ground might be hard to find the relationship between the first Anglican church and the rest</td>
+        <td>
+            <button onclick="playSegment(823.92, 829.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:49:67</td>
+        <td>13:54:72</td>
+        <td contenteditable="true">of the world is looking increasingly precarious, lebo de secre.</td>
+        <td>
+            <button onclick="playSegment(829.68, 834.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:56:39</td>
+        <td>14:02:00</td>
+        <td contenteditable="true">Still to come in this podcast. These are really unimaginable images that are about a shocking</td>
+        <td>
+            <button onclick="playSegment(836.4, 842.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:02:00</td>
+        <td>14:07:44</td>
+        <td contenteditable="true">for people living and doing business here, as it would be to see a city like Miami being bombed.</td>
+        <td>
+            <button onclick="playSegment(842.0, 847.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:07:91</td>
+        <td>14:09:75</td>
+        <td contenteditable="true">The emotional effects of war.</td>
+        <td>
+            <button onclick="playSegment(847.92, 849.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:17:27</td>
+        <td>14:23:51</td>
+        <td contenteditable="true">This is the Global News podcast. Back to our top story now, the fourth day of U.S. and</td>
+        <td>
+            <button onclick="playSegment(857.28, 863.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:23:51</td>
+        <td>14:29:36</td>
+        <td contenteditable="true">Israeli airstrikes on Iran. Globally, oil and gas prices have continued to rise.</td>
+        <td>
+            <button onclick="playSegment(863.52, 869.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:29:36</td>
+        <td>14:36:39</td>
+        <td contenteditable="true">The price of a barrel of crude oil hit $85 for the first time since 2024, while the price of gas</td>
+        <td>
+            <button onclick="playSegment(869.36, 876.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:36:39</td>
+        <td>14:42:24</td>
+        <td contenteditable="true">in Europe has more than doubled since Friday. Iran has blocked the strait of Hormuz. That's the</td>
+        <td>
+            <button onclick="playSegment(876.4, 882.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:42:24</td>
+        <td>14:48:72</td>
+        <td contenteditable="true">narrow strip between the Gulf and the Indian Ocean, through which about a fifth of global oil and gas</td>
+        <td>
+            <button onclick="playSegment(882.24, 888.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:48:72</td>
+        <td>14:54:00</td>
+        <td contenteditable="true">travels. Several tankers passing through have come under fire and there have been attacks on oil</td>
+        <td>
+            <button onclick="playSegment(888.72, 894.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:54:08</td>
+        <td>14:59:75</td>
+        <td contenteditable="true">and gas installations in neighboring countries, including Saudi Arabia, Qatar and the UAE.</td>
+        <td>
+            <button onclick="playSegment(894.08, 899.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:00:55</td>
+        <td>15:06:96</td>
+        <td contenteditable="true">Overnight, the U.S. Embassy in the Saudi capital, Riyadh, was hit by drones. The news was announced</td>
+        <td>
+            <button onclick="playSegment(900.56, 906.96)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:06:96</td>
+        <td>15:18:48</td>
+        <td contenteditable="true">on state TV. The authorities say an Iranian missile strike on Hamad International Airport in Doha</td>
+        <td>
+            <button onclick="playSegment(906.96, 918.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:18:56</td>
+        <td>15:25:68</td>
+        <td contenteditable="true">was foiled by its missile defense system. On Monday, Qatar shot down two Iranian fighter planes.</td>
+        <td>
+            <button onclick="playSegment(918.5600000000001, 925.6800000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:25:68</td>
+        <td>15:31:75</td>
+        <td contenteditable="true">Our correspondent in Doha, Barbara Pledasher, told me more about what's been happening across the Gulf.</td>
+        <td>
+            <button onclick="playSegment(925.6800000000001, 931.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:32:39</td>
+        <td>15:38:87</td>
+        <td contenteditable="true">There was a drone strike on the U.S. Embassy, essentially overnight. Two drones, the Defense</td>
+        <td>
+            <button onclick="playSegment(932.4, 938.88)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:38:87</td>
+        <td>15:45:60</td>
+        <td contenteditable="true">Ministry in Saudi Arabia, said, a not very much damage, a fire started, but it was limited,</td>
+        <td>
+            <button onclick="playSegment(938.88, 945.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:45:68</td>
+        <td>15:52:00</td>
+        <td contenteditable="true">and the Saudi said that there were no injuries. We do know that the embassy there put out an alert</td>
+        <td>
+            <button onclick="playSegment(945.6800000000001, 952.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:52:00</td>
+        <td>15:56:72</td>
+        <td contenteditable="true">to its citizens telling them to stay away from the building and to shelter in place, as they say,</td>
+        <td>
+            <button onclick="playSegment(952.0, 956.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:56:72</td>
+        <td>16:02:56</td>
+        <td contenteditable="true">which is what happened in Kuwait. When we heard that the embassy had been hit, that was never confirmed,</td>
+        <td>
+            <button onclick="playSegment(956.72, 962.5600000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:02:56</td>
+        <td>16:07:60</td>
+        <td contenteditable="true">although there was smoke in the area as well as emergency vehicles. They also, the Americans put out</td>
+        <td>
+            <button onclick="playSegment(962.5600000000001, 967.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:08:56</td>
+        <td>16:14:56</td>
+        <td contenteditable="true">such an alert. So, that seems that the Iranians are targeting when it comes to U.S.</td>
+        <td>
+            <button onclick="playSegment(968.5600000000001, 974.5600000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:14:55</td>
+        <td>16:17:75</td>
+        <td contenteditable="true">targets, not just military bases, but also civilian ones.</td>
+        <td>
+            <button onclick="playSegment(974.56, 977.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:17:75</td>
+        <td>16:24:87</td>
+        <td contenteditable="true">Barbara, should we be surprised that so many drone strikes are heading key U.S. targets</td>
+        <td>
+            <button onclick="playSegment(977.76, 984.88)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:25:43</td>
+        <td>16:31:19</td>
+        <td contenteditable="true">in the region? Is it precisely because the Iranians are using drones successfully?</td>
+        <td>
+            <button onclick="playSegment(985.4399999999999, 991.1999999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:31:75</td>
+        <td>16:36:23</td>
+        <td contenteditable="true">Well, there hasn't actually been a lot of damage, so the missiles that are being sent,</td>
+        <td>
+            <button onclick="playSegment(991.76, 996.2399999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:36:23</td>
+        <td>16:42:00</td>
+        <td contenteditable="true">the ballistic missiles are mostly intercepted by air defense systems in the Gulf States.</td>
+        <td>
+            <button onclick="playSegment(996.2399999999999, 1002.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:42:00</td>
+        <td>16:47:27</td>
+        <td contenteditable="true">The drones are much less sophisticated, and they do get around air defenses much more easily</td>
+        <td>
+            <button onclick="playSegment(1002.0, 1007.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:47:27</td>
+        <td>16:54:15</td>
+        <td contenteditable="true">than the missiles. And the impact that they have physically is some damage, but psychologically,</td>
+        <td>
+            <button onclick="playSegment(1007.28, 1014.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:54:15</td>
+        <td>16:58:96</td>
+        <td contenteditable="true">it's the greater damage, I think, because the Iranians can create this sense of insecurity</td>
+        <td>
+            <button onclick="playSegment(1014.16, 1018.96)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:58:96</td>
+        <td>17:04:55</td>
+        <td contenteditable="true">in the region. In fact, that is their goal, it seems, to create a sense of chaos and also economic</td>
+        <td>
+            <button onclick="playSegment(1018.96, 1024.56)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:04:55</td>
+        <td>17:09:44</td>
+        <td contenteditable="true">disruption. So, for example, they targeted for the first time energy infrastructure yesterday</td>
+        <td>
+            <button onclick="playSegment(1024.56, 1029.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:09:51</td>
+        <td>17:15:75</td>
+        <td contenteditable="true">on Monday, hitting the Saudi main refinery, oil refinery in Saudi Arabia, and also a liquid</td>
+        <td>
+            <button onclick="playSegment(1029.52, 1035.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:15:75</td>
+        <td>17:20:24</td>
+        <td contenteditable="true">natural gas targets here in Qatar. I should say they targeted them. They didn't necessarily hit</td>
+        <td>
+            <button onclick="playSegment(1035.76, 1040.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:20:24</td>
+        <td>17:24:32</td>
+        <td contenteditable="true">them because, again, some of them were blown out of the sky. But the result of that, even though</td>
+        <td>
+            <button onclick="playSegment(1040.24, 1044.3200000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:24:32</td>
+        <td>17:28:48</td>
+        <td contenteditable="true">the facilities themselves were not that much damage, the result was that production stopped,</td>
+        <td>
+            <button onclick="playSegment(1044.3200000000002, 1048.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:28:48</td>
+        <td>17:34:88</td>
+        <td contenteditable="true">and that has had a huge impact on the market. So, in a way, their biggest weapon when it comes to</td>
+        <td>
+            <button onclick="playSegment(1048.48, 1054.88)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:34:88</td>
+        <td>17:40:24</td>
+        <td contenteditable="true">the idea of creating instability in the region is its location, because they can disrupt things</td>
+        <td>
+            <button onclick="playSegment(1054.88, 1060.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:40:24</td>
+        <td>17:45:60</td>
+        <td contenteditable="true">quite easily, because it's a transport hub, sending drones to hit the airports. It doesn't take</td>
+        <td>
+            <button onclick="playSegment(1060.24, 1065.6000000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:45:60</td>
+        <td>17:51:36</td>
+        <td contenteditable="true">the airports out of function, but it means that they stop for security reasons, and that has a huge</td>
+        <td>
+            <button onclick="playSegment(1065.6000000000001, 1071.3600000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:51:36</td>
+        <td>17:57:68</td>
+        <td contenteditable="true">impact on travel and also on the energy industry. And tourism, I should add, because tourism is</td>
+        <td>
+            <button onclick="playSegment(1071.3600000000001, 1077.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:57:68</td>
+        <td>18:03:04</td>
+        <td contenteditable="true">another big thing here in the Gulf. What about the political impact of all of this? It's been said</td>
+        <td>
+            <button onclick="playSegment(1077.68, 1083.0400000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:03:27</td>
+        <td>18:10:07</td>
+        <td contenteditable="true">that the Iranians have been targeting the Gulf states in an effort to drive a wedge between those</td>
+        <td>
+            <button onclick="playSegment(1083.28, 1090.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:10:07</td>
+        <td>18:15:83</td>
+        <td contenteditable="true">states and the Americans to put pressure on the U.S. to stop the war. But is that happening,</td>
+        <td>
+            <button onclick="playSegment(1090.08, 1095.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:15:83</td>
+        <td>18:21:27</td>
+        <td contenteditable="true">or are we seeing more unity between those targeted countries and the Americans?</td>
+        <td>
+            <button onclick="playSegment(1095.84, 1101.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:21:27</td>
+        <td>18:27:92</td>
+        <td contenteditable="true">It's a risky calculation, because the Arab countries have, from the beginning, been against the</td>
+        <td>
+            <button onclick="playSegment(1101.28, 1107.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:28:72</td>
+        <td>18:34:00</td>
+        <td contenteditable="true">war. They very much lobbied the U.S. not to go to war, saying exactly this kind of scenario could</td>
+        <td>
+            <button onclick="playSegment(1108.72, 1114.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:34:00</td>
+        <td>18:38:24</td>
+        <td contenteditable="true">happen. So they knew that it could happen, something like this. At the moment, they are very much</td>
+        <td>
+            <button onclick="playSegment(1114.0, 1118.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:38:24</td>
+        <td>18:44:24</td>
+        <td contenteditable="true">focused on defense. It can escalate, as we can see, quite quickly over the last four days. But</td>
+        <td>
+            <button onclick="playSegment(1118.24, 1124.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:45:03</td>
+        <td>18:50:32</td>
+        <td contenteditable="true">at this point, the Gulf countries, although they're issuing very strong condemnations and warnings,</td>
+        <td>
+            <button onclick="playSegment(1125.04, 1130.3200000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:50:32</td>
+        <td>18:55:92</td>
+        <td contenteditable="true">they are very much in a defensive mode. Barbara Pledasher in Doha. And we have more from Barbara on</td>
+        <td>
+            <button onclick="playSegment(1130.3200000000002, 1135.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:56:00</td>
+        <td>19:02:48</td>
+        <td contenteditable="true">our YouTube channel today. Search for BBC News on YouTube, and you'll find the Global News podcast</td>
+        <td>
+            <button onclick="playSegment(1136.0, 1142.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:02:48</td>
+        <td>19:08:96</td>
+        <td contenteditable="true">in the podcast section. There's a new story available every weekday. For more on what it's like for</td>
+        <td>
+            <button onclick="playSegment(1142.48, 1148.96)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:08:96</td>
+        <td>19:15:20</td>
+        <td contenteditable="true">those living in the UAE, let's hear from Monica Marx. She's a professor of Middle East politics at</td>
+        <td>
+            <button onclick="playSegment(1148.96, 1155.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:15:20</td>
+        <td>19:21:68</td>
+        <td contenteditable="true">New York University Abu Dhabi. She spoke to Rob Young. The images that we've seen since Saturday</td>
+        <td>
+            <button onclick="playSegment(1155.2, 1161.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:21:75</td>
+        <td>19:28:40</td>
+        <td contenteditable="true">of missiles actually making contact with both airports, the one in Dubai, the one in Abu Dhabi,</td>
+        <td>
+            <button onclick="playSegment(1161.76, 1168.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:28:40</td>
+        <td>19:34:79</td>
+        <td contenteditable="true">with residential buildings like Etihad Tower and Abu Dhabi, where the Israel embassy was located,</td>
+        <td>
+            <button onclick="playSegment(1168.4, 1174.8)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:34:79</td>
+        <td>19:41:12</td>
+        <td contenteditable="true">and even hotels, like the Faramont in Dubai, which was a flame. These are really unimaginable images</td>
+        <td>
+            <button onclick="playSegment(1174.8, 1181.1200000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:41:12</td>
+        <td>19:46:56</td>
+        <td contenteditable="true">that are about a shocking for people living and doing business here, as it would be to see a city</td>
+        <td>
+            <button onclick="playSegment(1181.1200000000001, 1186.5600000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:46:63</td>
+        <td>19:54:63</td>
+        <td contenteditable="true">like Miami being bombed, because these cities are so almost pretzelnaturally calm. You can leave</td>
+        <td>
+            <button onclick="playSegment(1186.6399999999999, 1194.6399999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:54:63</td>
+        <td>19:59:91</td>
+        <td contenteditable="true">your purse down without worrying about it being stolen typically. You don't even see a homeless</td>
+        <td>
+            <button onclick="playSegment(1194.6399999999999, 1199.9199999999998)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:59:91</td>
+        <td>20:07:03</td>
+        <td contenteditable="true">person on the street. There's almost like a sterile quality about how safe these cities typically</td>
+        <td>
+            <button onclick="playSegment(1199.9199999999998, 1207.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:07:03</td>
+        <td>20:13:03</td>
+        <td contenteditable="true">feel to live in. And so what is the mood at the moment then, among the many foreigners who've made</td>
+        <td>
+            <button onclick="playSegment(1207.04, 1213.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:13:03</td>
+        <td>20:21:51</td>
+        <td contenteditable="true">Dubai their home? Most people seem to be feeling a combination of trepidation and gratitude to the</td>
+        <td>
+            <button onclick="playSegment(1213.04, 1221.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:21:51</td>
+        <td>20:27:59</td>
+        <td contenteditable="true">government for doing its best to strike everything out of the sky. They're seeing incoming hardware</td>
+        <td>
+            <button onclick="playSegment(1221.52, 1227.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:27:59</td>
+        <td>20:33:20</td>
+        <td contenteditable="true">from Iran that could land and could kill quite a lot of people if it wasn't being shot down.</td>
+        <td>
+            <button onclick="playSegment(1227.6, 1233.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:33:75</td>
+        <td>20:39:03</td>
+        <td contenteditable="true">So I think that the government here has been trying to project calm and competence just yesterday</td>
+        <td>
+            <button onclick="playSegment(1233.76, 1239.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:39:68</td>
+        <td>20:45:83</td>
+        <td contenteditable="true">at Dubai Mall. The top brass leadership was making a point of walking around and chilling out</td>
+        <td>
+            <button onclick="playSegment(1239.68, 1245.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:45:83</td>
+        <td>20:52:63</td>
+        <td contenteditable="true">together and reading random people, including people like a child from Asia, a man from Ghana that</td>
+        <td>
+            <button onclick="playSegment(1245.84, 1252.6399999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:52:63</td>
+        <td>20:57:83</td>
+        <td contenteditable="true">came up and read them up the mall. And they really wanted to show that these images to project calm</td>
+        <td>
+            <button onclick="playSegment(1252.6399999999999, 1257.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:57:83</td>
+        <td>21:03:51</td>
+        <td contenteditable="true">and to project strength. We heard that Amazon's cloud computing business said that drones have hit</td>
+        <td>
+            <button onclick="playSegment(1257.84, 1263.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:03:51</td>
+        <td>21:11:27</td>
+        <td contenteditable="true">three of its facilities in the United Arab Emirates as well as in Bahrain as well. So foreign</td>
+        <td>
+            <button onclick="playSegment(1263.52, 1271.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:11:27</td>
+        <td>21:18:31</td>
+        <td contenteditable="true">global businesses are also being affected. Do you see a situation in which companies decide to</td>
+        <td>
+            <button onclick="playSegment(1271.28, 1278.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:18:31</td>
+        <td>21:24:40</td>
+        <td contenteditable="true">pull their operations, to pull their people out of places like Dubai? If Iran kept on these attacks</td>
+        <td>
+            <button onclick="playSegment(1278.32, 1284.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:24:40</td>
+        <td>21:32:00</td>
+        <td contenteditable="true">for I think over a week or two at the current tempo, or if Iran went after really close to the</td>
+        <td>
+            <button onclick="playSegment(1284.4, 1292.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:32:00</td>
+        <td>21:38:07</td>
+        <td contenteditable="true">jugular vein of Gulf states, I would say attacking things like power, power plants, attacking</td>
+        <td>
+            <button onclick="playSegment(1292.0, 1298.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:38:07</td>
+        <td>21:43:68</td>
+        <td contenteditable="true">data centers even more and more successfully, managing to shut down the the internet or water</td>
+        <td>
+            <button onclick="playSegment(1298.08, 1303.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:43:68</td>
+        <td>21:49:20</td>
+        <td contenteditable="true">desalination, air conditioning, Gulf states are really uninhabitable without those things. Certainly</td>
+        <td>
+            <button onclick="playSegment(1303.68, 1309.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:49:20</td>
+        <td>21:55:51</td>
+        <td contenteditable="true">for businesses. And I think you would see a bigger movement out. Yesterday Abu Dhabi laid at night</td>
+        <td>
+            <button onclick="playSegment(1309.2, 1315.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:55:51</td>
+        <td>22:01:44</td>
+        <td contenteditable="true">in the middle of the night, got hit with some very loud explosions. About 94% of everything coming in</td>
+        <td>
+            <button onclick="playSegment(1315.52, 1321.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:01:44</td>
+        <td>22:08:24</td>
+        <td contenteditable="true">is being intercepted by the UAE. But I was chatting with my students last night in Abu Dhabi and they</td>
+        <td>
+            <button onclick="playSegment(1321.44, 1328.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:08:24</td>
+        <td>22:13:03</td>
+        <td contenteditable="true">felt the windows in their dorms shake and they went down into the basement to find shelter and</td>
+        <td>
+            <button onclick="playSegment(1328.24, 1333.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:13:84</td>
+        <td>22:19:27</td>
+        <td contenteditable="true">the elephants Iran and Israel, these highly ideological elephants are fighting and the grass</td>
+        <td>
+            <button onclick="playSegment(1333.8400000000001, 1339.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:19:27</td>
+        <td>22:23:36</td>
+        <td contenteditable="true">in the middle, the Arab Gulf states are. That's what's being trampled underneath including the</td>
+        <td>
+            <button onclick="playSegment(1339.28, 1343.3600000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:23:36</td>
+        <td>22:29:03</td>
+        <td contenteditable="true">civilians in those countries. So I really just hope that instead of having a caricature, it almost</td>
+        <td>
+            <button onclick="playSegment(1343.3600000000001, 1349.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:29:03</td>
+        <td>22:35:03</td>
+        <td contenteditable="true">cartoonish image of a city like Dubai of being nothing but rich people and Lamborghini's and kind</td>
+        <td>
+            <button onclick="playSegment(1349.04, 1355.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:35:03</td>
+        <td>22:40:00</td>
+        <td contenteditable="true">of having a heartless response to this that your listeners understand that many people from all</td>
+        <td>
+            <button onclick="playSegment(1355.04, 1360.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:40:00</td>
+        <td>22:46:07</td>
+        <td contenteditable="true">over the world, including war torn places like Iraq, like Palestine, like Ukraine, like Sudan,</td>
+        <td>
+            <button onclick="playSegment(1360.0, 1366.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:46:07</td>
+        <td>22:52:55</td>
+        <td contenteditable="true">have come to rebuild their lives in the Persian Gulf states. And for all of their flaws in different</td>
+        <td>
+            <button onclick="playSegment(1366.08, 1372.56)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:52:55</td>
+        <td>22:57:51</td>
+        <td contenteditable="true">ways including in their foreign policy, these countries have provided them the stability to do that.</td>
+        <td>
+            <button onclick="playSegment(1372.56, 1377.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:57:51</td>
+        <td>23:01:83</td>
+        <td contenteditable="true">So many people who've seen war before are being affected yet again.</td>
+        <td>
+            <button onclick="playSegment(1377.52, 1381.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:02:55</td>
+        <td>23:10:24</td>
+        <td contenteditable="true">Professor Monica Marx. Already the effects of the conflict have spread far beyond the Middle East,</td>
+        <td>
+            <button onclick="playSegment(1382.56, 1390.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:10:24</td>
+        <td>23:15:75</td>
+        <td contenteditable="true">reminder of the interconnected world we live in. As we mentioned earlier in this podcast,</td>
+        <td>
+            <button onclick="playSegment(1390.24, 1395.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:15:75</td>
+        <td>23:22:07</td>
+        <td contenteditable="true">Iran has blocked the Strait of Hormuz, a large proportion of the oil tankers normally passing</td>
+        <td>
+            <button onclick="playSegment(1395.76, 1402.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:22:24</td>
+        <td>23:28:87</td>
+        <td contenteditable="true">through that Strait are headed for countries in the East Asia. With oil and gas prices surging,</td>
+        <td>
+            <button onclick="playSegment(1402.24, 1408.8799999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:28:87</td>
+        <td>23:33:43</td>
+        <td contenteditable="true">countries like South Korea are now looking to secure supplies from outside the Middle East.</td>
+        <td>
+            <button onclick="playSegment(1408.8799999999999, 1413.4399999999998)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:33:91</td>
+        <td>23:37:19</td>
+        <td contenteditable="true">Our correspondent Jake Kwan is in Seoul and he told me more.</td>
+        <td>
+            <button onclick="playSegment(1413.9199999999998, 1417.1999999999998)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:37:83</td>
+        <td>23:43:03</td>
+        <td contenteditable="true">If you look at the map, South Korea is at the bottom half of the Korean Peninsula and its road</td>
+        <td>
+            <button onclick="playSegment(1417.84, 1423.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:43:03</td>
+        <td>23:49:35</td>
+        <td contenteditable="true">to the land is blocked by North Korea. So South Korea is practically an island and just like its</td>
+        <td>
+            <button onclick="playSegment(1423.04, 1429.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:49:35</td>
+        <td>23:55:19</td>
+        <td contenteditable="true">neighbor Japan. So nearly all of its energy fuel is imported, whether that's oil, gas, or</td>
+        <td>
+            <button onclick="playSegment(1429.36, 1435.1999999999998)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:55:19</td>
+        <td>24:02:39</td>
+        <td contenteditable="true">uranium for the nuclear power. And in an average year, South Korea imports some 70% of its oil from</td>
+        <td>
+            <button onclick="playSegment(1435.1999999999998, 1442.3999999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:02:39</td>
+        <td>24:09:03</td>
+        <td contenteditable="true">the Gulf countries like Saudi Arabia and Kuwait and Qatar, which are all embroiled in this conflict.</td>
+        <td>
+            <button onclick="playSegment(1442.3999999999999, 1449.04)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:09:03</td>
+        <td>24:14:87</td>
+        <td contenteditable="true">Now Saudi Arabia and oil, maybe they can buy them from the ports in the Red Sea away from Iran,</td>
+        <td>
+            <button onclick="playSegment(1449.04, 1454.8799999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:14:96</td>
+        <td>24:21:20</td>
+        <td contenteditable="true">but those are coming from Iraq, UAE, Kuwait, Qatar. These have to pass through the Strait of Hormuz.</td>
+        <td>
+            <button onclick="playSegment(1454.96, 1461.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:21:20</td>
+        <td>24:26:64</td>
+        <td contenteditable="true">So what happens if that strike gets shut down? Now that's the fear. And South Korea needs oil and</td>
+        <td>
+            <button onclick="playSegment(1461.2, 1466.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:26:64</td>
+        <td>24:32:08</td>
+        <td contenteditable="true">gas to run its power generators and also to feed its enormous petrochemical industry. And this</td>
+        <td>
+            <button onclick="playSegment(1466.64, 1472.0800000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:32:08</td>
+        <td>24:37:12</td>
+        <td contenteditable="true">is the number three export of all exports in South Korea. So it's a huge part of South Korean economy.</td>
+        <td>
+            <button onclick="playSegment(1472.0800000000002, 1477.1200000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:38:08</td>
+        <td>24:44:64</td>
+        <td contenteditable="true">So Jake, what will it mean then? For South Korea, if this war grinds on for weeks or for</td>
+        <td>
+            <button onclick="playSegment(1478.0800000000002, 1484.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:44:80</td>
+        <td>24:48:08</td>
+        <td contenteditable="true">months, I mean, how quickly could it pivot to find new energy sources?</td>
+        <td>
+            <button onclick="playSegment(1484.8000000000002, 1488.0800000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:48:88</td>
+        <td>24:53:36</td>
+        <td contenteditable="true">Well, it's going to be quite difficult to find these new energy source. I mean, South Korea said</td>
+        <td>
+            <button onclick="playSegment(1488.88, 1493.3600000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:53:36</td>
+        <td>24:59:68</td>
+        <td contenteditable="true">it will find different oil source, but in terms of using different energy source like, you know,</td>
+        <td>
+            <button onclick="playSegment(1493.3600000000001, 1499.68)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>24:59:68</td>
+        <td>25:04:56</td>
+        <td contenteditable="true">renewables or others, it simply can't be done. That's not what the power generators are designed to do.</td>
+        <td>
+            <button onclick="playSegment(1499.68, 1504.5600000000002)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:04:56</td>
+        <td>25:09:75</td>
+        <td contenteditable="true">You cannot just turn up the nuclear wind or hydro or solar. But South Korean government was</td>
+        <td>
+            <button onclick="playSegment(1504.5600000000002, 1509.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:09:75</td>
+        <td>25:15:11</td>
+        <td contenteditable="true">trying to assuage this fear saying that they have seven months of oil and stockpile, half of it in</td>
+        <td>
+            <button onclick="playSegment(1509.76, 1515.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:15:11</td>
+        <td>25:19:75</td>
+        <td contenteditable="true">the government stockpile, the other half in the kind of public sector. And there won't be an issue.</td>
+        <td>
+            <button onclick="playSegment(1515.12, 1519.76)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:19:75</td>
+        <td>25:24:64</td>
+        <td contenteditable="true">But that wasn't enough to quiet down the anxious investors today. And we saw South Korea's main</td>
+        <td>
+            <button onclick="playSegment(1519.76, 1524.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:24:64</td>
+        <td>25:30:16</td>
+        <td contenteditable="true">market index, Cospi, slip, 7%. And at one point, they actually had to shut down the trade for five</td>
+        <td>
+            <button onclick="playSegment(1524.64, 1530.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:30:16</td>
+        <td>25:35:92</td>
+        <td contenteditable="true">minutes because it was slipping so fast. And, you know, it was really, it seemed like there was a lot</td>
+        <td>
+            <button onclick="playSegment(1530.16, 1535.92)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:35:92</td>
+        <td>25:39:44</td>
+        <td contenteditable="true">of fear in the market today. Jake Kwan in Seoul.</td>
+        <td>
+            <button onclick="playSegment(1535.92, 1539.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:41:20</td>
+        <td>25:46:64</td>
+        <td contenteditable="true">And that's all from us for now. If you want to get in touch, you can email us at globalpodcast</td>
+        <td>
+            <button onclick="playSegment(1541.2, 1546.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:46:64</td>
+        <td>25:56:24</td>
+        <td contenteditable="true">at bbc.co.uk. You can also find us on x at bbcworldservice. Use the hashtag globalnewspod. And</td>
+        <td>
+            <button onclick="playSegment(1546.64, 1556.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>25:56:24</td>
+        <td>26:01:84</td>
+        <td contenteditable="true">don't forget our sister podcast, the global story, which goes in depth and beyond the headlines</td>
+        <td>
+            <button onclick="playSegment(1556.24, 1561.8400000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>26:01:91</td>
+        <td>26:08:39</td>
+        <td contenteditable="true">on one big story. This edition of the globalnewspodcast was mixed by Nick Randall and the producer</td>
+        <td>
+            <button onclick="playSegment(1561.9199999999998, 1568.3999999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>26:08:39</td>
+        <td>26:17:35</td>
+        <td contenteditable="true">was Adrian White. The editor is Karen Martin. I'm Celia Hatton. Until next time, goodbye.</td>
+        <td>
+            <button onclick="playSegment(1568.3999999999999, 1577.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+
+</table>
+
+<script>
+
+const media = document.getElementById("media");
+
+let stopTimer=null;
+
+function playSegment(start,end){
+    
+    media.currentTime=start;
+    media.play();
+
+    if(stopTimer) clearInterval(stopTimer)
+
+    stopTimer=setInterval(()=>{
+        if(media.currentTime>=end){
+            media.pause()
+            clearInterval(stopTimer)
+        }
+    },100)
+}
+
+function deleteRow(btn){
+    btn.parentElement.parentElement.remove()
+}
+
+</script>
+
+</body>
+</html>

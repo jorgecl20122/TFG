@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>Editor de transcripción</title>
+
+<style>
+
+body {font-family: Arial; margin:40px;}
+
+table {border-collapse: collapse; width:100%;}
+
+td,th {
+border:1px solid #ddd;
+padding:8px;
+}
+
+td[contenteditable] {
+background:#fafafa;
+}
+
+button {
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Editor de transcripción</h1>
+
+<audio id="media" controls src="../audio/reunion.mp3"></audio>
+
+<table>
+
+<tr>
+<th>Inicio</th>
+<th>Fin</th>
+<th>Texto</th>
+<th>Acciones</th>
+</tr>
+
+
+        <tr>
+        <td>00:00:00</td>
+        <td>00:07:00</td>
+        <td contenteditable="true">Radio Nacional de España. Noticias.</td>
+        <td>
+            <button onclick="playSegment(0.0, 7.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:07:00</td>
+        <td>00:15:08</td>
+        <td contenteditable="true">Última hora en Oriente próximo aterriz a enoman, el avión fletado por el Gobierno para</td>
+        <td>
+            <button onclick="playSegment(7.0, 15.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:15:08</td>
+        <td>00:19:48</td>
+        <td contenteditable="true">repatriar a españoles. Sara Lonson vía especial con Agostín, Carogu en la técnica.</td>
+        <td>
+            <button onclick="playSegment(15.08, 19.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:19:48</td>
+        <td>00:23:48</td>
+        <td contenteditable="true">Buenas tardes. Buenas tardes. Si se ha habido una 330 del ejército</td>
+        <td>
+            <button onclick="playSegment(19.48, 23.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:23:48</td>
+        <td>00:29:51</td>
+        <td contenteditable="true">del aire, está ya en Mascata, en la capital humaní, desde la que repatriará a 250 españoles</td>
+        <td>
+            <button onclick="playSegment(23.48, 29.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:29:51</td>
+        <td>00:35:20</td>
+        <td contenteditable="true">de los que se encontraban en la zona se suman a los 175 que regresaron ayer desde Abu Dhabi.</td>
+        <td>
+            <button onclick="playSegment(29.52, 35.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:35:20</td>
+        <td>00:39:60</td>
+        <td contenteditable="true">En Oriente medio, según ha venido informando el Ministerio de Exteriores, había unos 30.000</td>
+        <td>
+            <button onclick="playSegment(35.2, 39.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:39:60</td>
+        <td>00:44:64</td>
+        <td contenteditable="true">españoles entre turistas y residentes. No todos quieren salir, pero para quienes quieren</td>
+        <td>
+            <button onclick="playSegment(39.6, 44.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:44:64</td>
+        <td>00:49:39</td>
+        <td contenteditable="true">hacerlo, debido a que de forma total o parcial el espacio aéreo de muchos de estos países</td>
+        <td>
+            <button onclick="playSegment(44.64, 49.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:49:39</td>
+        <td>00:54:20</td>
+        <td contenteditable="true">del golfo, está cerrado, la mejor vía, la que funciona de forma más fluida, es a través</td>
+        <td>
+            <button onclick="playSegment(49.4, 54.2)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:54:20</td>
+        <td>00:59:28</td>
+        <td contenteditable="true">de o-man, donde el aeropuerto está abierto, esos sí los billetes comerciales están prácticamente</td>
+        <td>
+            <button onclick="playSegment(54.2, 59.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:59:28</td>
+        <td>01:06:07</td>
+        <td contenteditable="true">agotados. Desde Dubai, donde está el aeropuerto con mayor retráfico aéreo del mundo, fue</td>
+        <td>
+            <button onclick="playSegment(59.28, 66.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:06:07</td>
+        <td>01:11:07</td>
+        <td contenteditable="true">impactado y trabaja bajo mínimos hasta aquí, hasta Mascata se tardó a cinco horas por</td>
+        <td>
+            <button onclick="playSegment(66.08, 71.08)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:11:07</td>
+        <td>01:16:71</td>
+        <td contenteditable="true">carreteras el trayecto que están haciendo muchos. De otro lado, destacar en Irán, que está</td>
+        <td>
+            <button onclick="playSegment(71.08, 76.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:16:71</td>
+        <td>01:23:60</td>
+        <td contenteditable="true">siendo bombardeado con fuerza había 150 españoles. 22 de ellos han salido, ya lo ha confirmado</td>
+        <td>
+            <button onclick="playSegment(76.72, 83.60000000000001)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:23:59</td>
+        <td>01:29:31</td>
+        <td contenteditable="true">el gobierno, lo han hecho por la frontera terrestre hacia a Cerba Yán de A. Bacú y Vía</td>
+        <td>
+            <button onclick="playSegment(83.6, 89.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:29:31</td>
+        <td>01:34:51</td>
+        <td contenteditable="true">Estambul a Madrid. Y lo que hace el gobierno en concreto, el Ministerio de Exteriores es</td>
+        <td>
+            <button onclick="playSegment(89.32, 94.52)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:34:51</td>
+        <td>01:40:47</td>
+        <td contenteditable="true">reiterar el llamamiento a la desescalada en Oriente próximo, ahí un tweet, de José Manuel</td>
+        <td>
+            <button onclick="playSegment(94.52, 100.47999999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:40:47</td>
+        <td>01:46:91</td>
+        <td contenteditable="true">Alvarez, asegura que acaba de hablar con el ministro de Exteriores de Turquía para trasladarle</td>
+        <td>
+            <button onclick="playSegment(100.47999999999999, 106.91999999999999)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:46:91</td>
+        <td>01:53:31</td>
+        <td contenteditable="true">la solidaridad del gobierno con el ejecutivo turco y el pueblo de ese país ante el lanzamiento</td>
+        <td>
+            <button onclick="playSegment(106.91999999999999, 113.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:53:31</td>
+        <td>02:00:35</td>
+        <td contenteditable="true">de un misil contra Turquía, por parte de Irán Turquía, que es socioleadó de la OTAN, el</td>
+        <td>
+            <button onclick="playSegment(113.32, 120.36)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:00:35</td>
+        <td>02:05:59</td>
+        <td contenteditable="true">partido popular y el PNU ve parecen acercar posturas desde que el nacionalismo Bascos se negara</td>
+        <td>
+            <button onclick="playSegment(120.36, 125.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:05:59</td>
+        <td>02:10:24</td>
+        <td contenteditable="true">a apoyar la investidura de feijó, porque el candidato necesitaba contar también con los</td>
+        <td>
+            <button onclick="playSegment(125.6, 130.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:10:24</td>
+        <td>02:11:87</td>
+        <td contenteditable="true">votos de box, la ore herrero.</td>
+        <td>
+            <button onclick="playSegment(130.24, 131.88)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:11:87</td>
+        <td>02:16:71</td>
+        <td contenteditable="true">Sí, no, Nyefejo y Alitóres, se reunieron recientemente, lo anunciaba hoy el líder del PP</td>
+        <td>
+            <button onclick="playSegment(131.88, 136.72)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:16:71</td>
+        <td>02:21:31</td>
+        <td contenteditable="true">desde Victoria y lo confirmaban esta tarde fuentes del PNU, que marcaban este contacto en los</td>
+        <td>
+            <button onclick="playSegment(136.72, 141.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:21:31</td>
+        <td>02:25:15</td>
+        <td contenteditable="true">que mantienen habitualmente con las formaciones políticas lo cierto, es que en los últimos</td>
+        <td>
+            <button onclick="playSegment(141.32, 145.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:25:15</td>
+        <td>02:30:43</td>
+        <td contenteditable="true">meses la relación entre populares y nacionalistas Bascos no pasaba por un buen momento, incluso</td>
+        <td>
+            <button onclick="playSegment(145.16, 150.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:30:43</td>
+        <td>02:35:23</td>
+        <td contenteditable="true">hoy, desde el país Bascos feijo insistía que no entendía que fue en socios de Pedro</td>
+        <td>
+            <button onclick="playSegment(150.44, 155.23999999999998)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:35:23</td>
+        <td>02:39:24</td>
+        <td contenteditable="true">Sánchez, pero también aseguraba que la vía de comunicación con el PNU está abierta</td>
+        <td>
+            <button onclick="playSegment(155.23999999999998, 159.24)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:39:24</td>
+        <td>02:41:43</td>
+        <td contenteditable="true">de manera sincera de decía y respetuosa.</td>
+        <td>
+            <button onclick="playSegment(159.24, 161.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:41:43</td>
+        <td>02:50:43</td>
+        <td contenteditable="true">Insisto, desde el respeto de la educación, vamos a mantener una relación de comunicación</td>
+        <td>
+            <button onclick="playSegment(161.44, 170.44)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:50:43</td>
+        <td>02:55:40</td>
+        <td contenteditable="true">con el PNU y una relación de lealtad a Uscadí.</td>
+        <td>
+            <button onclick="playSegment(170.44, 175.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:55:40</td>
+        <td>02:59:31</td>
+        <td contenteditable="true">Palabras que escuchaba el mismo líder del PNU, veitor Esteban presente en este acto</td>
+        <td>
+            <button onclick="playSegment(175.4, 179.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:59:31</td>
+        <td>03:00:31</td>
+        <td contenteditable="true">en Victoria.</td>
+        <td>
+            <button onclick="playSegment(179.32, 180.32)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:00:31</td>
+        <td>03:06:12</td>
+        <td contenteditable="true">Familiares y amigos, siguen despidiendo, afernando onega, una de las voces de la transición</td>
+        <td>
+            <button onclick="playSegment(180.32, 186.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:06:12</td>
+        <td>03:08:56</td>
+        <td contenteditable="true">desde la casa de Galicia en Madrid.</td>
+        <td>
+            <button onclick="playSegment(186.12, 188.56)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:08:56</td>
+        <td>03:12:59</td>
+        <td contenteditable="true">Sus hijas son soles y Cristina onega, agradecen las muestras de cariño.</td>
+        <td>
+            <button onclick="playSegment(188.56, 192.6)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:12:59</td>
+        <td>03:17:15</td>
+        <td contenteditable="true">No sabéis de hecho sentir muy orgullosos de nuestro padre, que fue también un poco</td>
+        <td>
+            <button onclick="playSegment(192.6, 197.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:17:15</td>
+        <td>03:24:40</td>
+        <td contenteditable="true">padre de esta profesión y de todos vosotros, y ha sido emocionante escucharos y saber</td>
+        <td>
+            <button onclick="playSegment(197.16, 204.4)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:24:40</td>
+        <td>03:32:28</td>
+        <td contenteditable="true">que siempre tuvo un minuto para escuchar a cada uno de los compañeros con los que trabajó.</td>
+        <td>
+            <button onclick="playSegment(204.4, 212.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:32:28</td>
+        <td>03:36:63</td>
+        <td contenteditable="true">Football en Vallecas, partido ha blazado entre rayo y obiedo, Lucas García.</td>
+        <td>
+            <button onclick="playSegment(212.28, 216.64)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:36:63</td>
+        <td>03:41:47</td>
+        <td contenteditable="true">El partido ha blazado el pasado 7 de febrero por el mal estado en el Céspeda aquí en el</td>
+        <td>
+            <button onclick="playSegment(216.64, 221.48)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:41:47</td>
+        <td>03:45:84</td>
+        <td contenteditable="true">estadio de Vallecas, juegan el rayo vellicano de Cimokintó con 27 puntos 3 por encima del</td>
+        <td>
+            <button onclick="playSegment(221.48, 225.84)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:45:84</td>
+        <td>03:49:28</td>
+        <td contenteditable="true">escenso y el colista lo hubiido con 17 puntos.</td>
+        <td>
+            <button onclick="playSegment(225.84, 229.28)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:49:28</td>
+        <td>03:54:12</td>
+        <td contenteditable="true">Llegamos al minuto 2 de la primera parte, sin ole rayo vellicano 0, real lo vio 0.</td>
+        <td>
+            <button onclick="playSegment(229.28, 234.12)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+
+</table>
+
+<script>
+
+const media = document.getElementById("media");
+
+let stopTimer=null;
+
+function playSegment(start,end){
+    
+    media.currentTime=start;
+    media.play();
+
+    if(stopTimer) clearInterval(stopTimer)
+
+    stopTimer=setInterval(()=>{
+        if(media.currentTime>=end){
+            media.pause()
+            clearInterval(stopTimer)
+        }
+    },100)
+}
+
+function deleteRow(btn){
+    btn.parentElement.parentElement.remove()
+}
+
+</script>
+
+</body>
+</html>

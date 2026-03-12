@@ -1,0 +1,4 @@
+openai-whisper
+torch
+flask
+werkzeug

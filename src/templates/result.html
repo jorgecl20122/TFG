@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Resultado</title>
+    </head>
+    <body>
+        <h1>Transcripción generada</h1>
+
+        <p>El archivo se ha procesado correctamente.</p>
+
+        <a href="{{ url_for('viewer', job_id=job_id) }}" target="_blank">
+            Abrir editor HTML
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('index') }}">Subir otro archivo</a>
+    </body>
+</html>

@@ -1,0 +1,4499 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>Editor de transcripción</title>
+
+<style>
+
+body {font-family: Arial; margin:40px;}
+
+table {border-collapse: collapse; width:100%;}
+
+td,th {
+border:1px solid #ddd;
+padding:8px;
+}
+
+td[contenteditable] {
+background:#fafafa;
+}
+
+button {
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Editor de transcripción</h1>
+
+<audio id="media" controls src="/uploads/656b58b5-9d37-4797-aeef-1a5fc5e7cfff_entrevista_samu_Marcos.mp3"></audio>
+
+<table>
+
+<tr>
+<th>Inicio</th>
+<th>Fin</th>
+<th>Texto</th>
+<th>Acciones</th>
+</tr>
+
+
+        <tr>
+        <td>00:00:00</td>
+        <td>00:05:00</td>
+        <td contenteditable="true">¿Tú me voy a ir a mi nivel?</td>
+        <td>
+            <button onclick="playSegment(0.0, 5.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:05:00</td>
+        <td>00:09:00</td>
+        <td contenteditable="true">Te explico, vamos a hacer la motodecidad en Calout, ¿sabes cuál es?</td>
+        <td>
+            <button onclick="playSegment(5.0, 9.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:09:00</td>
+        <td>00:13:00</td>
+        <td contenteditable="true">Sí, vale. Hay dos dispositivos, el ordenador en el que vas a jugar,</td>
+        <td>
+            <button onclick="playSegment(9.0, 13.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:13:00</td>
+        <td>00:17:00</td>
+        <td contenteditable="true">que está grabando tanto audio como el sonido, y se proyecta en su pantalla,</td>
+        <td>
+            <button onclick="playSegment(13.0, 17.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:17:00</td>
+        <td>00:20:00</td>
+        <td contenteditable="true">que está en uno de mis dos compañeros para observarte, ¿vale?</td>
+        <td>
+            <button onclick="playSegment(17.0, 20.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:20:00</td>
+        <td>00:23:00</td>
+        <td contenteditable="true">Vale. Tienes que ir a un plano, si se le documento, que...</td>
+        <td>
+            <button onclick="playSegment(20.0, 23.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:23:00</td>
+        <td>00:24:00</td>
+        <td contenteditable="true">El filmo...</td>
+        <td>
+            <button onclick="playSegment(23.0, 24.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:24:00</td>
+        <td>00:26:00</td>
+        <td contenteditable="true">El filmo, con el bolito.</td>
+        <td>
+            <button onclick="playSegment(24.0, 26.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:26:00</td>
+        <td>00:28:00</td>
+        <td contenteditable="true">¿Qué acredita que te podemos grabar?</td>
+        <td>
+            <button onclick="playSegment(26.0, 28.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:29:00</td>
+        <td>00:32:00</td>
+        <td contenteditable="true">No hay espuestra de que vengo mi espiría, ¿no?</td>
+        <td>
+            <button onclick="playSegment(29.0, 32.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:32:00</td>
+        <td>00:33:00</td>
+        <td contenteditable="true">Es que...</td>
+        <td>
+            <button onclick="playSegment(32.0, 33.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:33:00</td>
+        <td>00:37:00</td>
+        <td contenteditable="true">Es que hay un rayar de aquí contra mí.</td>
+        <td>
+            <button onclick="playSegment(33.0, 37.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:40:00</td>
+        <td>00:43:00</td>
+        <td contenteditable="true">No me he pedido también, no son hombres.</td>
+        <td>
+            <button onclick="playSegment(40.0, 43.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:43:00</td>
+        <td>00:44:00</td>
+        <td contenteditable="true">No me he pedido.</td>
+        <td>
+            <button onclick="playSegment(43.0, 44.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:45:00</td>
+        <td>00:46:00</td>
+        <td contenteditable="true">¿Qué es la espiría?</td>
+        <td>
+            <button onclick="playSegment(45.0, 46.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:46:00</td>
+        <td>00:50:00</td>
+        <td contenteditable="true">Ahora vuelvo, no me he pedido.</td>
+        <td>
+            <button onclick="playSegment(46.0, 50.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:50:00</td>
+        <td>00:53:00</td>
+        <td contenteditable="true">No tengo una ahí, porque sacas un lecado.</td>
+        <td>
+            <button onclick="playSegment(50.0, 53.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:53:00</td>
+        <td>00:54:00</td>
+        <td contenteditable="true">¿Qué es?</td>
+        <td>
+            <button onclick="playSegment(53.0, 54.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:54:00</td>
+        <td>00:55:00</td>
+        <td contenteditable="true">¿Qué es?</td>
+        <td>
+            <button onclick="playSegment(54.0, 55.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>00:55:00</td>
+        <td>00:59:00</td>
+        <td contenteditable="true">Esto es un mínimo de sospechosos.</td>
+        <td>
+            <button onclick="playSegment(55.0, 59.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:02:00</td>
+        <td>01:06:00</td>
+        <td contenteditable="true">Claro, pero antes, todo el fin Calout del gameplay, no se ha grabado.</td>
+        <td>
+            <button onclick="playSegment(62.0, 66.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:06:00</td>
+        <td>01:08:00</td>
+        <td contenteditable="true">No, sí, o sea, no.</td>
+        <td>
+            <button onclick="playSegment(66.0, 68.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:08:00</td>
+        <td>01:11:00</td>
+        <td contenteditable="true">Vale, ¿qué estamos a un ceno?</td>
+        <td>
+            <button onclick="playSegment(68.0, 71.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:11:00</td>
+        <td>01:12:00</td>
+        <td contenteditable="true">Sí.</td>
+        <td>
+            <button onclick="playSegment(71.0, 72.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:13:00</td>
+        <td>01:17:00</td>
+        <td contenteditable="true">Hay un historián que siempre se ha instituado en la primera pédita.</td>
+        <td>
+            <button onclick="playSegment(73.0, 77.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:17:00</td>
+        <td>01:19:00</td>
+        <td contenteditable="true">Si os tenemos todo aquí, ¿no?</td>
+        <td>
+            <button onclick="playSegment(77.0, 79.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:19:00</td>
+        <td>01:21:00</td>
+        <td contenteditable="true">El otro no me ha firmado, ¿eh?</td>
+        <td>
+            <button onclick="playSegment(79.0, 81.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:21:00</td>
+        <td>01:22:00</td>
+        <td contenteditable="true">O sea, y tiene que...</td>
+        <td>
+            <button onclick="playSegment(81.0, 82.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:22:00</td>
+        <td>01:24:00</td>
+        <td contenteditable="true">Dentro de decir todo lo que vaya a venir.</td>
+        <td>
+            <button onclick="playSegment(82.0, 84.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:24:00</td>
+        <td>01:28:00</td>
+        <td contenteditable="true">Tengo que entrar en vayas jugando todo lo que se te pasa con la cabeza en voz alta.</td>
+        <td>
+            <button onclick="playSegment(84.0, 88.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:28:00</td>
+        <td>01:30:00</td>
+        <td contenteditable="true">Para que podamos escúsanlo nosotros, ¿vale?</td>
+        <td>
+            <button onclick="playSegment(88.0, 90.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:30:00</td>
+        <td>01:31:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(90.0, 91.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:34:00</td>
+        <td>01:37:00</td>
+        <td contenteditable="true">Pues el juego es el FB-Rey si vas a jugar una versión de los dos primeros niveles.</td>
+        <td>
+            <button onclick="playSegment(94.0, 97.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:37:00</td>
+        <td>01:39:00</td>
+        <td contenteditable="true">Cuando esté es cómodo, puedes empezar.</td>
+        <td>
+            <button onclick="playSegment(97.0, 99.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:39:00</td>
+        <td>01:40:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(99.0, 100.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:41:00</td>
+        <td>01:43:00</td>
+        <td contenteditable="true">¿Y si es alguna duda, me preocupo.</td>
+        <td>
+            <button onclick="playSegment(101.0, 103.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:43:00</td>
+        <td>01:45:00</td>
+        <td contenteditable="true">¿Se jugan ratón o...?</td>
+        <td>
+            <button onclick="playSegment(103.0, 105.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:45:00</td>
+        <td>01:46:00</td>
+        <td contenteditable="true">A verlo, les he ver.</td>
+        <td>
+            <button onclick="playSegment(105.0, 106.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:46:00</td>
+        <td>01:47:00</td>
+        <td contenteditable="true">A verlo, les he verlo.</td>
+        <td>
+            <button onclick="playSegment(106.0, 107.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:47:00</td>
+        <td>01:49:00</td>
+        <td contenteditable="true">Que lo has descocutado a fuego, los controlos lo puedes ver.</td>
+        <td>
+            <button onclick="playSegment(107.0, 109.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:49:00</td>
+        <td>01:50:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(109.0, 110.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:50:00</td>
+        <td>01:51:00</td>
+        <td contenteditable="true">Esto no quiero liarla.</td>
+        <td>
+            <button onclick="playSegment(110.0, 111.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:51:00</td>
+        <td>01:54:00</td>
+        <td contenteditable="true">Con los cascos no hayas de que lo deciden.</td>
+        <td>
+            <button onclick="playSegment(111.0, 114.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:54:00</td>
+        <td>01:55:00</td>
+        <td contenteditable="true">No, no.</td>
+        <td>
+            <button onclick="playSegment(114.0, 115.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:55:00</td>
+        <td>01:57:00</td>
+        <td contenteditable="true">Es una práctica que me he caído.</td>
+        <td>
+            <button onclick="playSegment(115.0, 117.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:57:00</td>
+        <td>01:58:00</td>
+        <td contenteditable="true">No, no, no.</td>
+        <td>
+            <button onclick="playSegment(117.0, 118.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:58:00</td>
+        <td>01:59:00</td>
+        <td contenteditable="true">No, no, no.</td>
+        <td>
+            <button onclick="playSegment(118.0, 119.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>01:59:00</td>
+        <td>02:00:00</td>
+        <td contenteditable="true">No, no, no, no.</td>
+        <td>
+            <button onclick="playSegment(119.0, 120.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:00:00</td>
+        <td>02:01:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(120.0, 121.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:01:00</td>
+        <td>02:03:00</td>
+        <td contenteditable="true">Me he quedado en el juego.</td>
+        <td>
+            <button onclick="playSegment(121.0, 123.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:03:00</td>
+        <td>02:05:00</td>
+        <td contenteditable="true">Jua, o niles.</td>
+        <td>
+            <button onclick="playSegment(123.0, 125.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:05:00</td>
+        <td>02:06:00</td>
+        <td contenteditable="true">Lo que...</td>
+        <td>
+            <button onclick="playSegment(125.0, 126.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:06:00</td>
+        <td>02:08:00</td>
+        <td contenteditable="true">Vale, vamos a ver.</td>
+        <td>
+            <button onclick="playSegment(126.0, 128.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:09:00</td>
+        <td>02:12:00</td>
+        <td contenteditable="true">Vale, vamos a ver, vamos a ver las flechitas.</td>
+        <td>
+            <button onclick="playSegment(129.0, 132.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:12:00</td>
+        <td>02:14:00</td>
+        <td contenteditable="true">El salto es...</td>
+        <td>
+            <button onclick="playSegment(132.0, 134.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:14:00</td>
+        <td>02:16:00</td>
+        <td contenteditable="true">Cambio según...</td>
+        <td>
+            <button onclick="playSegment(134.0, 136.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:16:00</td>
+        <td>02:17:00</td>
+        <td contenteditable="true">¿Cuánto se pulsa?</td>
+        <td>
+            <button onclick="playSegment(136.0, 137.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:17:00</td>
+        <td>02:19:00</td>
+        <td contenteditable="true">Pulsándolo o no.</td>
+        <td>
+            <button onclick="playSegment(137.0, 139.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:19:00</td>
+        <td>02:22:00</td>
+        <td contenteditable="true">Antes me pareció de esa tabena.</td>
+        <td>
+            <button onclick="playSegment(139.0, 142.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:24:00</td>
+        <td>02:26:00</td>
+        <td contenteditable="true">Vale, te mueves con esto.</td>
+        <td>
+            <button onclick="playSegment(144.0, 146.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:26:00</td>
+        <td>02:27:00</td>
+        <td contenteditable="true">No puedo ir para allá.</td>
+        <td>
+            <button onclick="playSegment(146.0, 147.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:27:00</td>
+        <td>02:29:00</td>
+        <td contenteditable="true">Me quiero...</td>
+        <td>
+            <button onclick="playSegment(147.0, 149.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:29:00</td>
+        <td>02:30:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(149.0, 150.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:30:00</td>
+        <td>02:32:00</td>
+        <td contenteditable="true">La nabiluma.</td>
+        <td>
+            <button onclick="playSegment(150.0, 152.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:32:00</td>
+        <td>02:34:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(152.0, 154.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:34:00</td>
+        <td>02:36:00</td>
+        <td contenteditable="true">Va a diar a cómo usó la pluma.</td>
+        <td>
+            <button onclick="playSegment(154.0, 156.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:37:00</td>
+        <td>02:38:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(157.0, 158.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:38:00</td>
+        <td>02:40:00</td>
+        <td contenteditable="true">Clique derecho.</td>
+        <td>
+            <button onclick="playSegment(158.0, 160.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:40:00</td>
+        <td>02:42:00</td>
+        <td contenteditable="true">Puesar la...</td>
+        <td>
+            <button onclick="playSegment(160.0, 162.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:42:00</td>
+        <td>02:43:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(162.0, 163.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:43:00</td>
+        <td>02:45:00</td>
+        <td contenteditable="true">Va hacia donde está apuntando con el ratón.</td>
+        <td>
+            <button onclick="playSegment(163.0, 165.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:45:00</td>
+        <td>02:47:00</td>
+        <td contenteditable="true">Sí, va hacia donde está apuntando.</td>
+        <td>
+            <button onclick="playSegment(165.0, 167.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:47:00</td>
+        <td>02:52:00</td>
+        <td contenteditable="true">Vale, entiendo que esa gazona está desluminada y la utilizo como plataforma.</td>
+        <td>
+            <button onclick="playSegment(167.0, 172.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:52:00</td>
+        <td>02:53:00</td>
+        <td contenteditable="true">Y el avé doble volverá, vale.</td>
+        <td>
+            <button onclick="playSegment(172.0, 173.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:53:00</td>
+        <td>02:54:00</td>
+        <td contenteditable="true">Si volve a la avé doble.</td>
+        <td>
+            <button onclick="playSegment(173.0, 174.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:54:00</td>
+        <td>02:55:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(174.0, 175.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:55:00</td>
+        <td>02:56:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(175.0, 176.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:56:00</td>
+        <td>02:58:00</td>
+        <td contenteditable="true">Parece un salto muy largo.</td>
+        <td>
+            <button onclick="playSegment(176.0, 178.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:58:00</td>
+        <td>02:59:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(178.0, 179.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>02:59:00</td>
+        <td>03:01:00</td>
+        <td contenteditable="true">Te dices en espacio y ships.</td>
+        <td>
+            <button onclick="playSegment(179.0, 181.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:01:00</td>
+        <td>03:03:00</td>
+        <td contenteditable="true">En ships está aquí.</td>
+        <td>
+            <button onclick="playSegment(181.0, 183.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:03:00</td>
+        <td>03:04:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(183.0, 184.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:05:00</td>
+        <td>03:06:00</td>
+        <td contenteditable="true">Pacio...</td>
+        <td>
+            <button onclick="playSegment(185.0, 186.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:06:00</td>
+        <td>03:07:00</td>
+        <td contenteditable="true">Pacio...</td>
+        <td>
+            <button onclick="playSegment(186.0, 187.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:07:00</td>
+        <td>03:08:00</td>
+        <td contenteditable="true">Pacio...</td>
+        <td>
+            <button onclick="playSegment(187.0, 188.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:08:00</td>
+        <td>03:09:00</td>
+        <td contenteditable="true">Pacio...</td>
+        <td>
+            <button onclick="playSegment(188.0, 189.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:09:00</td>
+        <td>03:10:00</td>
+        <td contenteditable="true">Pues parece que así no era.</td>
+        <td>
+            <button onclick="playSegment(189.0, 190.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:10:00</td>
+        <td>03:11:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(190.0, 191.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:11:00</td>
+        <td>03:12:00</td>
+        <td contenteditable="true">Uy...</td>
+        <td>
+            <button onclick="playSegment(191.0, 192.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:12:00</td>
+        <td>03:13:00</td>
+        <td contenteditable="true">La flechita...</td>
+        <td>
+            <button onclick="playSegment(192.0, 193.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:13:00</td>
+        <td>03:14:00</td>
+        <td contenteditable="true">Ah...</td>
+        <td>
+            <button onclick="playSegment(193.0, 194.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:14:00</td>
+        <td>03:15:00</td>
+        <td contenteditable="true">Ah...</td>
+        <td>
+            <button onclick="playSegment(194.0, 195.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:15:00</td>
+        <td>03:17:00</td>
+        <td contenteditable="true">Ah, solo se pega en la fenomenumidad, vale.</td>
+        <td>
+            <button onclick="playSegment(195.0, 197.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:17:00</td>
+        <td>03:19:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(197.0, 199.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:19:00</td>
+        <td>03:22:00</td>
+        <td contenteditable="true">El avé doble volverá y ahora...</td>
+        <td>
+            <button onclick="playSegment(199.0, 202.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:22:00</td>
+        <td>03:23:00</td>
+        <td contenteditable="true">Espacio y sí.</td>
+        <td>
+            <button onclick="playSegment(202.0, 203.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:23:00</td>
+        <td>03:24:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(203.0, 204.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:24:00</td>
+        <td>03:26:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(204.0, 206.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:26:00</td>
+        <td>03:28:00</td>
+        <td contenteditable="true">Un cejito para ver.</td>
+        <td>
+            <button onclick="playSegment(206.0, 208.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:28:00</td>
+        <td>03:30:00</td>
+        <td contenteditable="true">De ahí me dice.</td>
+        <td>
+            <button onclick="playSegment(208.0, 210.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:30:00</td>
+        <td>03:32:00</td>
+        <td contenteditable="true">No me dice nada.</td>
+        <td>
+            <button onclick="playSegment(210.0, 212.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:32:00</td>
+        <td>03:34:00</td>
+        <td contenteditable="true">Será un checkpoint a lo mejor.</td>
+        <td>
+            <button onclick="playSegment(212.0, 214.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:34:00</td>
+        <td>03:35:00</td>
+        <td contenteditable="true">No lo sé.</td>
+        <td>
+            <button onclick="playSegment(214.0, 215.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:35:00</td>
+        <td>03:37:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(215.0, 217.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:37:00</td>
+        <td>03:39:00</td>
+        <td contenteditable="true">Y le iré primero a la derecha.</td>
+        <td>
+            <button onclick="playSegment(217.0, 219.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:39:00</td>
+        <td>03:41:00</td>
+        <td contenteditable="true">Puede ser que encuentre algo.</td>
+        <td>
+            <button onclick="playSegment(219.0, 221.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:41:00</td>
+        <td>03:42:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(221.0, 222.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:42:00</td>
+        <td>03:43:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(222.0, 223.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:43:00</td>
+        <td>03:44:00</td>
+        <td contenteditable="true">Le chita para aquí.</td>
+        <td>
+            <button onclick="playSegment(223.0, 224.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:44:00</td>
+        <td>03:45:00</td>
+        <td contenteditable="true">Es parte en ship.</td>
+        <td>
+            <button onclick="playSegment(224.0, 225.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:45:00</td>
+        <td>03:47:00</td>
+        <td contenteditable="true">Y más que nada que es.</td>
+        <td>
+            <button onclick="playSegment(225.0, 227.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:47:00</td>
+        <td>03:48:00</td>
+        <td contenteditable="true">El...</td>
+        <td>
+            <button onclick="playSegment(227.0, 228.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:48:00</td>
+        <td>03:50:00</td>
+        <td contenteditable="true">El cofre este que me ha dicho que me voy a encontrar.</td>
+        <td>
+            <button onclick="playSegment(228.0, 230.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:50:00</td>
+        <td>03:51:00</td>
+        <td contenteditable="true">Otra fluma.</td>
+        <td>
+            <button onclick="playSegment(230.0, 231.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:51:00</td>
+        <td>03:52:00</td>
+        <td contenteditable="true">Vale, la puedo usar dos flores.</td>
+        <td>
+            <button onclick="playSegment(231.0, 232.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:52:00</td>
+        <td>03:53:00</td>
+        <td contenteditable="true">No lo sé.</td>
+        <td>
+            <button onclick="playSegment(232.0, 233.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:53:00</td>
+        <td>03:54:00</td>
+        <td contenteditable="true">A ver, entiendo.</td>
+        <td>
+            <button onclick="playSegment(233.0, 234.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:54:00</td>
+        <td>03:55:00</td>
+        <td contenteditable="true">Ok, te salen aquí abajo.</td>
+        <td>
+            <button onclick="playSegment(234.0, 235.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:55:00</td>
+        <td>03:56:00</td>
+        <td contenteditable="true">Esto...</td>
+        <td>
+            <button onclick="playSegment(235.0, 236.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:56:00</td>
+        <td>03:57:00</td>
+        <td contenteditable="true">No entiendo muy en lo que es.</td>
+        <td>
+            <button onclick="playSegment(236.0, 237.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:57:00</td>
+        <td>03:58:00</td>
+        <td contenteditable="true">Y esto tampoco.</td>
+        <td>
+            <button onclick="playSegment(237.0, 238.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>03:58:00</td>
+        <td>04:00:00</td>
+        <td contenteditable="true">Bueno, subo con el hospital antes.</td>
+        <td>
+            <button onclick="playSegment(238.0, 240.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:01:00</td>
+        <td>04:02:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(241.0, 242.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:02:00</td>
+        <td>04:03:00</td>
+        <td contenteditable="true">No me acuerdo de que había...</td>
+        <td>
+            <button onclick="playSegment(242.0, 243.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:03:00</td>
+        <td>04:04:00</td>
+        <td contenteditable="true">Su boca había...</td>
+        <td>
+            <button onclick="playSegment(243.0, 244.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:04:00</td>
+        <td>04:05:00</td>
+        <td contenteditable="true">Oah.</td>
+        <td>
+            <button onclick="playSegment(244.0, 245.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:07:00</td>
+        <td>04:08:00</td>
+        <td contenteditable="true">Su boca había aquí.</td>
+        <td>
+            <button onclick="playSegment(247.0, 248.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:08:00</td>
+        <td>04:09:00</td>
+        <td contenteditable="true">Ojo.</td>
+        <td>
+            <button onclick="playSegment(248.0, 249.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:09:00</td>
+        <td>04:12:00</td>
+        <td contenteditable="true">Va a decir que es el checkpoint.</td>
+        <td>
+            <button onclick="playSegment(249.0, 252.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:12:00</td>
+        <td>04:14:00</td>
+        <td contenteditable="true">Ojo, sí.</td>
+        <td>
+            <button onclick="playSegment(252.0, 254.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:14:00</td>
+        <td>04:18:00</td>
+        <td contenteditable="true">Si, si hagan mejor de salte mejor la verdad.</td>
+        <td>
+            <button onclick="playSegment(254.0, 258.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:18:00</td>
+        <td>04:28:00</td>
+        <td contenteditable="true">Ah, no se puede hacer.</td>
+        <td>
+            <button onclick="playSegment(258.0, 268.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:29:00</td>
+        <td>04:31:00</td>
+        <td contenteditable="true">Si, tiene más que salto.</td>
+        <td>
+            <button onclick="playSegment(269.0, 271.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:34:00</td>
+        <td>04:35:00</td>
+        <td contenteditable="true">Uéu...</td>
+        <td>
+            <button onclick="playSegment(274.0, 275.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:41:00</td>
+        <td>04:43:00</td>
+        <td contenteditable="true">Hay un amigo patrullando.</td>
+        <td>
+            <button onclick="playSegment(281.0, 283.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:43:00</td>
+        <td>04:45:00</td>
+        <td contenteditable="true">Tendré cuidado.</td>
+        <td>
+            <button onclick="playSegment(283.0, 285.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:45:00</td>
+        <td>04:48:00</td>
+        <td contenteditable="true">No sé, es como recuperar la flecha de saque como por ahí.</td>
+        <td>
+            <button onclick="playSegment(285.0, 288.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:52:00</td>
+        <td>04:55:00</td>
+        <td contenteditable="true">Ahora, cuando gasto las dos, por recuperar las dos.</td>
+        <td>
+            <button onclick="playSegment(292.0, 295.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>04:56:00</td>
+        <td>05:00:00</td>
+        <td contenteditable="true">Pues, yo por aquí, a ver si puedo.</td>
+        <td>
+            <button onclick="playSegment(296.0, 300.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:04:00</td>
+        <td>05:07:00</td>
+        <td contenteditable="true">A ver si es que no llevo a repartir la ultradora.</td>
+        <td>
+            <button onclick="playSegment(304.0, 307.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:10:00</td>
+        <td>05:11:00</td>
+        <td contenteditable="true">Eh... vale.</td>
+        <td>
+            <button onclick="playSegment(310.0, 311.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:11:00</td>
+        <td>05:13:00</td>
+        <td contenteditable="true">Por aquí, más o menos.</td>
+        <td>
+            <button onclick="playSegment(311.0, 313.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:18:00</td>
+        <td>05:19:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(318.0, 319.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:20:00</td>
+        <td>05:21:00</td>
+        <td contenteditable="true">Una espada.</td>
+        <td>
+            <button onclick="playSegment(320.0, 321.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:21:00</td>
+        <td>05:22:00</td>
+        <td contenteditable="true">Aquí hay ciegos.</td>
+        <td>
+            <button onclick="playSegment(321.0, 322.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:22:00</td>
+        <td>05:23:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(322.0, 323.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:24:00</td>
+        <td>05:27:00</td>
+        <td contenteditable="true">Ah, en el aire puedo hacer la verdad que...</td>
+        <td>
+            <button onclick="playSegment(324.0, 327.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:32:00</td>
+        <td>05:33:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(332.0, 333.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:33:00</td>
+        <td>05:34:00</td>
+        <td contenteditable="true">Vale, muere...</td>
+        <td>
+            <button onclick="playSegment(333.0, 334.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:34:00</td>
+        <td>05:37:00</td>
+        <td contenteditable="true">recuperar mis plóxicas antes de sitio.</td>
+        <td>
+            <button onclick="playSegment(334.0, 337.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:37:00</td>
+        <td>05:38:00</td>
+        <td contenteditable="true">Otro checkpoint.</td>
+        <td>
+            <button onclick="playSegment(337.0, 338.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:39:00</td>
+        <td>05:41:00</td>
+        <td contenteditable="true">Eh... espacios.</td>
+        <td>
+            <button onclick="playSegment(339.0, 341.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:41:00</td>
+        <td>05:42:00</td>
+        <td contenteditable="true">Sí.</td>
+        <td>
+            <button onclick="playSegment(341.0, 342.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:43:00</td>
+        <td>05:45:00</td>
+        <td contenteditable="true">Eh... creí derecho.</td>
+        <td>
+            <button onclick="playSegment(343.0, 345.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:46:00</td>
+        <td>05:48:00</td>
+        <td contenteditable="true">Su boca va a activar botones.</td>
+        <td>
+            <button onclick="playSegment(346.0, 348.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:53:00</td>
+        <td>05:55:00</td>
+        <td contenteditable="true">Ah, vale, si desatío.</td>
+        <td>
+            <button onclick="playSegment(353.0, 355.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:56:00</td>
+        <td>05:58:00</td>
+        <td contenteditable="true">Podría hacer lo más al botones.</td>
+        <td>
+            <button onclick="playSegment(356.0, 358.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>05:58:00</td>
+        <td>06:00:00</td>
+        <td contenteditable="true">Esto no tiene que haberme saluvante.</td>
+        <td>
+            <button onclick="playSegment(358.0, 360.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:03:00</td>
+        <td>06:05:00</td>
+        <td contenteditable="true">Vale, puedo recuperarlas.</td>
+        <td>
+            <button onclick="playSegment(363.0, 365.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:07:00</td>
+        <td>06:10:00</td>
+        <td contenteditable="true">No gusta la anticipación del salto de este.</td>
+        <td>
+            <button onclick="playSegment(367.0, 370.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:10:00</td>
+        <td>06:12:00</td>
+        <td contenteditable="true">De verdad, aquí.</td>
+        <td>
+            <button onclick="playSegment(370.0, 372.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:13:00</td>
+        <td>06:15:00</td>
+        <td contenteditable="true">Otra pluma más. Vale, guay.</td>
+        <td>
+            <button onclick="playSegment(373.0, 375.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:16:00</td>
+        <td>06:17:00</td>
+        <td contenteditable="true">Por aquí.</td>
+        <td>
+            <button onclick="playSegment(376.0, 377.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:19:00</td>
+        <td>06:22:00</td>
+        <td contenteditable="true">De verdad, si es salto, hay veces que parece que salto más.</td>
+        <td>
+            <button onclick="playSegment(379.0, 382.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:24:00</td>
+        <td>06:26:00</td>
+        <td contenteditable="true">Uah, aquí ya no llevo, ¿no?</td>
+        <td>
+            <button onclick="playSegment(384.0, 386.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:29:00</td>
+        <td>06:30:00</td>
+        <td contenteditable="true">Por aquí.</td>
+        <td>
+            <button onclick="playSegment(389.0, 390.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:39:00</td>
+        <td>06:42:00</td>
+        <td contenteditable="true">Dejese que no llevo, es que me hace esa firme que desalto.</td>
+        <td>
+            <button onclick="playSegment(399.0, 402.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:42:00</td>
+        <td>06:43:00</td>
+        <td contenteditable="true">Ahí ves un desalto más.</td>
+        <td>
+            <button onclick="playSegment(402.0, 403.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:43:00</td>
+        <td>06:44:00</td>
+        <td contenteditable="true">Es que salto menos.</td>
+        <td>
+            <button onclick="playSegment(403.0, 404.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:53:00</td>
+        <td>06:54:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(413.0, 414.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>06:55:00</td>
+        <td>06:56:00</td>
+        <td contenteditable="true">Eh...</td>
+        <td>
+            <button onclick="playSegment(415.0, 416.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:15:00</td>
+        <td>07:16:00</td>
+        <td contenteditable="true">Voy a macho.</td>
+        <td>
+            <button onclick="playSegment(435.0, 436.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:18:00</td>
+        <td>07:20:00</td>
+        <td contenteditable="true">No, no sé si estoy me atrope.</td>
+        <td>
+            <button onclick="playSegment(438.0, 440.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:24:00</td>
+        <td>07:29:00</td>
+        <td contenteditable="true">Me worshife, viva si te hasnos� tu hice a esta reporter.</td>
+        <td>
+            <button onclick="playSegment(444.0, 449.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:29:00</td>
+        <td>07:31:00</td>
+        <td contenteditable="true">Laceda la t free privileged.</td>
+        <td>
+            <button onclick="playSegment(449.0, 451.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:31:00</td>
+        <td>07:32:00</td>
+        <td contenteditable="true">Sabes qué es?</td>
+        <td>
+            <button onclick="playSegment(451.0, 452.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:50:00</td>
+        <td>07:51:00</td>
+        <td contenteditable="true">Necesitando solo...]</td>
+        <td>
+            <button onclick="playSegment(470.0, 471.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:51:00</td>
+        <td>07:53:00</td>
+        <td contenteditable="true">¿Por qué?</td>
+        <td>
+            <button onclick="playSegment(471.0, 473.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:55:00</td>
+        <td>07:57:00</td>
+        <td contenteditable="true">No hay más camino, hay un salto de ser.</td>
+        <td>
+            <button onclick="playSegment(475.0, 477.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>07:57:00</td>
+        <td>07:59:00</td>
+        <td contenteditable="true">Hay que poder.</td>
+        <td>
+            <button onclick="playSegment(477.0, 479.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:05:00</td>
+        <td>08:09:00</td>
+        <td contenteditable="true">Vale, vamos a ver si es un nuevo orden a que haces.</td>
+        <td>
+            <button onclick="playSegment(485.0, 489.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:15:00</td>
+        <td>08:17:00</td>
+        <td contenteditable="true">Vale, ahí no llega.</td>
+        <td>
+            <button onclick="playSegment(495.0, 497.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:21:00</td>
+        <td>08:25:00</td>
+        <td contenteditable="true">Vale, vamos a ver si es un nuevo orden a que haces.</td>
+        <td>
+            <button onclick="playSegment(501.0, 505.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:45:00</td>
+        <td>08:47:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(525.0, 527.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:51:00</td>
+        <td>08:55:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(531.0, 535.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>08:59:00</td>
+        <td>09:01:00</td>
+        <td contenteditable="true">Vale, puedo hacer los insaltas.</td>
+        <td>
+            <button onclick="playSegment(539.0, 541.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:11:00</td>
+        <td>09:13:00</td>
+        <td contenteditable="true">Vale, vale.</td>
+        <td>
+            <button onclick="playSegment(551.0, 553.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:13:00</td>
+        <td>09:15:00</td>
+        <td contenteditable="true">¿Dónde me va a hacer cosas?</td>
+        <td>
+            <button onclick="playSegment(553.0, 555.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:15:00</td>
+        <td>09:17:00</td>
+        <td contenteditable="true">Vale, vale, vale.</td>
+        <td>
+            <button onclick="playSegment(555.0, 557.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:17:00</td>
+        <td>09:19:00</td>
+        <td contenteditable="true">Sarto así.</td>
+        <td>
+            <button onclick="playSegment(557.0, 559.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:19:00</td>
+        <td>09:21:00</td>
+        <td contenteditable="true">No sé si llevo, que no me ha plomado aquí.</td>
+        <td>
+            <button onclick="playSegment(559.0, 561.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:21:00</td>
+        <td>09:23:00</td>
+        <td contenteditable="true">Que ves así.</td>
+        <td>
+            <button onclick="playSegment(561.0, 563.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:23:00</td>
+        <td>09:25:00</td>
+        <td contenteditable="true">Y ahora, mira aquí arriba.</td>
+        <td>
+            <button onclick="playSegment(563.0, 565.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:25:00</td>
+        <td>09:27:00</td>
+        <td contenteditable="true">La recupero.</td>
+        <td>
+            <button onclick="playSegment(565.0, 567.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:27:00</td>
+        <td>09:29:00</td>
+        <td contenteditable="true">A mí quedo una fecha nada más todavía.</td>
+        <td>
+            <button onclick="playSegment(567.0, 569.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>09:45:00</td>
+        <td>09:47:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(585.0, 587.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:09:00</td>
+        <td>10:11:00</td>
+        <td contenteditable="true">Esto se va a dar a blauas, ¿sabe?</td>
+        <td>
+            <button onclick="playSegment(609.0, 611.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:11:00</td>
+        <td>10:13:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(611.0, 613.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:13:00</td>
+        <td>10:15:00</td>
+        <td contenteditable="true">Una cosa es, bien o sé que haces.</td>
+        <td>
+            <button onclick="playSegment(613.0, 615.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:19:00</td>
+        <td>10:23:00</td>
+        <td contenteditable="true">Vale, eso se rompa, ¿ok?</td>
+        <td>
+            <button onclick="playSegment(619.0, 623.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:23:00</td>
+        <td>10:25:00</td>
+        <td contenteditable="true">Vale, vamos a hacer rompa, ¿ok?</td>
+        <td>
+            <button onclick="playSegment(623.0, 625.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:39:00</td>
+        <td>10:41:00</td>
+        <td contenteditable="true">Eso se va a caer o...</td>
+        <td>
+            <button onclick="playSegment(639.0, 641.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:43:00</td>
+        <td>10:45:00</td>
+        <td contenteditable="true">Se ve aquí, se mueve de abajo, ¿sabes?</td>
+        <td>
+            <button onclick="playSegment(643.0, 645.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:45:00</td>
+        <td>10:47:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(645.0, 647.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:47:00</td>
+        <td>10:49:00</td>
+        <td contenteditable="true">Vale, vale.</td>
+        <td>
+            <button onclick="playSegment(647.0, 649.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>10:49:00</td>
+        <td>10:51:00</td>
+        <td contenteditable="true">Vale, vale, vale.</td>
+        <td>
+            <button onclick="playSegment(649.0, 651.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:07:00</td>
+        <td>11:09:00</td>
+        <td contenteditable="true">Que no que yo quería ir ahí, poder.</td>
+        <td>
+            <button onclick="playSegment(667.0, 669.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:17:00</td>
+        <td>11:27:37</td>
+        <td contenteditable="true">y esto nuevo basarlo</td>
+        <td>
+            <button onclick="playSegment(677.0, 687.38)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:27:37</td>
+        <td>11:37:29</td>
+        <td contenteditable="true">ah ver salta aquí da creo pero aquí arriba y ahora tengo音</td>
+        <td>
+            <button onclick="playSegment(687.38, 697.3)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:37:48</td>
+        <td>11:41:50</td>
+        <td contenteditable="true">quiero cuidar la지를 boarding</td>
+        <td>
+            <button onclick="playSegment(697.48, 701.5)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:41:50</td>
+        <td>11:45:15</td>
+        <td contenteditable="true">eh creo que bajarme</td>
+        <td>
+            <button onclick="playSegment(701.5, 705.16)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:47:00</td>
+        <td>11:50:00</td>
+        <td contenteditable="true">Es que no me...</td>
+        <td>
+            <button onclick="playSegment(707.0, 710.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>11:51:00</td>
+        <td>11:54:00</td>
+        <td contenteditable="true">Pero no es como darle a la cosa de esta.</td>
+        <td>
+            <button onclick="playSegment(711.0, 714.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:08:00</td>
+        <td>12:10:00</td>
+        <td contenteditable="true">Si me caigo voy aquí.</td>
+        <td>
+            <button onclick="playSegment(728.0, 730.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:18:00</td>
+        <td>12:21:00</td>
+        <td contenteditable="true">Si te vas a activar los botones,</td>
+        <td>
+            <button onclick="playSegment(738.0, 741.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:22:00</td>
+        <td>12:24:00</td>
+        <td contenteditable="true">para abrir la mierda de esta,</td>
+        <td>
+            <button onclick="playSegment(742.0, 744.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:25:00</td>
+        <td>12:27:00</td>
+        <td contenteditable="true">pero...</td>
+        <td>
+            <button onclick="playSegment(745.0, 747.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:27:00</td>
+        <td>12:30:00</td>
+        <td contenteditable="true">No sé, vale, puedo quedarme aquí abajo.</td>
+        <td>
+            <button onclick="playSegment(747.0, 750.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:36:00</td>
+        <td>12:38:00</td>
+        <td contenteditable="true">Lo vas a que sigo sin ver.</td>
+        <td>
+            <button onclick="playSegment(756.0, 758.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:40:00</td>
+        <td>12:42:00</td>
+        <td contenteditable="true">Está por aquí abajo, a esta.</td>
+        <td>
+            <button onclick="playSegment(760.0, 762.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:43:00</td>
+        <td>12:46:00</td>
+        <td contenteditable="true">Bueno, ni siquiera le da el botón, pero bueno.</td>
+        <td>
+            <button onclick="playSegment(763.0, 766.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:48:00</td>
+        <td>12:51:00</td>
+        <td contenteditable="true">Vale, dime que en un checkpoint, por favor.</td>
+        <td>
+            <button onclick="playSegment(768.0, 771.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:52:00</td>
+        <td>12:54:00</td>
+        <td contenteditable="true">Venos mal.</td>
+        <td>
+            <button onclick="playSegment(772.0, 774.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:54:00</td>
+        <td>12:57:00</td>
+        <td contenteditable="true">Esto se cae, vale, de nuevo.</td>
+        <td>
+            <button onclick="playSegment(774.0, 777.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>12:59:00</td>
+        <td>13:01:00</td>
+        <td contenteditable="true">Vamos muy rápido.</td>
+        <td>
+            <button onclick="playSegment(779.0, 781.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:08:00</td>
+        <td>13:10:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(788.0, 790.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:12:00</td>
+        <td>13:14:00</td>
+        <td contenteditable="true">Ya por lo que voy.</td>
+        <td>
+            <button onclick="playSegment(792.0, 794.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:15:00</td>
+        <td>13:17:00</td>
+        <td contenteditable="true">Vale, el salto está aquí.</td>
+        <td>
+            <button onclick="playSegment(795.0, 797.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:18:00</td>
+        <td>13:20:00</td>
+        <td contenteditable="true">Se puede que salto por ahí, está.</td>
+        <td>
+            <button onclick="playSegment(798.0, 800.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:21:00</td>
+        <td>13:23:00</td>
+        <td contenteditable="true">Aquí hay una... no sé por aquí, si las dos no.</td>
+        <td>
+            <button onclick="playSegment(801.0, 803.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:30:00</td>
+        <td>13:32:00</td>
+        <td contenteditable="true">Bueno, no llevo ni de coña, ya...</td>
+        <td>
+            <button onclick="playSegment(810.0, 812.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:45:00</td>
+        <td>13:47:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(825.0, 827.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>13:58:00</td>
+        <td>14:01:00</td>
+        <td contenteditable="true">Vale, a ver si así...</td>
+        <td>
+            <button onclick="playSegment(838.0, 841.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:01:00</td>
+        <td>14:03:00</td>
+        <td contenteditable="true">No sé, que hay por aquí.</td>
+        <td>
+            <button onclick="playSegment(841.0, 843.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:05:00</td>
+        <td>14:07:00</td>
+        <td contenteditable="true">Vale, esta zona, esto se cae también.</td>
+        <td>
+            <button onclick="playSegment(845.0, 847.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:07:00</td>
+        <td>14:09:00</td>
+        <td contenteditable="true">Parece que es...</td>
+        <td>
+            <button onclick="playSegment(847.0, 849.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:10:00</td>
+        <td>14:12:00</td>
+        <td contenteditable="true">Vale, por aquí, no.</td>
+        <td>
+            <button onclick="playSegment(850.0, 852.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:17:00</td>
+        <td>14:20:00</td>
+        <td contenteditable="true">Ah, es que el das tiene un lado.</td>
+        <td>
+            <button onclick="playSegment(857.0, 860.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:24:00</td>
+        <td>14:26:00</td>
+        <td contenteditable="true">Ah, me voy a jodas.</td>
+        <td>
+            <button onclick="playSegment(864.0, 866.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:26:00</td>
+        <td>14:28:00</td>
+        <td contenteditable="true">No, Dios.</td>
+        <td>
+            <button onclick="playSegment(866.0, 868.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:32:00</td>
+        <td>14:35:00</td>
+        <td contenteditable="true">Joder, me decían el checkpoint de rádio, aquí.</td>
+        <td>
+            <button onclick="playSegment(872.0, 875.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:35:00</td>
+        <td>14:37:00</td>
+        <td contenteditable="true">Aquí.</td>
+        <td>
+            <button onclick="playSegment(875.0, 877.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:39:00</td>
+        <td>14:41:00</td>
+        <td contenteditable="true">Vale, voy.</td>
+        <td>
+            <button onclick="playSegment(879.0, 881.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:46:00</td>
+        <td>14:48:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(886.0, 888.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:51:00</td>
+        <td>14:54:00</td>
+        <td contenteditable="true">Estoy de Rc se caen, se caen, no se caen.</td>
+        <td>
+            <button onclick="playSegment(891.0, 894.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:54:00</td>
+        <td>14:56:00</td>
+        <td contenteditable="true">No, no se caen, vale.</td>
+        <td>
+            <button onclick="playSegment(894.0, 896.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:56:00</td>
+        <td>14:58:00</td>
+        <td contenteditable="true">Mejor.</td>
+        <td>
+            <button onclick="playSegment(896.0, 898.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>14:59:00</td>
+        <td>15:01:00</td>
+        <td contenteditable="true">Oh, de.</td>
+        <td>
+            <button onclick="playSegment(899.0, 901.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:01:00</td>
+        <td>15:03:00</td>
+        <td contenteditable="true">Otra vez el deshavaste.</td>
+        <td>
+            <button onclick="playSegment(901.0, 903.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:29:00</td>
+        <td>15:31:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(929.0, 931.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:42:00</td>
+        <td>15:44:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(942.0, 944.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:45:00</td>
+        <td>15:47:00</td>
+        <td contenteditable="true">Vale, por aquí, por aquí.</td>
+        <td>
+            <button onclick="playSegment(945.0, 947.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:48:00</td>
+        <td>15:51:00</td>
+        <td contenteditable="true">Espera que se recuperen las.</td>
+        <td>
+            <button onclick="playSegment(948.0, 951.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:52:00</td>
+        <td>15:55:00</td>
+        <td contenteditable="true">Vale, otra vez el salto de las.</td>
+        <td>
+            <button onclick="playSegment(952.0, 955.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>15:59:00</td>
+        <td>16:01:00</td>
+        <td contenteditable="true">Vale, un enemigo por ahí.</td>
+        <td>
+            <button onclick="playSegment(959.0, 961.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:11:00</td>
+        <td>16:13:00</td>
+        <td contenteditable="true">Ah, este son mis vidas, ahora.</td>
+        <td>
+            <button onclick="playSegment(971.0, 973.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:14:00</td>
+        <td>16:16:00</td>
+        <td contenteditable="true">Vale, vale.</td>
+        <td>
+            <button onclick="playSegment(974.0, 976.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:16:00</td>
+        <td>16:18:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(976.0, 978.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:18:00</td>
+        <td>16:21:00</td>
+        <td contenteditable="true">Ahora vamos a hacer lo que quisiera ser tener,</td>
+        <td>
+            <button onclick="playSegment(978.0, 981.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:21:00</td>
+        <td>16:23:00</td>
+        <td contenteditable="true">pero vamos a tener forma de entrevista.</td>
+        <td>
+            <button onclick="playSegment(981.0, 983.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:23:00</td>
+        <td>16:25:00</td>
+        <td contenteditable="true">A ver.</td>
+        <td>
+            <button onclick="playSegment(983.0, 985.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:26:00</td>
+        <td>16:28:00</td>
+        <td contenteditable="true">Vale, vale.</td>
+        <td>
+            <button onclick="playSegment(986.0, 988.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:28:00</td>
+        <td>16:30:00</td>
+        <td contenteditable="true">No, no, un poco de el cuello para jachar a mí.</td>
+        <td>
+            <button onclick="playSegment(988.0, 990.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:30:00</td>
+        <td>16:32:00</td>
+        <td contenteditable="true">Ah, ok, ok.</td>
+        <td>
+            <button onclick="playSegment(990.0, 992.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:32:00</td>
+        <td>16:34:00</td>
+        <td contenteditable="true">Pues tengo una pequeña entrevista, me da un puesto en el ritmo.</td>
+        <td>
+            <button onclick="playSegment(992.0, 994.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:34:00</td>
+        <td>16:36:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(994.0, 996.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:36:00</td>
+        <td>16:38:00</td>
+        <td contenteditable="true">Ok, ok.</td>
+        <td>
+            <button onclick="playSegment(996.0, 998.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:38:00</td>
+        <td>16:41:00</td>
+        <td contenteditable="true">Hay tendido las vidas en el último momento.</td>
+        <td>
+            <button onclick="playSegment(998.0, 1001.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:41:00</td>
+        <td>16:46:00</td>
+        <td contenteditable="true">Vale, ver atención, ¿cómo te he sentido en general?</td>
+        <td>
+            <button onclick="playSegment(1001.0, 1006.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:46:00</td>
+        <td>16:52:00</td>
+        <td contenteditable="true">O sea, me ha molado, esta igual idea de molar,</td>
+        <td>
+            <button onclick="playSegment(1006.0, 1012.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:52:00</td>
+        <td>16:55:00</td>
+        <td contenteditable="true">de sobernos los pudles con las plumas,</td>
+        <td>
+            <button onclick="playSegment(1012.0, 1015.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:55:00</td>
+        <td>16:57:00</td>
+        <td contenteditable="true">porque cuando entiendes lo que tienes que hacer,</td>
+        <td>
+            <button onclick="playSegment(1015.0, 1017.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>16:57:00</td>
+        <td>17:00:00</td>
+        <td contenteditable="true">se siente muy fluido, blanc, se siente bastante guay,</td>
+        <td>
+            <button onclick="playSegment(1017.0, 1020.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:00:00</td>
+        <td>17:02:00</td>
+        <td contenteditable="true">pero a ver un par de momentos,</td>
+        <td>
+            <button onclick="playSegment(1020.0, 1022.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:02:00</td>
+        <td>17:06:00</td>
+        <td contenteditable="true">es que me he quedado descado de que no entendía como seguir cuando.</td>
+        <td>
+            <button onclick="playSegment(1022.0, 1026.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:06:00</td>
+        <td>17:09:00</td>
+        <td contenteditable="true">No sé en qué parte ha sido.</td>
+        <td>
+            <button onclick="playSegment(1026.0, 1029.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:09:00</td>
+        <td>17:11:00</td>
+        <td contenteditable="true">En esta última parte del nivel 2,</td>
+        <td>
+            <button onclick="playSegment(1029.0, 1031.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:11:00</td>
+        <td>17:14:00</td>
+        <td contenteditable="true">la que tenía que subir por...</td>
+        <td>
+            <button onclick="playSegment(1031.0, 1034.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:14:00</td>
+        <td>17:17:00</td>
+        <td contenteditable="true">subiendo con las estas, me ha descabado ahí.</td>
+        <td>
+            <button onclick="playSegment(1034.0, 1037.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:17:00</td>
+        <td>17:21:00</td>
+        <td contenteditable="true">Luego, el salto no ha acabado de entender si el salto</td>
+        <td>
+            <button onclick="playSegment(1037.0, 1041.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:21:00</td>
+        <td>17:24:00</td>
+        <td contenteditable="true">es de siempre igual, porque a veces como que me hagas,</td>
+        <td>
+            <button onclick="playSegment(1041.0, 1044.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:24:00</td>
+        <td>17:27:00</td>
+        <td contenteditable="true">es la que lleva más altos, las que me hagas menos.</td>
+        <td>
+            <button onclick="playSegment(1044.0, 1047.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:27:00</td>
+        <td>17:29:00</td>
+        <td contenteditable="true">Es la que lleva menos alto.</td>
+        <td>
+            <button onclick="playSegment(1047.0, 1049.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:29:00</td>
+        <td>17:31:00</td>
+        <td contenteditable="true">Y luego creo que también en el nivel 1,</td>
+        <td>
+            <button onclick="playSegment(1049.0, 1051.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:31:00</td>
+        <td>17:33:00</td>
+        <td contenteditable="true">no me acuerdo en qué parte me quedaba ahí,</td>
+        <td>
+            <button onclick="playSegment(1051.0, 1053.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:33:00</td>
+        <td>17:36:00</td>
+        <td contenteditable="true">ahí ha descado,</td>
+        <td>
+            <button onclick="playSegment(1053.0, 1056.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:36:00</td>
+        <td>17:38:00</td>
+        <td contenteditable="true">o ha sido en el principio del nivel 2.</td>
+        <td>
+            <button onclick="playSegment(1056.0, 1058.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:38:00</td>
+        <td>17:40:00</td>
+        <td contenteditable="true">Y la que había dos botones,</td>
+        <td>
+            <button onclick="playSegment(1058.0, 1060.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:40:00</td>
+        <td>17:42:00</td>
+        <td contenteditable="true">ese que pició el nivel 2, que había dos botones,</td>
+        <td>
+            <button onclick="playSegment(1060.0, 1062.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:42:00</td>
+        <td>17:44:00</td>
+        <td contenteditable="true">y no digo no veo dónde dar,</td>
+        <td>
+            <button onclick="playSegment(1062.0, 1064.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:44:00</td>
+        <td>17:46:00</td>
+        <td contenteditable="true">hasta que me da cuenta de que tenía que dar.</td>
+        <td>
+            <button onclick="playSegment(1064.0, 1066.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:46:00</td>
+        <td>17:47:00</td>
+        <td contenteditable="true">Pero, hasta why,</td>
+        <td>
+            <button onclick="playSegment(1066.0, 1067.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:47:00</td>
+        <td>17:50:00</td>
+        <td contenteditable="true">pero tenía un par de momentos los que me ha descado.</td>
+        <td>
+            <button onclick="playSegment(1067.0, 1070.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:50:00</td>
+        <td>17:51:00</td>
+        <td contenteditable="true">Pero, bueno, ellos en primero,</td>
+        <td>
+            <button onclick="playSegment(1070.0, 1071.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:51:00</td>
+        <td>17:53:00</td>
+        <td contenteditable="true">pero yo creo que el salto es que estaba dando para la gente.</td>
+        <td>
+            <button onclick="playSegment(1071.0, 1073.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:53:00</td>
+        <td>17:54:00</td>
+        <td contenteditable="true">En el coláidero de sabes,</td>
+        <td>
+            <button onclick="playSegment(1073.0, 1074.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:54:00</td>
+        <td>17:55:00</td>
+        <td contenteditable="true">si el coláidero estaba...</td>
+        <td>
+            <button onclick="playSegment(1074.0, 1075.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:55:00</td>
+        <td>17:57:00</td>
+        <td contenteditable="true">Tiene que estar quitando la fuerza,</td>
+        <td>
+            <button onclick="playSegment(1075.0, 1077.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:57:00</td>
+        <td>17:59:00</td>
+        <td contenteditable="true">y no quiero ver la gente.</td>
+        <td>
+            <button onclick="playSegment(1077.0, 1079.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>17:59:00</td>
+        <td>18:01:00</td>
+        <td contenteditable="true">Si tienes que pensar en la pú,</td>
+        <td>
+            <button onclick="playSegment(1079.0, 1081.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:01:00</td>
+        <td>18:02:00</td>
+        <td contenteditable="true">es un elemento de pú,</td>
+        <td>
+            <button onclick="playSegment(1081.0, 1082.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:02:00</td>
+        <td>18:04:00</td>
+        <td contenteditable="true">que es el primero que te queda de la cabeza.</td>
+        <td>
+            <button onclick="playSegment(1082.0, 1084.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:04:00</td>
+        <td>18:06:00</td>
+        <td contenteditable="true">En la pú, ¿por supuesto?</td>
+        <td>
+            <button onclick="playSegment(1084.0, 1086.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:06:00</td>
+        <td>18:07:00</td>
+        <td contenteditable="true">Y ¿cuál es...</td>
+        <td>
+            <button onclick="playSegment(1086.0, 1087.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:07:00</td>
+        <td>18:09:00</td>
+        <td contenteditable="true">ya no tanto elementos,</td>
+        <td>
+            <button onclick="playSegment(1087.0, 1089.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:09:00</td>
+        <td>18:11:00</td>
+        <td contenteditable="true">sino el momento del gameplay,</td>
+        <td>
+            <button onclick="playSegment(1089.0, 1091.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:11:00</td>
+        <td>18:13:00</td>
+        <td contenteditable="true">y que más te venga de la cabeza?</td>
+        <td>
+            <button onclick="playSegment(1091.0, 1093.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:13:00</td>
+        <td>18:17:00</td>
+        <td contenteditable="true">Usar la pú, para...</td>
+        <td>
+            <button onclick="playSegment(1093.0, 1097.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:17:00</td>
+        <td>18:18:00</td>
+        <td contenteditable="true">usar de plataforma,</td>
+        <td>
+            <button onclick="playSegment(1097.0, 1098.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:18:00</td>
+        <td>18:20:00</td>
+        <td contenteditable="true">tirarla contra una pared,</td>
+        <td>
+            <button onclick="playSegment(1098.0, 1100.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:20:00</td>
+        <td>18:21:00</td>
+        <td contenteditable="true">y subirte encima de ella.</td>
+        <td>
+            <button onclick="playSegment(1100.0, 1101.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:21:00</td>
+        <td>18:23:00</td>
+        <td contenteditable="true">Hablando de la cura,</td>
+        <td>
+            <button onclick="playSegment(1101.0, 1103.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:23:00</td>
+        <td>18:26:00</td>
+        <td contenteditable="true">cuando la peda es que es que es que es que es una pluma,</td>
+        <td>
+            <button onclick="playSegment(1103.0, 1106.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:26:00</td>
+        <td>18:29:00</td>
+        <td contenteditable="true">que es lo primero que se te pasa con la cabeza de la cabeza.</td>
+        <td>
+            <button onclick="playSegment(1106.0, 1109.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:29:00</td>
+        <td>18:30:00</td>
+        <td contenteditable="true">Juraría,</td>
+        <td>
+            <button onclick="playSegment(1109.0, 1110.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:30:00</td>
+        <td>18:32:00</td>
+        <td contenteditable="true">no me acuerdo muy bien, pero juraría que en cuanto al hago,</td>
+        <td>
+            <button onclick="playSegment(1110.0, 1112.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:32:00</td>
+        <td>18:34:00</td>
+        <td contenteditable="true">que he dicho, vale, hay que dispararla.</td>
+        <td>
+            <button onclick="playSegment(1112.0, 1114.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:34:00</td>
+        <td>18:36:00</td>
+        <td contenteditable="true">Entonces, ¿no sé si incluso llega o...</td>
+        <td>
+            <button onclick="playSegment(1114.0, 1116.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:36:00</td>
+        <td>18:38:00</td>
+        <td contenteditable="true">¿no creo que he visto la caja y espada directamente,</td>
+        <td>
+            <button onclick="playSegment(1116.0, 1118.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:38:00</td>
+        <td>18:41:00</td>
+        <td contenteditable="true">o disparado incluso antes de que me pongan la caja?</td>
+        <td>
+            <button onclick="playSegment(1118.0, 1121.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:41:00</td>
+        <td>18:43:00</td>
+        <td contenteditable="true">¿Vale, como se hacía? ¿Vale?</td>
+        <td>
+            <button onclick="playSegment(1121.0, 1123.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:43:00</td>
+        <td>18:45:00</td>
+        <td contenteditable="true">Y cuando ha visto la pluma,</td>
+        <td>
+            <button onclick="playSegment(1123.0, 1125.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:45:00</td>
+        <td>18:47:00</td>
+        <td contenteditable="true">¿cu qué crees que va a pasar?</td>
+        <td>
+            <button onclick="playSegment(1125.0, 1127.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:48:00</td>
+        <td>18:51:00</td>
+        <td contenteditable="true">A principio creo que pensaba que se quedaba enganchada</td>
+        <td>
+            <button onclick="playSegment(1128.0, 1131.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:51:00</td>
+        <td>18:52:00</td>
+        <td contenteditable="true">en todos los sitios,</td>
+        <td>
+            <button onclick="playSegment(1131.0, 1132.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:52:00</td>
+        <td>18:54:00</td>
+        <td contenteditable="true">porque de hecho, como ir a zona en verde,</td>
+        <td>
+            <button onclick="playSegment(1132.0, 1134.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:54:00</td>
+        <td>18:57:00</td>
+        <td contenteditable="true">pensaba que me pudieran la zona en verde como disparar aquí,</td>
+        <td>
+            <button onclick="playSegment(1134.0, 1137.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:57:00</td>
+        <td>18:59:00</td>
+        <td contenteditable="true">para usarla y se quedan en fa en nivel,</td>
+        <td>
+            <button onclick="playSegment(1137.0, 1139.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>18:59:00</td>
+        <td>19:01:00</td>
+        <td contenteditable="true">y luego ya me da cuenta de que no se quedan cualquier sitio,</td>
+        <td>
+            <button onclick="playSegment(1139.0, 1141.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:01:00</td>
+        <td>19:04:00</td>
+        <td contenteditable="true">sino que se quedas solo en las zonas iluminadas.</td>
+        <td>
+            <button onclick="playSegment(1141.0, 1144.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:06:00</td>
+        <td>19:07:00</td>
+        <td contenteditable="true">Vamos a hablar de el pulmelo,</td>
+        <td>
+            <button onclick="playSegment(1146.0, 1147.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:07:00</td>
+        <td>19:08:00</td>
+        <td contenteditable="true">el segundo nivel,</td>
+        <td>
+            <button onclick="playSegment(1147.0, 1148.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:08:00</td>
+        <td>19:09:00</td>
+        <td contenteditable="true">dentro del cobre está desvalent.</td>
+        <td>
+            <button onclick="playSegment(1148.0, 1149.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:09:00</td>
+        <td>19:10:00</td>
+        <td contenteditable="true">Vale, sí, le...</td>
+        <td>
+            <button onclick="playSegment(1149.0, 1150.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:10:00</td>
+        <td>19:13:00</td>
+        <td contenteditable="true">¿Cuándo has llegado a la zona?</td>
+        <td>
+            <button onclick="playSegment(1150.0, 1153.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:13:00</td>
+        <td>19:15:00</td>
+        <td contenteditable="true">¿Qué si te pasa si volacabezado?</td>
+        <td>
+            <button onclick="playSegment(1153.0, 1155.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:16:00</td>
+        <td>19:17:00</td>
+        <td contenteditable="true">¿Eso es sin calazón?</td>
+        <td>
+            <button onclick="playSegment(1156.0, 1157.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:17:00</td>
+        <td>19:20:00</td>
+        <td contenteditable="true">Bueno, intuitivamente,</td>
+        <td>
+            <button onclick="playSegment(1157.0, 1160.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:20:00</td>
+        <td>19:22:00</td>
+        <td contenteditable="true">se había que ir hacia la derecha,</td>
+        <td>
+            <button onclick="playSegment(1160.0, 1162.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:22:00</td>
+        <td>19:25:00</td>
+        <td contenteditable="true">cuando subí la parte...</td>
+        <td>
+            <button onclick="playSegment(1162.0, 1165.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:25:00</td>
+        <td>19:27:00</td>
+        <td contenteditable="true">en el bloque este,</td>
+        <td>
+            <button onclick="playSegment(1165.0, 1167.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:27:00</td>
+        <td>19:29:00</td>
+        <td contenteditable="true">que te deja ver el primer botón,</td>
+        <td>
+            <button onclick="playSegment(1167.0, 1169.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:29:00</td>
+        <td>19:31:00</td>
+        <td contenteditable="true">hay que dar el botón si o si,</td>
+        <td>
+            <button onclick="playSegment(1169.0, 1171.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:31:00</td>
+        <td>19:33:00</td>
+        <td contenteditable="true">y sabía que tenías que subirla también,</td>
+        <td>
+            <button onclick="playSegment(1171.0, 1173.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:33:00</td>
+        <td>19:35:00</td>
+        <td contenteditable="true">encima de la plataforma.</td>
+        <td>
+            <button onclick="playSegment(1173.0, 1175.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:35:00</td>
+        <td>19:37:00</td>
+        <td contenteditable="true">Luego, hace que me ha costado,</td>
+        <td>
+            <button onclick="playSegment(1175.0, 1177.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:37:00</td>
+        <td>19:40:00</td>
+        <td contenteditable="true">al principio, no acababa de entender</td>
+        <td>
+            <button onclick="playSegment(1177.0, 1180.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:40:00</td>
+        <td>19:44:00</td>
+        <td contenteditable="true">que la plataforma se acabía una parez,</td>
+        <td>
+            <button onclick="playSegment(1180.0, 1184.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:44:00</td>
+        <td>19:46:00</td>
+        <td contenteditable="true">que tenía que activarla con otro botón.</td>
+        <td>
+            <button onclick="playSegment(1184.0, 1186.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:46:00</td>
+        <td>19:48:00</td>
+        <td contenteditable="true">Me da cuenta con el resto de iteraciones,</td>
+        <td>
+            <button onclick="playSegment(1186.0, 1188.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:48:00</td>
+        <td>19:50:00</td>
+        <td contenteditable="true">pero al principio no lo he visto.</td>
+        <td>
+            <button onclick="playSegment(1188.0, 1190.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:50:00</td>
+        <td>19:52:00</td>
+        <td contenteditable="true">¿Qué problema se has visto en el cobre?</td>
+        <td>
+            <button onclick="playSegment(1190.0, 1192.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:52:00</td>
+        <td>19:54:00</td>
+        <td contenteditable="true">Que no hayas entendido.</td>
+        <td>
+            <button onclick="playSegment(1192.0, 1194.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:54:00</td>
+        <td>19:56:00</td>
+        <td contenteditable="true">Que no veía el segundo botón al principio,</td>
+        <td>
+            <button onclick="playSegment(1194.0, 1196.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>19:56:00</td>
+        <td>19:58:00</td>
+        <td contenteditable="true">el problema que no veía el botón.</td>
+        <td>
+            <button onclick="playSegment(1196.0, 1198.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:02:00</td>
+        <td>20:04:00</td>
+        <td contenteditable="true">¿El contrabento de las plumas?</td>
+        <td>
+            <button onclick="playSegment(1202.0, 1204.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:04:00</td>
+        <td>20:05:00</td>
+        <td contenteditable="true">¿Cómo lo describimos?</td>
+        <td>
+            <button onclick="playSegment(1204.0, 1205.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:07:00</td>
+        <td>20:11:00</td>
+        <td contenteditable="true">Pues tú tienes un número de terminado de plumas,</td>
+        <td>
+            <button onclick="playSegment(1207.0, 1211.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:12:00</td>
+        <td>20:15:00</td>
+        <td contenteditable="true">puedes dispararlas a cualquier lado,</td>
+        <td>
+            <button onclick="playSegment(1212.0, 1215.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:15:00</td>
+        <td>20:17:00</td>
+        <td contenteditable="true">si la dispara es un sitio que está iluminado,</td>
+        <td>
+            <button onclick="playSegment(1215.0, 1217.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:17:00</td>
+        <td>20:19:00</td>
+        <td contenteditable="true">se va a quedar ahí o a un botón,</td>
+        <td>
+            <button onclick="playSegment(1217.0, 1219.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:19:00</td>
+        <td>20:20:00</td>
+        <td contenteditable="true">se va a quedar en los botones,</td>
+        <td>
+            <button onclick="playSegment(1219.0, 1220.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:20:00</td>
+        <td>20:22:00</td>
+        <td contenteditable="true">y si el botón también está iluminado,</td>
+        <td>
+            <button onclick="playSegment(1220.0, 1222.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:22:00</td>
+        <td>20:24:00</td>
+        <td contenteditable="true">así que sería como la misma zona.</td>
+        <td>
+            <button onclick="playSegment(1222.0, 1224.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:24:00</td>
+        <td>20:26:00</td>
+        <td contenteditable="true">Y cuando has gastado todas tus plumas,</td>
+        <td>
+            <button onclick="playSegment(1224.0, 1226.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:26:00</td>
+        <td>20:29:00</td>
+        <td contenteditable="true">puedes pulsar lo de doble para que te vuelvan todas.</td>
+        <td>
+            <button onclick="playSegment(1226.0, 1229.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:29:00</td>
+        <td>20:33:00</td>
+        <td contenteditable="true">Y creo que eso sería el funcionamiento de la sí.</td>
+        <td>
+            <button onclick="playSegment(1229.0, 1233.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:33:00</td>
+        <td>20:36:00</td>
+        <td contenteditable="true">¿Qué has sentido cómodo con la recuperación de las plumas?</td>
+        <td>
+            <button onclick="playSegment(1233.0, 1236.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:37:00</td>
+        <td>20:40:00</td>
+        <td contenteditable="true">Había veces que cuando tenías dos plumas</td>
+        <td>
+            <button onclick="playSegment(1237.0, 1240.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:40:00</td>
+        <td>20:42:00</td>
+        <td contenteditable="true">enganchadas en un sitio,</td>
+        <td>
+            <button onclick="playSegment(1240.0, 1242.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:42:00</td>
+        <td>20:44:00</td>
+        <td contenteditable="true">y quería recuperar las tres,</td>
+        <td>
+            <button onclick="playSegment(1242.0, 1244.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:44:00</td>
+        <td>20:46:00</td>
+        <td contenteditable="true">tenías que disparar hacia la también,</td>
+        <td>
+            <button onclick="playSegment(1244.0, 1246.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:46:00</td>
+        <td>20:47:00</td>
+        <td contenteditable="true">en un sitio para engancharla,</td>
+        <td>
+            <button onclick="playSegment(1246.0, 1247.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:47:00</td>
+        <td>20:48:00</td>
+        <td contenteditable="true">o dispararla,</td>
+        <td>
+            <button onclick="playSegment(1247.0, 1248.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:48:00</td>
+        <td>20:49:00</td>
+        <td contenteditable="true">y mientras tenia el aire,</td>
+        <td>
+            <button onclick="playSegment(1248.0, 1249.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:49:00</td>
+        <td>20:50:00</td>
+        <td contenteditable="true">darle a recuperar.</td>
+        <td>
+            <button onclick="playSegment(1249.0, 1250.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:50:00</td>
+        <td>20:52:00</td>
+        <td contenteditable="true">Es decir, como que había veces que me habría gustado,</td>
+        <td>
+            <button onclick="playSegment(1250.0, 1252.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:52:00</td>
+        <td>20:53:00</td>
+        <td contenteditable="true">puede recuperar las plumas,</td>
+        <td>
+            <button onclick="playSegment(1252.0, 1253.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:53:00</td>
+        <td>20:55:00</td>
+        <td contenteditable="true">sin tener que gastar las todas.</td>
+        <td>
+            <button onclick="playSegment(1253.0, 1255.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:58:00</td>
+        <td>20:59:00</td>
+        <td contenteditable="true">Ya me da respondido,</td>
+        <td>
+            <button onclick="playSegment(1258.0, 1259.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>20:59:00</td>
+        <td>21:02:00</td>
+        <td contenteditable="true">pero ¿qué señales te indican que puedes clavar un aplubo?</td>
+        <td>
+            <button onclick="playSegment(1259.0, 1262.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:02:00</td>
+        <td>21:03:00</td>
+        <td contenteditable="true">¿Qué está iluminado?</td>
+        <td>
+            <button onclick="playSegment(1262.0, 1263.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:05:00</td>
+        <td>21:08:00</td>
+        <td contenteditable="true">Habido alguna mecánica que las sintias es incómodo?</td>
+        <td>
+            <button onclick="playSegment(1265.0, 1268.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:09:00</td>
+        <td>21:12:00</td>
+        <td contenteditable="true">Lo de las plumas,</td>
+        <td>
+            <button onclick="playSegment(1269.0, 1272.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:12:00</td>
+        <td>21:13:00</td>
+        <td contenteditable="true">el tema es de recuperar los plumas.</td>
+        <td>
+            <button onclick="playSegment(1272.0, 1273.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:13:00</td>
+        <td>21:15:00</td>
+        <td contenteditable="true">Me habría gustado poder recuperarlas,</td>
+        <td>
+            <button onclick="playSegment(1273.0, 1275.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:15:00</td>
+        <td>21:17:00</td>
+        <td contenteditable="true">sin tener que gastar las todas.</td>
+        <td>
+            <button onclick="playSegment(1275.0, 1277.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:17:00</td>
+        <td>21:19:00</td>
+        <td contenteditable="true">Y luego, creo que con lo que más parecía,</td>
+        <td>
+            <button onclick="playSegment(1277.0, 1279.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:19:00</td>
+        <td>21:20:00</td>
+        <td contenteditable="true">tenías sícolo del salto,</td>
+        <td>
+            <button onclick="playSegment(1279.0, 1280.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:20:00</td>
+        <td>21:21:00</td>
+        <td contenteditable="true">porque no acababa de...</td>
+        <td>
+            <button onclick="playSegment(1280.0, 1281.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:21:00</td>
+        <td>21:23:00</td>
+        <td contenteditable="true">de eso, de pillarle bien,</td>
+        <td>
+            <button onclick="playSegment(1281.0, 1283.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:23:00</td>
+        <td>21:25:00</td>
+        <td contenteditable="true">de ver las alturas de hasta dónde llegaba, no llegaba.</td>
+        <td>
+            <button onclick="playSegment(1283.0, 1285.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:29:00</td>
+        <td>21:32:00</td>
+        <td contenteditable="true">¿Había algún momento en el cual no tuvieses claro</td>
+        <td>
+            <button onclick="playSegment(1289.0, 1292.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:32:00</td>
+        <td>21:33:00</td>
+        <td contenteditable="true">un objetivo en el nivel?</td>
+        <td>
+            <button onclick="playSegment(1292.0, 1293.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:33:00</td>
+        <td>21:35:00</td>
+        <td contenteditable="true">Sí, en el principio del nivel 2.</td>
+        <td>
+            <button onclick="playSegment(1293.0, 1295.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:36:00</td>
+        <td>21:39:00</td>
+        <td contenteditable="true">Y diría la segunda parte del nivel 2,</td>
+        <td>
+            <button onclick="playSegment(1296.0, 1299.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:39:00</td>
+        <td>21:41:00</td>
+        <td contenteditable="true">pero tampoco lo consideraría tanto,</td>
+        <td>
+            <button onclick="playSegment(1299.0, 1301.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:41:00</td>
+        <td>21:43:00</td>
+        <td contenteditable="true">porque creo que eso es más parte del pútlo y de arte cuenta.</td>
+        <td>
+            <button onclick="playSegment(1301.0, 1303.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:43:00</td>
+        <td>21:46:00</td>
+        <td contenteditable="true">En cambio, la primera sí que ha sido un poco más frustrante,</td>
+        <td>
+            <button onclick="playSegment(1303.0, 1306.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:46:00</td>
+        <td>21:47:00</td>
+        <td contenteditable="true">pero el hecho de decir,</td>
+        <td>
+            <button onclick="playSegment(1306.0, 1307.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:47:00</td>
+        <td>21:49:00</td>
+        <td contenteditable="true">es que no veo el botón.</td>
+        <td>
+            <button onclick="playSegment(1307.0, 1309.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:51:00</td>
+        <td>21:54:00</td>
+        <td contenteditable="true">¿Qué creías que hacía cada tipo de ataque de espada?</td>
+        <td>
+            <button onclick="playSegment(1311.0, 1314.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:54:00</td>
+        <td>21:56:00</td>
+        <td contenteditable="true">Tampoco se usaba mucho,</td>
+        <td>
+            <button onclick="playSegment(1314.0, 1316.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>21:56:00</td>
+        <td>22:00:00</td>
+        <td contenteditable="true">pero entiendo que el de melee cuando está en su vuelo,</td>
+        <td>
+            <button onclick="playSegment(1316.0, 1320.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:00:00</td>
+        <td>22:02:00</td>
+        <td contenteditable="true">pues, invente a hacer un golpe,</td>
+        <td>
+            <button onclick="playSegment(1320.0, 1322.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:02:00</td>
+        <td>22:03:00</td>
+        <td contenteditable="true">y el otro es como una taquenaria</td>
+        <td>
+            <button onclick="playSegment(1322.0, 1323.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:03:00</td>
+        <td>22:05:00</td>
+        <td contenteditable="true">que afecta a todo lo que esté en ese área.</td>
+        <td>
+            <button onclick="playSegment(1323.0, 1325.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:09:00</td>
+        <td>22:11:00</td>
+        <td contenteditable="true">¿Si tuvieses que poner una situación de ejemplo,</td>
+        <td>
+            <button onclick="playSegment(1329.0, 1331.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:11:00</td>
+        <td>22:13:00</td>
+        <td contenteditable="true">¿cuál usarías en cada situación?</td>
+        <td>
+            <button onclick="playSegment(1331.0, 1333.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:13:00</td>
+        <td>22:15:00</td>
+        <td contenteditable="true">Pues, para el enemigo,</td>
+        <td>
+            <button onclick="playSegment(1333.0, 1335.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:15:00</td>
+        <td>22:18:00</td>
+        <td contenteditable="true">este del final del nivel 2, que me estaba atacando arriba,</td>
+        <td>
+            <button onclick="playSegment(1335.0, 1338.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:18:00</td>
+        <td>22:21:00</td>
+        <td contenteditable="true">podría haber intentado atacar con el aéreo,</td>
+        <td>
+            <button onclick="playSegment(1338.0, 1341.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:21:00</td>
+        <td>22:24:00</td>
+        <td contenteditable="true">para haberle dado que probablemente se pudiera resolver así,</td>
+        <td>
+            <button onclick="playSegment(1341.0, 1344.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:24:00</td>
+        <td>22:26:00</td>
+        <td contenteditable="true">y para los enemigos del melee,</td>
+        <td>
+            <button onclick="playSegment(1344.0, 1346.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:26:00</td>
+        <td>22:28:00</td>
+        <td contenteditable="true">que es donde presentan el ataque,</td>
+        <td>
+            <button onclick="playSegment(1346.0, 1348.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:28:00</td>
+        <td>22:29:00</td>
+        <td contenteditable="true">pues, sería el otro ataque.</td>
+        <td>
+            <button onclick="playSegment(1348.0, 1349.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:34:00</td>
+        <td>22:36:00</td>
+        <td contenteditable="true">¿Cuál ha sido el momento de máxima atención del game?</td>
+        <td>
+            <button onclick="playSegment(1354.0, 1356.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:36:00</td>
+        <td>22:38:00</td>
+        <td contenteditable="true">El de atención, pero de máxima atención,</td>
+        <td>
+            <button onclick="playSegment(1356.0, 1358.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:38:00</td>
+        <td>22:39:00</td>
+        <td contenteditable="true">de lo que ha sentido más peligro,</td>
+        <td>
+            <button onclick="playSegment(1358.0, 1359.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:39:00</td>
+        <td>22:41:00</td>
+        <td contenteditable="true">no lo ha aceptado más en buscarlo.</td>
+        <td>
+            <button onclick="playSegment(1359.0, 1361.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:41:00</td>
+        <td>22:44:00</td>
+        <td contenteditable="true">Pues, te diría que él de los bloquecitos pequeños,</td>
+        <td>
+            <button onclick="playSegment(1361.0, 1364.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:44:00</td>
+        <td>22:46:00</td>
+        <td contenteditable="true">cuando tenía que saltar ahí a ajustar el desalto</td>
+        <td>
+            <button onclick="playSegment(1364.0, 1366.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:46:00</td>
+        <td>22:48:00</td>
+        <td contenteditable="true">porque tenía que estar muy atento de...</td>
+        <td>
+            <button onclick="playSegment(1366.0, 1368.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:48:00</td>
+        <td>22:49:00</td>
+        <td contenteditable="true">de Garbion.</td>
+        <td>
+            <button onclick="playSegment(1368.0, 1369.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>22:56:00</td>
+        <td>23:00:00</td>
+        <td contenteditable="true">¿Recuerdas un momento de haber dicho entiendo el juzg,</td>
+        <td>
+            <button onclick="playSegment(1376.0, 1380.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:00:00</td>
+        <td>23:02:00</td>
+        <td contenteditable="true">entiendo que tengo que hacer?</td>
+        <td>
+            <button onclick="playSegment(1380.0, 1382.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:02:00</td>
+        <td>23:04:00</td>
+        <td contenteditable="true">Cuando, en el que me quedo descado,</td>
+        <td>
+            <button onclick="playSegment(1382.0, 1384.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:04:00</td>
+        <td>23:05:00</td>
+        <td contenteditable="true">en el principio del nivel 2,</td>
+        <td>
+            <button onclick="playSegment(1384.0, 1385.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:05:00</td>
+        <td>23:09:00</td>
+        <td contenteditable="true">cuando me he dado cuenta de que podía utilizar la parte verde,</td>
+        <td>
+            <button onclick="playSegment(1385.0, 1389.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:09:00</td>
+        <td>23:11:00</td>
+        <td contenteditable="true">de abajo del bloque, para ver más abajo,</td>
+        <td>
+            <button onclick="playSegment(1389.0, 1391.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:11:00</td>
+        <td>23:12:00</td>
+        <td contenteditable="true">e icho, vale.</td>
+        <td>
+            <button onclick="playSegment(1391.0, 1392.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:12:00</td>
+        <td>23:13:00</td>
+        <td contenteditable="true">Así se hace.</td>
+        <td>
+            <button onclick="playSegment(1392.0, 1393.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:17:00</td>
+        <td>23:20:00</td>
+        <td contenteditable="true">¿Había de algún momento de que ha sentido alivio jugando?</td>
+        <td>
+            <button onclick="playSegment(1397.0, 1400.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:20:00</td>
+        <td>23:23:00</td>
+        <td contenteditable="true">Alivio, cuando es super a las tonas,</td>
+        <td>
+            <button onclick="playSegment(1400.0, 1403.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:23:00</td>
+        <td>23:25:00</td>
+        <td contenteditable="true">es que me quedo cascadas.</td>
+        <td>
+            <button onclick="playSegment(1403.0, 1405.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:25:00</td>
+        <td>23:28:00</td>
+        <td contenteditable="true">Sí, diría que cuando es super ajo y llegado,</td>
+        <td>
+            <button onclick="playSegment(1405.0, 1408.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:28:00</td>
+        <td>23:30:00</td>
+        <td contenteditable="true">cuando había super a la parte,</td>
+        <td>
+            <button onclick="playSegment(1408.0, 1410.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:30:00</td>
+        <td>23:32:00</td>
+        <td contenteditable="true">y ve que llegaba un checkpoint,</td>
+        <td>
+            <button onclick="playSegment(1410.0, 1412.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:32:00</td>
+        <td>23:34:00</td>
+        <td contenteditable="true">y he hecho, por fin un checkpoint menos mal.</td>
+        <td>
+            <button onclick="playSegment(1412.0, 1414.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:34:00</td>
+        <td>23:35:00</td>
+        <td contenteditable="true">Vale.</td>
+        <td>
+            <button onclick="playSegment(1414.0, 1415.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:35:00</td>
+        <td>23:36:00</td>
+        <td contenteditable="true">Puedes hacerle, vamos.</td>
+        <td>
+            <button onclick="playSegment(1415.0, 1416.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>23:36:00</td>
+        <td>23:37:00</td>
+        <td contenteditable="true">Ok.</td>
+        <td>
+            <button onclick="playSegment(1416.0, 1417.0)">▶</button>
+            <button onclick="deleteRow(this)">🗑</button>
+        </td>
+        </tr>
+        
+
+</table>
+
+<script>
+
+const media = document.getElementById("media");
+
+let stopTimer=null;
+
+function playSegment(start,end){
+    
+    media.currentTime=start;
+    media.play();
+
+    if(stopTimer) clearInterval(stopTimer)
+
+    stopTimer=setInterval(()=>{
+        if(media.currentTime>=end){
+            media.pause()
+            clearInterval(stopTimer)
+        }
+    },100)
+}
+
+function deleteRow(btn){
+    btn.parentElement.parentElement.remove()
+}
+
+</script>
+
+</body>
+</html>
