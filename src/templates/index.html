@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+<head>
     <meta charset="UTF-8">
-        <title>Subir audio</title>
-    </head>
-    <body>
-        <h1>Transcriptor de reuniones</h1>
+    <title>Transcriptor de reuniones</title>
+</head>
+<body>
+    <h1>Transcriptor de reuniones</h1>
 
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="audio" accept=".mp3,.wav,.m4a,.mpeg,.mp4" required>
-            <button type="submit">Subir y transcribir</button>
-        </form>
-    </body>
+    <p>
+        Usuario: <strong>{{ current_user["username"] }}</strong>
+        ({{ current_user["role"] }})
+    </p>
+
+    <p><strong>Factor actual de estimación:</strong> {{ calibration_factor }}</p>
+
+    <p>
+        Esta versión realiza una pasada rápida y otra más precisa sobre el audio
+        para detectar posibles diferencias entre ambas transcripciones.
+    </p>
+
+    <p>
+        Los fragmentos donde haya más incertidumbre se marcarán después en el editor
+        para que puedan revisarse manualmente.
+    </p>
+
+    <p>
+        <a href="{{ url_for('meetings') }}">Ver reuniones</a> |
+        {% if current_user["role"] == "admin" %}
+            <a href="{{ url_for('admin_users') }}">Gestionar usuarios</a> |
+        {% endif %}
+        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+    </p>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Título de la reunión:</label><br>
+            <input type="text" name="title" placeholder="Ej. Reunión semanal" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Archivo de audio:</label><br>
+            <input type="file" name="audio" required>
+        </div>
+
+        <br>
+
+        <button type="submit">Subir y transcribir</button>
+    </form>
+</body>
 </html>

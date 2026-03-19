@@ -1,0 +1,562 @@
+[
+  {
+    "start": 0.0,
+    "end": 15.040000000000001,
+    "text": "ULTIMA HORA EN ORIENTE PRÓXIMO A TERRITZA EN HOMÁN, EL AVIÓN FLETADO POR EL GOBIERNO PARA",
+    "fast_text": "Última hora en Oriente próximo aterriz a Noman, el avión fletado por el Gobierno para",
+    "slow_text": "ULTIMA HORA EN ORIENTE PRÓXIMO A TERRITZA EN HOMÁN, EL AVIÓN FLETADO POR EL GOBIERNO PARA",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 0.942
+  },
+  {
+    "start": 15.040000000000001,
+    "end": 19.6,
+    "text": "REPATRIAR A ESPAÑOLES, SARALÓN SE ENVIADA ESPECIAL CON AGOSTIN CAROU, EN LA TÉCNICA.",
+    "fast_text": "repatriar a españoles. Sara Lonson vía especial con Agostín, Carogu en la técnica",
+    "slow_text": "REPATRIAR A ESPAÑOLES, SARALÓN SE ENVIADA ESPECIAL CON AGOSTIN CAROU, EN LA TÉCNICA.",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 0.887
+  },
+  {
+    "start": 19.6,
+    "end": 20.6,
+    "text": "Buenas tardes.",
+    "fast_text": "Buenas tardes. Buenas tardes, sí, ese avión a 330 del ejército",
+    "slow_text": "Buenas tardes.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.361
+  },
+  {
+    "start": 20.6,
+    "end": 21.6,
+    "text": "Buenas tardes.",
+    "fast_text": "Buenas tardes. Buenas tardes, sí, ese avión a 330 del ejército",
+    "slow_text": "Buenas tardes.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.361
+  },
+  {
+    "start": 21.6,
+    "end": 25.64,
+    "text": "Sí, ese avión a 330 del Ejército del Aire está ya en Mascate, en la capital",
+    "fast_text": "del aire está ya en Mascate, en la capital humaní, desde la que repatriará a 250 españoles",
+    "slow_text": "Sí, ese avión a 330 del Ejército del Aire está ya en Mascate, en la capital",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.509
+  },
+  {
+    "start": 25.64,
+    "end": 31.36,
+    "text": "humaní, desde la que repatriará a 250 españoles de los que se encontraban en la zona.",
+    "fast_text": "del aire está ya en Mascate, en la capital humaní, desde la que repatriará a 250 españoles",
+    "slow_text": "humaní, desde la que repatriará a 250 españoles de los que se encontraban en la zona.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.538
+  },
+  {
+    "start": 31.36,
+    "end": 35.2,
+    "text": "Se suman a los 175 que regresaron ayer desde Abu Dhabi.",
+    "fast_text": "de los que se encontraban en la zona se suman a los 175 que regresaron ayer desde Abu Dhabi.",
+    "slow_text": "Se suman a los 175 que regresaron ayer desde Abu Dhabi.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.745
+  },
+  {
+    "start": 35.2,
+    "end": 39.36,
+    "text": "En Oriente Medio, según ha venido informando el Ministerio de Exteriores, había unos 30",
+    "fast_text": "En Oriente medio, según ha venido informando el Ministerio de Exteriores, había unos 30",
+    "slow_text": "En Oriente Medio, según ha venido informando el Ministerio de Exteriores, había unos 30",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 1.0
+  },
+  {
+    "start": 39.36,
+    "end": 42.519999999999996,
+    "text": "mil españoles entre turistas y residentes.",
+    "fast_text": "mil españoles entre turistas y residentes. No todos quieren salir, pero para quienes quieren",
+    "slow_text": "mil españoles entre turistas y residentes.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.626
+  },
+  {
+    "start": 42.519999999999996,
+    "end": 46.6,
+    "text": "No todos quieren salir, pero para quienes quieren hacerlo, debido a que de forma total",
+    "fast_text": "mil españoles entre turistas y residentes. No todos quieren salir, pero para quienes quieren",
+    "slow_text": "No todos quieren salir, pero para quienes quieren hacerlo, debido a que de forma total",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.552
+  },
+  {
+    "start": 46.6,
+    "end": 50.8,
+    "text": "o parcial el espacio aéreo de muchos de estos países del Golfo está cerrado,",
+    "fast_text": "hacerlo, debido a que de forma total o parcial, el espacio aéreo de muchos de estos países",
+    "slow_text": "o parcial el espacio aéreo de muchos de estos países del Golfo está cerrado,",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.638
+  },
+  {
+    "start": 50.8,
+    "end": 55.120000000000005,
+    "text": "la mejor vía a la que funciona de forma más fluida es a través de Oman, donde",
+    "fast_text": "del golfo está cerrado, la mejor vía, la que funciona de forma más fluida, es a través",
+    "slow_text": "la mejor vía a la que funciona de forma más fluida es a través de Oman, donde",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.755
+  },
+  {
+    "start": 55.160000000000004,
+    "end": 56.720000000000006,
+    "text": "el aeropuerto está abierto.",
+    "fast_text": "de Oman, donde el aeropuerto está abierto, esos sí los billetes comerciales están prácticamente",
+    "slow_text": "el aeropuerto está abierto.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.437
+  },
+  {
+    "start": 56.720000000000006,
+    "end": 60.080000000000005,
+    "text": "Esos sí los billetes comerciales están prácticamente agotados.",
+    "fast_text": "de Oman, donde el aeropuerto está abierto, esos sí los billetes comerciales están prácticamente",
+    "slow_text": "Esos sí los billetes comerciales están prácticamente agotados.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.675
+  },
+  {
+    "start": 60.080000000000005,
+    "end": 66.88000000000001,
+    "text": "Desde Dubai, donde está el aeropuerto con mayor tráfico aéreo del mundo, fue impactado",
+    "fast_text": "agotados, desde Dubai, donde está el aeropuerto con mayor retráfico aéreo del mundo, fue impactado",
+    "slow_text": "Desde Dubai, donde está el aeropuerto con mayor tráfico aéreo del mundo, fue impactado",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 0.939
+  },
+  {
+    "start": 66.88000000000001,
+    "end": 70.0,
+    "text": "y trabaja bajo mínimos hasta aquí, hasta Mascate.",
+    "fast_text": "y trabaja bajo mínimos hasta aquí, hasta Mascate se tardó a 5 horas por carreteras el",
+    "slow_text": "y trabaja bajo mínimos hasta aquí, hasta Mascate.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.718
+  },
+  {
+    "start": 70.0,
+    "end": 74.32000000000001,
+    "text": "Se tarda cinco horas por carreteras el trayecto que están haciendo muchos.",
+    "fast_text": "trayecto que están haciendo muchos. De otro lado, destacar en Irán, que está siendo",
+    "slow_text": "Se tarda cinco horas por carreteras el trayecto que están haciendo muchos.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.444
+  },
+  {
+    "start": 74.32000000000001,
+    "end": 78.24000000000001,
+    "text": "De otro lado, destacar en Irán, que está siendo bombardeado con fuerza.",
+    "fast_text": "trayecto que están haciendo muchos. De otro lado, destacar en Irán, que está siendo",
+    "slow_text": "De otro lado, destacar en Irán, que está siendo bombardeado con fuerza.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.608
+  },
+  {
+    "start": 78.24000000000001,
+    "end": 82.24000000000001,
+    "text": "Había 150 españoles, 22 de ellos han salido.",
+    "fast_text": "bombardeado con fuerza, había 150 españoles. 22 de ellos han salido, ya lo ha confirmado",
+    "slow_text": "Había 150 españoles, 22 de ellos han salido.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.661
+  },
+  {
+    "start": 82.24,
+    "end": 86.47999999999999,
+    "text": "Pero ya lo ha confirmado el Gobierno, lo han hecho por la frontera terrestre,",
+    "fast_text": "el gobierno, lo han hecho por la frontera terrestre hacia a Cervallán de A. Bacú y Vía",
+    "slow_text": "Pero ya lo ha confirmado el Gobierno, lo han hecho por la frontera terrestre,",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.629
+  },
+  {
+    "start": 86.47999999999999,
+    "end": 90.47999999999999,
+    "text": "hacia Cervayan, de ahí, Abacú y Vía Stambul, a Madrid.",
+    "fast_text": "el gobierno, lo han hecho por la frontera terrestre hacia a Cervallán de A. Bacú y Vía",
+    "slow_text": "hacia Cervayan, de ahí, Abacú y Vía Stambul, a Madrid.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.418
+  },
+  {
+    "start": 90.47999999999999,
+    "end": 95.6,
+    "text": "Y lo que hace el Gobierno en concreto el Ministerio de Exteriores es reiterar el",
+    "fast_text": "Estambul a Madrid. Y lo que hace el gobierno en concreto, el Ministerio",
+    "slow_text": "Y lo que hace el Gobierno en concreto el Ministerio de Exteriores es reiterar el",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.685
+  },
+  {
+    "start": 95.6,
+    "end": 98.75999999999999,
+    "text": "llamamiento a la desescalada en Oriente Próximo.",
+    "fast_text": "de Exteriores es reiterar el llamamiento a la desescalada en Oriente próximo, hay un",
+    "slow_text": "llamamiento a la desescalada en Oriente Próximo.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.723
+  },
+  {
+    "start": 98.75999999999999,
+    "end": 103.75999999999999,
+    "text": "Hay un tweet de José Manuel Alvares, asegura que acaba de hablar con el",
+    "fast_text": "tweet, de José Manuel Alvarez, asegura que acaba de hablar con el ministro de Exteriores",
+    "slow_text": "Hay un tweet de José Manuel Alvares, asegura que acaba de hablar con el",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.795
+  },
+  {
+    "start": 103.75999999999999,
+    "end": 108.11999999999999,
+    "text": "Ministro de Exteriores de Turquía para trasladarle la solidaridad del",
+    "fast_text": "de Turquía para trasladarle la solidaridad del gobierno con el ejecutivo turco y el pueblo",
+    "slow_text": "Ministro de Exteriores de Turquía para trasladarle la solidaridad del",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.579
+  },
+  {
+    "start": 108.12,
+    "end": 113.44,
+    "text": "Gobierno con el Ejecutivo Turco y el pueblo de ese país ante el lanzamiento de",
+    "fast_text": "de Turquía para trasladarle la solidaridad del gobierno con el ejecutivo turco y el pueblo",
+    "slow_text": "Gobierno con el Ejecutivo Turco y el pueblo de ese país ante el lanzamiento de",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.512
+  },
+  {
+    "start": 113.44,
+    "end": 120.12,
+    "text": "un misil contra Turquía, por parte de Irán, Turquía, que es socio aliado de la OTAN.",
+    "fast_text": "de ese país ante el lanzamiento de un misil contra Turquía, por parte de Irán Turquía,",
+    "slow_text": "un misil contra Turquía, por parte de Irán, Turquía, que es socio aliado de la OTAN.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.598
+  },
+  {
+    "start": 120.12,
+    "end": 124.76,
+    "text": "El Partido Popular y el PNV parecen acercar posturas, desde que el nacionalismo",
+    "fast_text": "que es socioleadó de la OTAN. El partido popular y el PNU me parecen a acercar posturas desde",
+    "slow_text": "El Partido Popular y el PNV parecen acercar posturas, desde que el nacionalismo",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.671
+  },
+  {
+    "start": 124.76,
+    "end": 128.52,
+    "text": "Vasco se negara a apoyar la investidura de Feijo, porque el candidato",
+    "fast_text": "que el nacionalismo Bascos se negara apoyar la investidura de Feyjo, porque el candidato",
+    "slow_text": "Vasco se negara a apoyar la investidura de Feijo, porque el candidato",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.826
+  },
+  {
+    "start": 128.52,
+    "end": 131.92000000000002,
+    "text": "necesitaba contar también con los votos de Vox, Laura Herrero.",
+    "fast_text": "necesitaba contar también con los votos de box, la ore herrero.",
+    "slow_text": "necesitaba contar también con los votos de Vox, Laura Herrero.",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 0.942
+  },
+  {
+    "start": 131.92000000000002,
+    "end": 135.68,
+    "text": "Sí, Núñez Feijo y autor Esteban se reunieron recientemente, lo anunzaba",
+    "fast_text": "Sí, no, Nyeféjo y Alitó Esteban se reunieron recientemente, lo anunciaba hoy el líder",
+    "slow_text": "Sí, Núñez Feijo y autor Esteban se reunieron recientemente, lo anunzaba",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.781
+  },
+  {
+    "start": 135.76000000000002,
+    "end": 139.64000000000001,
+    "text": "hoy el líder del PP desde Vitoria y lo confirmaba en esa tarde fuentes del PNV,",
+    "fast_text": "del PP desde Victoria y lo confirmaban esta tarde fuentes del PNU que marcaban este contacto",
+    "slow_text": "hoy el líder del PP desde Vitoria y lo confirmaba en esa tarde fuentes del PNV,",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.729
+  },
+  {
+    "start": 139.64000000000001,
+    "end": 142.92000000000002,
+    "text": "que marcaban este contacto en los que mantienen habitualmente con las",
+    "fast_text": "en los que mantienen habitualmente con las formaciones políticas lo cierto es que en",
+    "slow_text": "que marcaban este contacto en los que mantienen habitualmente con las",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.549
+  },
+  {
+    "start": 142.92000000000002,
+    "end": 146.84,
+    "text": "formaciones políticas. Lo cierto es que en los últimos meses la relación entre",
+    "fast_text": "los últimos meses la relación entre populares y nacionalistas Bascos no pasaba por un buen",
+    "slow_text": "formaciones políticas. Lo cierto es que en los últimos meses la relación entre",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.419
+  },
+  {
+    "start": 146.84,
+    "end": 150.72,
+    "text": "populares y nacionalistas Vascos no pasaba por un buen momento, incluso hoy",
+    "fast_text": "los últimos meses la relación entre populares y nacionalistas Bascos no pasaba por un buen",
+    "slow_text": "populares y nacionalistas Vascos no pasaba por un buen momento, incluso hoy",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.646
+  },
+  {
+    "start": 150.72,
+    "end": 153.96,
+    "text": "desde el país Vasco Feijo insistía que no entendía que fuesen",
+    "fast_text": "momento, incluso hoy desde el país Bascó, Feyjo insistía que no entendía que fue",
+    "slow_text": "desde el país Vasco Feijo insistía que no entendía que fuesen",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.791
+  },
+  {
+    "start": 153.96,
+    "end": 157.28,
+    "text": "socios de Pedro Sánchez, pero también aseguraba que la vía de",
+    "fast_text": "en socios de Pedro Sánchez, pero también aseguraba que la vía de comunicación con el",
+    "slow_text": "socios de Pedro Sánchez, pero también aseguraba que la vía de",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.839
+  },
+  {
+    "start": 157.28,
+    "end": 161.36,
+    "text": "comunicación con el PNV está abierta de manera sincera, decía y respetuosa.",
+    "fast_text": "PNU está abierta de manera sincera de decía y respetuosa.",
+    "slow_text": "comunicación con el PNV está abierta de manera sincera, decía y respetuosa.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.806
+  },
+  {
+    "start": 161.52,
+    "end": 167.96,
+    "text": "Insisto, desde el respeto de la educación, vamos a mantener una relación",
+    "fast_text": "Insisto, desde el respeto de Irán Turquía, vamos a mantener una relación de comunicación",
+    "slow_text": "Insisto, desde el respeto de la educación, vamos a mantener una relación",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.769
+  },
+  {
+    "start": 167.96,
+    "end": 174.60000000000002,
+    "text": "de comunicación con el PNV y una relación de lealta a Uscadí.",
+    "fast_text": "con el PNU y una relación de lealtad a Uscadí.",
+    "slow_text": "de comunicación con el PNV y una relación de lealta a Uscadí.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.819
+  },
+  {
+    "start": 175.20000000000002,
+    "end": 177.44000000000003,
+    "text": "Palabras que escuchaba el mismo líder del PNV,",
+    "fast_text": "Palabras que escuchaba el mismo líder del PNU, Feyjo Esteban, presente en este acto",
+    "slow_text": "Palabras que escuchaba el mismo líder del PNV,",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.698
+  },
+  {
+    "start": 177.44000000000003,
+    "end": 179.68,
+    "text": "y esteban presente en este acto en Vitoria.",
+    "fast_text": "Palabras que escuchaba el mismo líder del PNU, Feyjo Esteban, presente en este acto",
+    "slow_text": "y esteban presente en este acto en Vitoria.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.504
+  },
+  {
+    "start": 180.0,
+    "end": 184.76000000000002,
+    "text": "Familiares de amigos siguen despidiendo a Fernando Ónega, una de las voces",
+    "fast_text": "Femiliares y amigos, siguen despidiendo, afernando onega, una de las voces de la transición",
+    "slow_text": "Familiares de amigos siguen despidiendo a Fernando Ónega, una de las voces",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.845
+  },
+  {
+    "start": 184.76000000000002,
+    "end": 187.72000000000003,
+    "text": "de la transición desde la casa de Galicia en Madrid.",
+    "fast_text": "desde la casa de Galicia en Madrid.",
+    "slow_text": "de la transición desde la casa de Galicia en Madrid.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.8
+  },
+  {
+    "start": 188.35999999999999,
+    "end": 192.4,
+    "text": "Sus hijas son Soles y Cristina Ónega, agradecen las muestras de cariño.",
+    "fast_text": "Sus hijas son soles y Cristina onega, agradecen las muestras de cariño.",
+    "slow_text": "Sus hijas son Soles y Cristina Ónega, agradecen las muestras de cariño.",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 0.986
+  },
+  {
+    "start": 192.76,
+    "end": 195.52,
+    "text": "Nos habéis hecho sentir muy orgullosos de nuestro padre,",
+    "fast_text": "No sabéis de hecho sentir muy orgullosos de nuestro padre, que fue también un poco",
+    "slow_text": "Nos habéis hecho sentir muy orgullosos de nuestro padre,",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.779
+  },
+  {
+    "start": 196.36,
+    "end": 200.92,
+    "text": "que fue también un poco padre de esta profesión y de todos vosotros.",
+    "fast_text": "padre de esta profesión y de todos vosotros, y ha sido emocionante escucharos y saber",
+    "slow_text": "que fue también un poco padre de esta profesión y de todos vosotros.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.57
+  },
+  {
+    "start": 200.92,
+    "end": 206.36,
+    "text": "Se ha sido emocionante escucharos y saber que siempre tuvo un minuto",
+    "fast_text": "padre de esta profesión y de todos vosotros, y ha sido emocionante escucharos y saber",
+    "slow_text": "Se ha sido emocionante escucharos y saber que siempre tuvo un minuto",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.526
+  },
+  {
+    "start": 206.36,
+    "end": 209.24,
+    "text": "para escuchar a cada uno de los compañeros con los que trabajó.",
+    "fast_text": "que siempre tuvo un minuto para escuchar a cada uno de los compañeros con los que trabajó.",
+    "slow_text": "para escuchar a cada uno de los compañeros con los que trabajó.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.821
+  },
+  {
+    "start": 211.96,
+    "end": 215.88,
+    "text": "Fútbol en Vallecas partido aplazado entre Rayo y Oviedo Lucas García.",
+    "fast_text": "Football en Vallecas, partido ablazado entre Rallo y Obiedo, Lucas García.",
+    "slow_text": "Fútbol en Vallecas partido aplazado entre Rayo y Oviedo Lucas García.",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 0.906
+  },
+  {
+    "start": 216.48,
+    "end": 221.0,
+    "text": "El partido ha plazado el pasado 7 de febrero por el mal estado en el césped",
+    "fast_text": "El partido ha blazado el pasado 7 de febrero por el mal estado en el Céspeda aquí en el",
+    "slow_text": "El partido ha plazado el pasado 7 de febrero por el mal estado en el césped",
+    "uncertain": false,
+    "review_reason": "",
+    "similarity": 0.914
+  },
+  {
+    "start": 221.0,
+    "end": 222.68,
+    "text": "aquí en el estadio de Vallecas.",
+    "fast_text": "estadio de Vallecas, juegan el Rallo Vallecano de Fimoquinto, 27 puntos 3 por encima del",
+    "slow_text": "aquí en el estadio de Vallecas.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.328
+  },
+  {
+    "start": 222.68,
+    "end": 226.79999999999998,
+    "text": "Juegan el Rayo Vallecano 15 con 27.3 por encima del descenso y el colista",
+    "fast_text": "estadio de Vallecas, juegan el Rallo Vallecano de Fimoquinto, 27 puntos 3 por encima del",
+    "slow_text": "Juegan el Rayo Vallecano 15 con 27.3 por encima del descenso y el colista",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.582
+  },
+  {
+    "start": 226.79999999999998,
+    "end": 229.24,
+    "text": "lo viedó con 17 puntos.",
+    "fast_text": "extenso y el colista, lo hubiido con 17 puntos y llegamos al minuto 2 de la primera",
+    "slow_text": "lo viedó con 17 puntos.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.365
+  },
+  {
+    "start": 229.24,
+    "end": 231.44,
+    "text": "Llegamos al minuto 2 de la primera parte,",
+    "fast_text": "extenso y el colista, lo hubiido con 17 puntos y llegamos al minuto 2 de la primera",
+    "slow_text": "Llegamos al minuto 2 de la primera parte,",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.557
+  },
+  {
+    "start": 231.44,
+    "end": 234.16,
+    "text": "todavía sin goles, Rayo Vallecano 0, Real Oviedo 0.",
+    "fast_text": "parte, sin ole rallo, Vallecano 0, real lo hubiido 0.",
+    "slow_text": "todavía sin goles, Rayo Vallecano 0, Real Oviedo 0.",
+    "uncertain": true,
+    "review_reason": "fast_slow_difference",
+    "similarity": 0.763
+  }
+]

@@ -1,4 +1,5 @@
-openai-whisper
-torch
+faster-whisper==1.2.1
+ctranslate2==4.7.1
 flask
 werkzeug
+mutagen
