@@ -1,8 +1,11 @@
 from faster_whisper import WhisperModel
 from difflib import SequenceMatcher
+
+from numpy import block
+from aligner import align_segments
 import re
 
-FAST_MODEL_NAME = "base"
+FAST_MODEL_NAME = "small"
 SLOW_MODEL_NAME = "small"
 
 fast_model = WhisperModel(FAST_MODEL_NAME, device="cpu", compute_type="int8")
@@ -26,11 +29,18 @@ def similarity(text_a, text_b):
     return SequenceMatcher(None, a, b).ratio()
 
 
-def transcribe_with_model(model, audio_path, beam_size=1):
+def transcribe_with_model(
+    model,
+    audio_path,
+    beam_size=1,
+    vad_filter=False,
+    language="es"
+):
     segments_generator, info = model.transcribe(
         audio_path,
         beam_size=beam_size,
-        vad_filter=False
+        vad_filter=vad_filter,
+        language=language
     )
 
     segments = []
@@ -46,70 +56,79 @@ def transcribe_with_model(model, audio_path, beam_size=1):
 
 
 def transcribe_fast(audio_path):
-    return transcribe_with_model(fast_model, audio_path, beam_size=1)
+    return transcribe_with_model(
+        fast_model,
+        audio_path,
+        beam_size=1,
+        vad_filter=True,
+        language="es"
+    )
 
 
 def transcribe_slow(audio_path):
-    return transcribe_with_model(slow_model, audio_path, beam_size=5)
+    return transcribe_with_model(
+        slow_model,
+        audio_path,
+        beam_size=5,
+        vad_filter=True,
+        language="es"
+    )
 
 
 def transcribe_for_calibration(audio_path):
     return transcribe_fast(audio_path)
 
+def format_text_for_display(text):
+    if not text:
+        return text
 
-def overlap(a_start, a_end, b_start, b_end):
-    return max(0.0, min(a_end, b_end) - max(a_start, b_start))
+    if text.isupper():
+        text = text.lower()
+        text = text.capitalize()
 
-
-def find_best_match(reference_segment, candidate_segments):
-    best_segment = None
-    best_overlap = 0.0
-
-    for candidate in candidate_segments:
-        current_overlap = overlap(
-            reference_segment["start"],
-            reference_segment["end"],
-            candidate["start"],
-            candidate["end"]
-        )
-
-        if current_overlap > best_overlap:
-            best_overlap = current_overlap
-            best_segment = candidate
-
-    return best_segment, best_overlap
+    return text
 
 
-def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.85):
+def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.9):
+    aligned_blocks = align_segments(fast_segments, slow_segments)
     merged = []
 
-    for slow_seg in slow_segments:
-        fast_match, _ = find_best_match(slow_seg, fast_segments)
+    for block in aligned_blocks:
+        fast_text = format_text_for_display(block["a_text"])
+        slow_text = format_text_for_display(block["b_text"])
 
-        fast_text = fast_match["text"] if fast_match else ""
-        slow_text = slow_seg["text"]
-
-        sim = similarity(fast_text, slow_text) if fast_match else 0.0
+        if not fast_text and not slow_text:
+            sim = 1.0
+        elif not fast_text or not slow_text:
+            sim = 0.0
+        else:
+            sim = similarity(fast_text, slow_text)
 
         uncertain = False
         reason = ""
 
-        if fast_match is None:
+        if not fast_text:
             uncertain = True
-            reason = "no_fast_match"
+            reason = "missing_fast_block"
+        elif not slow_text:
+            uncertain = True
+            reason = "missing_slow_block"
         elif sim < threshold:
             uncertain = True
             reason = "fast_slow_difference"
 
         merged.append({
-            "start": slow_seg["start"],
-            "end": slow_seg["end"],
-            "text": slow_text,
+            "start": block["start"],
+            "end": block["end"],
+            "text": slow_text if slow_text else fast_text,
             "fast_text": fast_text,
             "slow_text": slow_text,
             "uncertain": uncertain,
             "review_reason": reason,
-            "similarity": round(sim, 3)
+            "similarity": round(sim, 3),
+            "fast_count": len(block["a_segments"]),
+            "slow_count": len(block["b_segments"])
         })
 
     return merged
+

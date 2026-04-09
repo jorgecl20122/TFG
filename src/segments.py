@@ -32,6 +32,8 @@ def generate_html(segments, audio_path, output):
                 <div><strong>Lenta:</strong> {html.escape(s.get("slow_text", ""))}</div>
                 <div><strong>Similitud:</strong> {s.get("similarity", "")}</div>
                 <div><strong>Motivo:</strong> {html.escape(s.get("review_reason", ""))}</div>
+                <div><strong>Segmentos rápida:</strong> {s.get("fast_count", "")}</div>
+                <div><strong>Segmentos lenta:</strong> {s.get("slow_count", "")}</div>
             </div>
             """
 
