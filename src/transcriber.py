@@ -5,11 +5,25 @@ from numpy import block
 from aligner import align_segments
 import re
 
-FAST_MODEL_NAME = "small"
-SLOW_MODEL_NAME = "small"
+MODEL_NAME = "small"
 
-fast_model = WhisperModel(FAST_MODEL_NAME, device="cpu", compute_type="int8")
-slow_model = WhisperModel(SLOW_MODEL_NAME, device="cpu", compute_type="int8")
+model = None
+
+
+def get_model():
+    global model
+
+    if model is None:
+        model = WhisperModel(
+            MODEL_NAME,
+            device="cpu",
+            compute_type="int8"
+        )
+
+    return model
+
+fast_model = None
+slow_model = None
 
 
 def normalize_text(text):
@@ -57,9 +71,9 @@ def transcribe_with_model(
 
 def transcribe_fast(audio_path):
     return transcribe_with_model(
-        fast_model,
+        get_model(),
         audio_path,
-        beam_size=1,
+        beam_size=2,
         vad_filter=True,
         language="es"
     )
@@ -67,7 +81,7 @@ def transcribe_fast(audio_path):
 
 def transcribe_slow(audio_path):
     return transcribe_with_model(
-        slow_model,
+        get_model(),
         audio_path,
         beam_size=5,
         vad_filter=True,
@@ -89,7 +103,7 @@ def format_text_for_display(text):
     return text
 
 
-def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.9):
+def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.85):
     aligned_blocks = align_segments(fast_segments, slow_segments)
     merged = []
 
@@ -103,6 +117,8 @@ def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.9):
             sim = 0.0
         else:
             sim = similarity(fast_text, slow_text)
+
+        similarity_percent = int(round(sim * 100))
 
         uncertain = False
         reason = ""
@@ -125,7 +141,8 @@ def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.9):
             "slow_text": slow_text,
             "uncertain": uncertain,
             "review_reason": reason,
-            "similarity": round(sim, 3),
+            "similarity_score": round(sim, 3),
+            "similarity_percent": similarity_percent,
             "fast_count": len(block["a_segments"]),
             "slow_count": len(block["b_segments"])
         })

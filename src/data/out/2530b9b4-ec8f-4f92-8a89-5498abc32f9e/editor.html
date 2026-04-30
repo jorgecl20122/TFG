@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Editor de transcripción</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #f7f8fa;
+    color: #222;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+audio {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: top;
+}
+
+th {
+    background: #f0f3f7;
+    text-align: left;
+}
+
+td[contenteditable] {
+    background: #fafafa;
+    min-width: 320px;
+}
+
+button {
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.uncertain-row {
+    background: #fff6d8;
+}
+
+.badge {
+    display: inline-block;
+    background: #d97706;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.review-box {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #555;
+    max-width: 420px;
+}
+
+.note {
+    margin-top: 18px;
+    color: #666;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Editor de transcripción</h1>
+
+<audio id="media" controls src="/uploads/2530b9b4-ec8f-4f92-8a89-5498abc32f9e_1772648269508.mp3"></audio>
+
+<table>
+    <tr>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Texto final</th>
+        <th>Revisión</th>
+        <th>Acciones</th>
+    </tr>
+
+    
+        <tr class="">
+            <td>00:02.350</td>
+            <td>00:13.460</td>
+            <td contenteditable="true">RADIO NACIONAL DE ESPAÑA Noticias. Última hora en Oriente, próximo a Terriza, en Oman,</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(2.35, 13.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:13.220</td>
+            <td>00:16.460</td>
+            <td contenteditable="true">el avión, fletado por el gobierno, para repatriar a españoles.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(13.22, 16.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:16.300</td>
+            <td>00:19.460</td>
+            <td contenteditable="true">Sara Alonso, enviada especial con Agostín Karou, en la técnica.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(16.3, 19.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:19.300</td>
+            <td>00:23.780</td>
+            <td contenteditable="true">Buenas tardes. Buenas tardes. Sí, ese avión a 330 del ejército del aire</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(19.3, 23.78)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:23.460</td>
+            <td>00:29.460</td>
+            <td contenteditable="true">está ya en Mascate, en la capital humaní, desde la que repatriará a 250 españoles</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(23.46, 29.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:29.460</td>
+            <td>00:31.460</td>
+            <td contenteditable="true">de los que se encontraban en la zona.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(29.46, 31.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:31.260</td>
+            <td>00:50.619</td>
+            <td contenteditable="true">Se suman a los 175 que regresaron ayer desde Abu Dhabi. En Oriente Medio, según ha venido informando el Ministerio de Exteriores, había unos 30.000 españoles entre turistas y residentes. No todos quieren salir, pero para quienes se quieren hacerlo, debido a que de forma total o parcial el espacio aéreo de muchos de estos países del Golfo está cerrado.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(31.26, 50.62)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:50.460</td>
+            <td>00:56.619</td>
+            <td contenteditable="true">La mejor vía, la que funciona de forma más fluida, es a través de Oman, donde el aeropuerto está abierto.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(50.46, 56.62)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>00:56.460</td>
+            <td>01:14.540</td>
+            <td contenteditable="true">Esos sí, los billetes comerciales están prácticamente agotados. Desde Dubai, donde está el aeropuerto con mayor tráfico, el aeropuerto aéreo del mundo fue impactado y trabaja bajo mínimos hasta aquí, hasta Mascate. Se tarda cinco horas por carreteras. El trayecto que están haciendo muchos.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(56.46, 74.54)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>01:14.459</td>
+            <td>01:18.459</td>
+            <td contenteditable="true">De otro lado, destacar en Irán, que está siendo bombardeado con fuerza.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(74.46, 78.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>01:18.459</td>
+            <td>01:22.459</td>
+            <td contenteditable="true">Había 150 españoles, 22 de ellos han salido.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(78.46, 82.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>01:22.459</td>
+            <td>01:26.659</td>
+            <td contenteditable="true">Ya lo ha confirmado el Gobierno, lo han hecho por la frontera terrestre</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(82.46, 86.66)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>01:26.459</td>
+            <td>01:34.459</td>
+            <td contenteditable="true">hacia Azerbaiyán, de ahí a Baku y Vía Stambul, a Madrid. Lo que hace el Gobierno, en concreto, el Ministerio de Exteriores,</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(86.46, 94.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>01:34.299</td>
+            <td>01:38.739</td>
+            <td contenteditable="true">es reiterar el llamamiento a la desescalada en Oriente Próximo.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(94.3, 98.74)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="uncertain-row">
+            <td>01:38.459</td>
+            <td>02:03.459</td>
+            <td contenteditable="true">Hay un tweet de José Manuel Alvares. Asegura que acaba de hablar con el Ministro de Exteriores de Turquía para trasladarle la solidaridad del Gobierno con el Ejecutivo Turco y el pueblo de ese país ante el lanzamiento de un misil contra Turquía, por parte de Irán, Turquía, que es socio-aliado de la OTAN. En el Partido Popular y el PNV parecen acercar posturas</td>
+            <td>
+                <span class="badge">Revisar</span>
+                
+            <div class="review-box">
+                <div><strong>Rápida:</strong> Hay un tweet de José Manuel Albares, asegura que acaba de hablar con el Ministro de Exteriores de Turquía para trasladarle la solidaridad del Gobierno con el Ejecutivo Turco y el pueblo de ese país ante el lanzamiento de un misil contra Turquía, por parte de Irán, que es socio aliado de la OTAN. El Partido Popular y el PNV parecen acercar posturas</div>
+                <div><strong>Lenta:</strong> Hay un tweet de José Manuel Alvares. Asegura que acaba de hablar con el Ministro de Exteriores de Turquía para trasladarle la solidaridad del Gobierno con el Ejecutivo Turco y el pueblo de ese país ante el lanzamiento de un misil contra Turquía, por parte de Irán, Turquía, que es socio-aliado de la OTAN. En el Partido Popular y el PNV parecen acercar posturas</div>
+                <div><strong>Similitud:</strong> 0.14</div>
+                <div><strong>Motivo:</strong> fast_slow_difference</div>
+                <div><strong>Segmentos rápida:</strong> 7</div>
+                <div><strong>Segmentos lenta:</strong> 7</div>
+            </div>
+            
+            </td>
+            <td>
+                <button onclick="playSegment(98.46, 123.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>02:03.459</td>
+            <td>02:07.700</td>
+            <td contenteditable="true">desde que el nacionalismo vasco se negara a apoyar la investidura de Feijo,</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(123.46, 127.7)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>02:07.459</td>
+            <td>02:17.460</td>
+            <td contenteditable="true">porque el candidato necesitaba contar también con los votos de Vox. Sí, Noñez Feijo y Haitor Esteban se reunieron recientemente, lo anunciaba hoy el líder del PP desde Vitoria</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(127.46, 137.46)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>02:17.460</td>
+            <td>02:22.580</td>
+            <td contenteditable="true">y lo confirmaba en esa tarde fuentes del PNV, que marcaban este contacto en los que mantienen habitualmente</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(137.46, 142.58)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>02:22.460</td>
+            <td>02:26.539</td>
+            <td contenteditable="true">con las formaciones políticas. Lo cierto es que en los últimos meses la relación</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(142.46, 146.54)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>02:26.460</td>
+            <td>02:41.580</td>
+            <td contenteditable="true">entre populares y nacionalistas vascos no pasaba por un buen momento incluso hoy desde el país vasco Feijo insistía que no entendía que fuesen socios de Pedro Sánchez, pero también aseguraba que la vía de comunicación con el PNV está abierta de manera sincera, decía, y respetuosa.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(146.46, 161.58)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>02:41.460</td>
+            <td>02:51.740</td>
+            <td contenteditable="true">Insisto, desde el respeto de la educación, pues vamos a mantener una relación de comunicación con el PNV</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(161.46, 171.74)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>02:51.460</td>
+            <td>02:57.500</td>
+            <td contenteditable="true">y una relación de lealta a Euskadi. Palabras que escuchaba el mismo líder del PNV,</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(171.46, 177.5)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="uncertain-row">
+            <td>02:57.460</td>
+            <td>03:12.699</td>
+            <td contenteditable="true">Haitor Esteban, presente en este acto en Vitoria. Familiares de amigos siguen despidiendo a Fernando Únega, una de las voces de la transición desde la casa de Galicia en Madrid. Sus hijas son Soles y Cristina Únega, agradecen las muestras de cariño.</td>
+            <td>
+                <span class="badge">Revisar</span>
+                
+            <div class="review-box">
+                <div><strong>Rápida:</strong> y Aytor Esteban, presente en este acto en Vitoria. Familiares de amigos, siguen despidiendo a Fernando Ñoñega, una de las voces de la transición desde la casa de Galicia en Madrid. Sus hijas son Soles y Cristina Ñoñega, agradecen las muestras de cariño.</div>
+                <div><strong>Lenta:</strong> Haitor Esteban, presente en este acto en Vitoria. Familiares de amigos siguen despidiendo a Fernando Únega, una de las voces de la transición desde la casa de Galicia en Madrid. Sus hijas son Soles y Cristina Únega, agradecen las muestras de cariño.</div>
+                <div><strong>Similitud:</strong> 0.016</div>
+                <div><strong>Motivo:</strong> fast_slow_difference</div>
+                <div><strong>Segmentos rápida:</strong> 5</div>
+                <div><strong>Segmentos lenta:</strong> 4</div>
+            </div>
+            
+            </td>
+            <td>
+                <button onclick="playSegment(177.46, 192.7)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>03:12.460</td>
+            <td>03:36.439</td>
+            <td contenteditable="true">Nos habéis hecho sentir muy orgullosos de nuestro padre, que fue también un poco padre de esta profesión y de todos vosotros, y ha sido emocionante escucharos y saber que siempre tuvo un minuto para escuchar a cada uno de los compañeros con los que trabajó. Fútbol en Vallecas, partido aplazado entre Rayo y Oviedo, Lucas García.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(192.46, 216.44)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>03:36.439</td>
+            <td>03:42.599</td>
+            <td contenteditable="true">El partido ha aplazado el pasado 7 de febrero, por el mal estado en el césped aquí, en el estadio de Vallecas,</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(216.44, 222.6)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>03:42.439</td>
+            <td>03:46.439</td>
+            <td contenteditable="true">juegan el Rayo Vallecano, 15-27.3 por encima del descenso,</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(222.44, 226.44)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>03:46.240</td>
+            <td>03:51.439</td>
+            <td contenteditable="true">y el colista lo vio con 17 puntos. Llegamos al minuto 2 de la primera parte,</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(226.24, 231.44)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>03:51.400</td>
+            <td>03:54.439</td>
+            <td contenteditable="true">todavía sin goles, Rayo Vallecano 0, Real Oviedo 0.</td>
+            <td>
+                
+                
+            </td>
+            <td>
+                <button onclick="playSegment(231.4, 234.44)">▶</button>
+                <button onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+</table>
+
+<p class="note">
+    Los fragmentos marcados como "Revisar" son segmentos donde la pasada rápida y la lenta no coinciden lo suficiente.
+</p>
+
+<script>
+const media = document.getElementById("media");
+let stopTimer = null;
+
+function playSegment(start, end) {
+    media.currentTime = start;
+    media.play();
+
+    if (stopTimer) {
+        clearInterval(stopTimer);
+    }
+
+    stopTimer = setInterval(() => {
+        if (media.currentTime >= end) {
+            media.pause();
+            clearInterval(stopTimer);
+        }
+    }, 100);
+}
+
+function deleteRow(btn) {
+    btn.parentElement.parentElement.remove();
+}
+</script>
+
+</body>
+</html>

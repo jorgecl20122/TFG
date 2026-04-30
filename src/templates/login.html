@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+<div style="max-width: 420px; margin: 70px auto;">
+    <div class="card" style="padding: 36px 34px;">
+        <h1 class="section-title" style="text-align:center; margin-bottom: 28px;">Iniciar Sesión</h1>
+
+        {% if error %}
+            <div style="background:#fdeaea; color:#b53a3a; border:1px solid #f2caca; padding:12px; border-radius:10px; margin-bottom:18px;">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            <div class="form-group">
+                <label>Usuario</label>
+                <input name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input name="password" type="password" required>
+            </div>
+
+            <button type="submit" class="btn" style="width:100%; margin-top:8px;">
+                Iniciar Sesión
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

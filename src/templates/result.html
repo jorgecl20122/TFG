@@ -1,30 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Resultado</title>
-</head>
-<body>
-    <h1>Transcripción generada</h1>
+{% extends "base.html" %}
 
+{% block title %}Resultado{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 760px; margin: 0 auto; text-align:center;">
+    <h1 class="section-title">Transcripción generada</h1>
     <p>La reunión se ha procesado correctamente.</p>
 
     <p><strong>Título:</strong> {{ meeting["title"] }}</p>
     <p><strong>Estado:</strong> {{ meeting["status"] }}</p>
 
-    <p>
-        Los fragmentos marcados como <strong>Revisar</strong> son zonas donde la
-        transcripción rápida y la lenta no coinciden lo suficiente.
-    </p>
+    <div style="margin:22px 0; color:#5f6f84;">
+        Los fragmentos marcados para revisión son zonas donde la pasada rápida y la lenta no coinciden lo suficiente.
+    </div>
 
-    <a href="{{ url_for('viewer', job_id=job_id) }}" target="_blank">
-        Abrir editor HTML
-    </a>
-
-    <br><br>
-
-    <a href="{{ url_for('meetings') }}">Ver reuniones</a>
-    <br><br>
-    <a href="{{ url_for('index') }}">Volver al inicio</a>
-</body>
-</html>
+    <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+        <a href="{{ url_for('viewer', job_id=job_id) }}" target="_blank" class="btn">Abrir editor HTML</a>
+        <a href="{{ url_for('meetings') }}" class="btn btn-secondary">Ver reuniones</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Transcriptor{% endblock %}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            color: #2f3d56;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #ffffff;
+            border-bottom: 1px solid #d9e1ea;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .topbar-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #304463;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #4d7fd6, #2f63c6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #466aa4;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #2f63c6;
+        }
+
+        .spacer {
+            flex: 1;
+        }
+
+        .profile-btn {
+            text-decoration: none;
+            background: #f1f5fb;
+            color: #304463;
+            border: 1px solid #d8e2ef;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .profile-btn:hover {
+            background: #e8eef8;
+        }
+
+        .page {
+            max-width: 1320px;
+            margin: 28px auto;
+            padding: 0 20px 40px 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #dde5ef;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            padding: 24px;
+        }
+
+        .section-title {
+            margin-top: 0;
+            color: #304463;
+        }
+
+        .muted {
+            color: #66758a;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            background: #3f7ad9;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #326bc8;
+        }
+
+        .btn-secondary {
+            background: #f1f5fb;
+            color: #304463;
+            border: 1px solid #d8e2ef;
+        }
+
+        .btn-secondary:hover {
+            background: #e8eef8;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border: 1px solid #d7e0ea;
+            background: #fff;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #56677f;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e6edf5;
+            text-align: left;
+        }
+
+        th {
+            color: #64748b;
+            background: #f8fbff;
+            font-size: 14px;
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-done {
+            background: #e7f7ed;
+            color: #207245;
+        }
+
+        .status-processing, .status-pending {
+            background: #eef4ff;
+            color: #2f63c6;
+        }
+
+        .status-error {
+            background: #fdeaea;
+            color: #b53a3a;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% if current_user %}
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a href="{{ url_for('profile') }}" class="brand">
+                <div class="brand-logo">T</div>
+                <div>Transcriptor</div>
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Subir archivo</a>
+                <a href="{{ url_for('meetings') }}">Mis Reuniones</a>
+                {% if current_user["role"] == "admin" %}
+                    <a href="{{ url_for('admin_users') }}">Gestionar Usuarios</a>
+                {% endif %}
+            </div>
+
+            <div class="spacer"></div>
+
+            <a href="{{ url_for('profile') }}" class="profile-btn">Mi Perfil</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="page">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

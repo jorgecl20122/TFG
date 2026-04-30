@@ -1,0 +1,1618 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Editor de transcripción</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #eef2f7;
+    color: #2e3b52;
+}
+
+.top-player {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #5e7394;
+    color: white;
+    padding: 16px 22px 18px 22px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+
+.top-player-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+audio {
+    width: 100%;
+}
+
+.timeline-wrapper {
+    position: relative;
+    margin-top: 10px;
+    height: 24px;
+    background: rgba(255,255,255,0.16);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.marker {
+    position: absolute;
+    top: 3px;
+    width: 3px;
+    height: 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.ok-marker {
+    background: #dbe7ff;
+}
+
+.review-marker {
+    background: #ffd166;
+}
+
+.marker.active {
+    width: 6px;
+    background: #ffffff;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.25);
+}
+
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 150px 20px 40px 20px;
+}
+
+.editor-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border: 1px solid #dbe3ee;
+    overflow: hidden;
+}
+
+.editor-header {
+    padding: 22px 24px;
+    border-bottom: 1px solid #e6edf5;
+}
+
+.editor-header h1 {
+    margin: 0;
+    color: #304463;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+}
+
+td, th {
+    border-bottom: 1px solid #e7edf5;
+    padding: 12px;
+    vertical-align: top;
+}
+
+th {
+    background: #f7faff;
+    text-align: left;
+    color: #65758c;
+}
+
+td[contenteditable] {
+    background: #fbfcfe;
+    min-width: 320px;
+}
+
+.row-ok {
+    background: #ffffff;
+}
+
+.row-review {
+    background: #fff8df;
+}
+
+.segment-row.active-row {
+    outline: 2px solid #4b79cf;
+    outline-offset: -2px;
+    background: #edf4ff;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.badge-review {
+    background: #e9b949;
+    color: white;
+}
+
+.badge-ok {
+    background: #55b87a;
+    color: white;
+}
+
+.review-box {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #56677f;
+    max-width: 460px;
+}
+
+.sim-pill {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.sim-good {
+    background: #e7f7ed;
+    color: #207245;
+}
+
+.sim-medium {
+    background: #fff4d8;
+    color: #9a6b00;
+}
+
+.sim-bad {
+    background: #fdeaea;
+    color: #b53a3a;
+}
+
+.sim-neutral {
+    background: #eef2f7;
+    color: #607086;
+}
+
+.action-btn {
+    cursor: pointer;
+    margin-right: 6px;
+    border: 1px solid #d7e0ea;
+    background: #f7faff;
+    border-radius: 8px;
+    padding: 7px 10px;
+}
+
+.note {
+    padding: 20px 24px;
+    color: #66758a;
+    font-size: 14px;
+    border-top: 1px solid #e6edf5;
+    background: #fbfdff;
+}
+
+.text-slow {
+    font-weight: 600;
+    color: #2e3b52;
+    margin-bottom: 4px;
+}
+
+.text-fast {
+    font-size: 13px;
+    color: #7a8aa3;
+    margin-bottom: 6px;
+}
+
+.meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.meta-reason {
+    color: #8a98ad;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-player">
+    <div class="top-player-inner">
+        <audio id="media" controls src="/uploads/532ee2fe-632c-446e-ba2f-b529bcb31fac_1772648269508.mp3"></audio>
+        <div class="timeline-wrapper" id="timeline">
+            <div class="marker ok-marker" id="marker-0" style="left:1.002%;" onclick="playSegment(0)"></div><div class="marker ok-marker" id="marker-1" style="left:5.639%;" onclick="playSegment(1)"></div><div class="marker ok-marker" id="marker-2" style="left:6.953%;" onclick="playSegment(2)"></div><div class="marker ok-marker" id="marker-3" style="left:8.232%;" onclick="playSegment(3)"></div><div class="marker ok-marker" id="marker-4" style="left:8.727%;" onclick="playSegment(4)"></div><div class="marker ok-marker" id="marker-5" style="left:10.007%;" onclick="playSegment(5)"></div><div class="marker ok-marker" id="marker-6" style="left:10.860%;" onclick="playSegment(6)"></div><div class="marker ok-marker" id="marker-7" style="left:12.566%;" onclick="playSegment(7)"></div><div class="marker ok-marker" id="marker-8" style="left:13.334%;" onclick="playSegment(8)"></div><div class="marker ok-marker" id="marker-9" style="left:14.699%;" onclick="playSegment(9)"></div><div class="marker ok-marker" id="marker-10" style="left:15.979%;" onclick="playSegment(10)"></div><div class="marker ok-marker" id="marker-11" style="left:18.964%;" onclick="playSegment(11)"></div><div class="marker ok-marker" id="marker-12" style="left:21.524%;" onclick="playSegment(12)"></div><div class="marker ok-marker" id="marker-13" style="left:24.083%;" onclick="playSegment(13)"></div><div class="marker ok-marker" id="marker-14" style="left:25.363%;" onclick="playSegment(14)"></div><div class="marker ok-marker" id="marker-15" style="left:27.069%;" onclick="playSegment(15)"></div><div class="marker ok-marker" id="marker-16" style="left:30.481%;" onclick="playSegment(16)"></div><div class="marker ok-marker" id="marker-17" style="left:31.761%;" onclick="playSegment(17)"></div><div class="marker ok-marker" id="marker-18" style="left:33.467%;" onclick="playSegment(18)"></div><div class="marker ok-marker" id="marker-19" style="left:35.173%;" onclick="playSegment(19)"></div><div class="marker ok-marker" id="marker-20" style="left:36.879%;" onclick="playSegment(20)"></div><div class="marker ok-marker" id="marker-21" style="left:38.586%;" onclick="playSegment(21)"></div><div class="marker ok-marker" id="marker-22" style="left:40.224%;" onclick="playSegment(22)"></div><div class="marker ok-marker" id="marker-23" style="left:41.998%;" onclick="playSegment(23)"></div><div class="marker ok-marker" id="marker-24" style="left:43.107%;" onclick="playSegment(24)"></div><div class="marker ok-marker" id="marker-25" style="left:45.240%;" onclick="playSegment(25)"></div><div class="marker ok-marker" id="marker-26" style="left:51.246%;" onclick="playSegment(26)"></div><div class="marker ok-marker" id="marker-27" style="left:52.662%;" onclick="playSegment(27)"></div><div class="marker ok-marker" id="marker-28" style="left:54.368%;" onclick="playSegment(28)"></div><div class="marker ok-marker" id="marker-29" style="left:56.074%;" onclick="playSegment(29)"></div><div class="marker ok-marker" id="marker-30" style="left:57.610%;" onclick="playSegment(30)"></div><div class="marker ok-marker" id="marker-31" style="left:58.633%;" onclick="playSegment(31)"></div><div class="marker ok-marker" id="marker-32" style="left:59.623%;" onclick="playSegment(32)"></div><div class="marker ok-marker" id="marker-33" style="left:60.766%;" onclick="playSegment(33)"></div><div class="marker review-marker" id="marker-34" style="left:61.466%;" onclick="playSegment(34)"></div><div class="marker ok-marker" id="marker-35" style="left:62.472%;" onclick="playSegment(35)"></div><div class="marker ok-marker" id="marker-36" style="left:64.042%;" onclick="playSegment(36)"></div><div class="marker ok-marker" id="marker-37" style="left:65.168%;" onclick="playSegment(37)"></div><div class="marker review-marker" id="marker-38" style="left:67.744%;" onclick="playSegment(38)"></div><div class="marker ok-marker" id="marker-39" style="left:68.870%;" onclick="playSegment(39)"></div><div class="marker ok-marker" id="marker-40" style="left:69.980%;" onclick="playSegment(40)"></div><div class="marker ok-marker" id="marker-41" style="left:73.136%;" onclick="playSegment(41)"></div><div class="marker ok-marker" id="marker-42" style="left:74.416%;" onclick="playSegment(42)"></div><div class="marker ok-marker" id="marker-43" style="left:75.695%;" onclick="playSegment(43)"></div><div class="marker ok-marker" id="marker-44" style="left:76.548%;" onclick="playSegment(44)"></div><div class="marker ok-marker" id="marker-45" style="left:78.255%;" onclick="playSegment(45)"></div><div class="marker ok-marker" id="marker-46" style="left:82.093%;" onclick="playSegment(46)"></div><div class="marker ok-marker" id="marker-47" style="left:86.786%;" onclick="playSegment(47)"></div><div class="marker ok-marker" id="marker-48" style="left:88.304%;" onclick="playSegment(48)"></div><div class="marker ok-marker" id="marker-49" style="left:92.322%;" onclick="playSegment(49)"></div><div class="marker ok-marker" id="marker-50" style="left:94.881%;" onclick="playSegment(50)"></div><div class="marker ok-marker" id="marker-51" style="left:96.502%;" onclick="playSegment(51)"></div><div class="marker ok-marker" id="marker-52" style="left:97.441%;" onclick="playSegment(52)"></div><div class="marker ok-marker" id="marker-53" style="left:98.703%;" onclick="playSegment(53)"></div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="editor-card">
+        <div class="editor-header">
+            <h1>Editor de transcripción</h1>
+        </div>
+
+        <table>
+            <tr>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Revisión</th>
+                <th>Acciones</th>
+            </tr>
+            
+        <tr class="row-ok segment-row" id="row-0" data-index="0" data-start="2.35" data-end="13.46">
+            <td>00:02.350</td>
+            <td>00:13.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">RADIO NACIONAL DE ESPAÑA Noticias. Última hora en Oriente, próximo a Terriza, en Oman,</div>
+                <div class="text-fast">Radio Nacional de España. Noticias. Última hora en Oriente, próximo a Terriza, en Oman, el avión,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">95%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(0)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-1" data-index="1" data-start="13.22" data-end="16.46">
+            <td>00:13.220</td>
+            <td>00:16.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">el avión, fletado por el gobierno, para repatriar a españoles.</div>
+                <div class="text-fast">fletado por el gobierno, para repatriar a españoles.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">92%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(1)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-2" data-index="2" data-start="16.3" data-end="19.46">
+            <td>00:16.300</td>
+            <td>00:19.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Sara Alonso, enviada especial con Agostín Karou, en la técnica.</div>
+                <div class="text-fast">Sara Alonso, enviada especial con Agostín Carou en la técnica.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">98%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(2)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-3" data-index="3" data-start="19.3" data-end="20.86">
+            <td>00:19.300</td>
+            <td>00:20.859</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Buenas tardes.</div>
+                <div class="text-fast">Buenas tardes.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(3)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-4" data-index="4" data-start="20.46" data-end="23.78">
+            <td>00:20.460</td>
+            <td>00:23.780</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Buenas tardes. Sí, ese avión a 330 del ejército del aire</div>
+                <div class="text-fast">Buenas tardes, sí, ese avión a 330 del ejército del aire,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(4)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-5" data-index="5" data-start="23.46" data-end="25.94">
+            <td>00:23.460</td>
+            <td>00:25.940</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">está ya en Mascate, en la capital humaní,</div>
+                <div class="text-fast">está ya en Mascate, en la capital humaní,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(5)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-6" data-index="6" data-start="25.46" data-end="29.46">
+            <td>00:25.460</td>
+            <td>00:29.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">desde la que repatriará a 250 españoles</div>
+                <div class="text-fast">desde la que repatriará a 250 españoles</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(6)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-7" data-index="7" data-start="29.46" data-end="31.46">
+            <td>00:29.460</td>
+            <td>00:31.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">de los que se encontraban en la zona.</div>
+                <div class="text-fast">de los que se encontraban en la zona.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(7)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-8" data-index="8" data-start="31.26" data-end="34.94">
+            <td>00:31.260</td>
+            <td>00:34.939</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Se suman a los 175 que regresaron ayer desde Abu Dhabi.</div>
+                <div class="text-fast">Se suman a los 175 que regresaron ayer desde Abu Dhabi.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(8)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-9" data-index="9" data-start="34.46" data-end="37.94">
+            <td>00:34.460</td>
+            <td>00:37.939</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">En Oriente Medio, según ha venido informando el Ministerio de Exteriores,</div>
+                <div class="text-fast">En Oriente Medio, según ha venido informando el Ministerio de Exteriores,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(9)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-10" data-index="10" data-start="37.46" data-end="45.1">
+            <td>00:37.460</td>
+            <td>00:45.100</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">había unos 30.000 españoles entre turistas y residentes. No todos quieren salir, pero para quienes se quieren hacerlo,</div>
+                <div class="text-fast">había unos 30.000 españoles entre turistas y residentes. No todos quieren salir, pero para quienes quieren hacerlo,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">99%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(10)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-11" data-index="11" data-start="44.46" data-end="50.62">
+            <td>00:44.460</td>
+            <td>00:50.619</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">debido a que de forma total o parcial el espacio aéreo de muchos de estos países del Golfo está cerrado.</div>
+                <div class="text-fast">debido a que de forma total o parcial el espacio aéreo de muchos de estos países del Golfo está cerrado.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(11)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-12" data-index="12" data-start="50.46" data-end="56.62">
+            <td>00:50.460</td>
+            <td>00:56.619</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">La mejor vía, la que funciona de forma más fluida, es a través de Oman, donde el aeropuerto está abierto.</div>
+                <div class="text-fast">La mejor vía, la que funciona de forma más fluida, es a través de Oman, donde el aeropuerto está abierto.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(12)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-13" data-index="13" data-start="56.46" data-end="60.02">
+            <td>00:56.460</td>
+            <td>01:00.020</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Esos sí, los billetes comerciales están prácticamente agotados.</div>
+                <div class="text-fast">Esos sí, los billetes comerciales están prácticamente agotados.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(13)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-14" data-index="14" data-start="59.46" data-end="64.1">
+            <td>00:59.460</td>
+            <td>01:04.099</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Desde Dubai, donde está el aeropuerto con mayor tráfico,</div>
+                <div class="text-fast">Desde Dubai, donde está el aeropuerto con mayor tráfico</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(14)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-15" data-index="15" data-start="63.46" data-end="71.86">
+            <td>01:03.460</td>
+            <td>01:11.859</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">el aeropuerto aéreo del mundo fue impactado y trabaja bajo mínimos hasta aquí, hasta Mascate. Se tarda cinco horas por carreteras.</div>
+                <div class="text-fast">aéreo del mundo, fue impactado y trabaja bajo mínimos, hasta aquí, hasta Mascate, se tarda cinco horas por carreteras.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">94%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(15)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-16" data-index="16" data-start="71.46" data-end="74.54">
+            <td>01:11.459</td>
+            <td>01:14.540</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">El trayecto que están haciendo muchos.</div>
+                <div class="text-fast">El trayecto que están haciendo muchos.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(16)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-17" data-index="17" data-start="74.46" data-end="78.46">
+            <td>01:14.459</td>
+            <td>01:18.459</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">De otro lado, destacar en Irán, que está siendo bombardeado con fuerza.</div>
+                <div class="text-fast">De otro lado, destacar en Irán, que está siendo bombardeado con fuerza,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(17)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-18" data-index="18" data-start="78.46" data-end="82.46">
+            <td>01:18.459</td>
+            <td>01:22.459</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Había 150 españoles, 22 de ellos han salido.</div>
+                <div class="text-fast">había 150 españoles, 22 de ellos han salido ya,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">97%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(18)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-19" data-index="19" data-start="82.46" data-end="86.66">
+            <td>01:22.459</td>
+            <td>01:26.659</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Ya lo ha confirmado el Gobierno, lo han hecho por la frontera terrestre</div>
+                <div class="text-fast">lo ha confirmado el Gobierno, lo han hecho por la frontera terrestre</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">98%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(19)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-20" data-index="20" data-start="86.46" data-end="90.82">
+            <td>01:26.459</td>
+            <td>01:30.819</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">hacia Azerbaiyán, de ahí a Baku y Vía Stambul, a Madrid.</div>
+                <div class="text-fast">hacia Cervayan, de ahí, Abaq, y Vía Estambul, a Madrid.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-medium">87%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(20)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-21" data-index="21" data-start="90.46" data-end="94.46">
+            <td>01:30.459</td>
+            <td>01:34.459</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Lo que hace el Gobierno, en concreto, el Ministerio de Exteriores,</div>
+                <div class="text-fast">Y lo que hace el Gobierno, en concreto, el Ministerio de Exteriores,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">98%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(21)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-22" data-index="22" data-start="94.3" data-end="98.74">
+            <td>01:34.299</td>
+            <td>01:38.739</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">es reiterar el llamamiento a la desescalada en Oriente Próximo.</div>
+                <div class="text-fast">es reiterar el llamamiento a la desescalada en Oriente Próximo.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(22)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-23" data-index="23" data-start="98.46" data-end="101.46">
+            <td>01:38.459</td>
+            <td>01:41.459</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Hay un tweet de José Manuel Alvares.</div>
+                <div class="text-fast">Hay un tweet de José Manuel Albares,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">97%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(23)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-24" data-index="24" data-start="101.06" data-end="106.46">
+            <td>01:41.060</td>
+            <td>01:46.459</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Asegura que acaba de hablar con el Ministro de Exteriores de Turquía</div>
+                <div class="text-fast">asegura que acaba de hablar con el Ministro de Exteriores de Turquía</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(24)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-25" data-index="25" data-start="106.06" data-end="120.46">
+            <td>01:46.060</td>
+            <td>02:00.459</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">para trasladarle la solidaridad del Gobierno con el Ejecutivo Turco y el pueblo de ese país ante el lanzamiento de un misil contra Turquía, por parte de Irán, Turquía, que es socio-aliado de la OTAN.</div>
+                <div class="text-fast">para trasladarle la solidaridad del Gobierno con el Ejecutivo Turco y el pueblo de ese país ante el lanzamiento de un misil contra Turquía, por parte de Irán, que es socio aliado de la OTAN.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">98%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(25)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-26" data-index="26" data-start="120.14" data-end="123.46">
+            <td>02:00.140</td>
+            <td>02:03.459</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">En el Partido Popular y el PNV parecen acercar posturas</div>
+                <div class="text-fast">El Partido Popular y el PNV parecen acercar posturas</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">97%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(26)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-27" data-index="27" data-start="123.46" data-end="127.7">
+            <td>02:03.459</td>
+            <td>02:07.700</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">desde que el nacionalismo vasco se negara a apoyar la investidura de Feijo,</div>
+                <div class="text-fast">desde que el nacionalismo vasco se negara a apoyar la investidura de Feijo,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(27)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-28" data-index="28" data-start="127.46" data-end="131.86">
+            <td>02:07.459</td>
+            <td>02:11.860</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">porque el candidato necesitaba contar también con los votos de Vox.</div>
+                <div class="text-fast">porque el candidato necesitaba contar también con los votos de Vox, Laura Herrero.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">90%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(28)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-29" data-index="29" data-start="131.46" data-end="135.46">
+            <td>02:11.460</td>
+            <td>02:15.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Sí, Noñez Feijo y Haitor Esteban se reunieron recientemente,</div>
+                <div class="text-fast">Sí, Nuñez Feijo y Aytor Esteban se reunieron recientemente,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">96%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(29)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-30" data-index="30" data-start="135.06" data-end="137.46">
+            <td>02:15.060</td>
+            <td>02:17.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">lo anunciaba hoy el líder del PP desde Vitoria</div>
+                <div class="text-fast">lo anunciaba hoy el líder del PP desde Vitoria</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(30)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-31" data-index="31" data-start="137.46" data-end="140.46">
+            <td>02:17.460</td>
+            <td>02:20.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">y lo confirmaba en esa tarde fuentes del PNV,</div>
+                <div class="text-fast">y lo confirmaba en esa tarde fuentes del PNV,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(31)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-32" data-index="32" data-start="139.78" data-end="142.58">
+            <td>02:19.780</td>
+            <td>02:22.580</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">que marcaban este contacto en los que mantienen habitualmente</div>
+                <div class="text-fast">que marcaban este contacto en los que mantienen habitualmente</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(32)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-33" data-index="33" data-start="142.46" data-end="144.46">
+            <td>02:22.460</td>
+            <td>02:24.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">con las formaciones políticas.</div>
+                <div class="text-fast">con las formaciones políticas.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(33)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-review segment-row" id="row-34" data-index="34" data-start="144.1" data-end="146.54">
+            <td>02:24.099</td>
+            <td>02:26.539</td>
+            
+            <td>
+                <span class="badge badge-review">Revisar</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Lo cierto es que en los últimos meses la relación</div>
+                <div class="text-fast">El segundo es que en los últimos meses la relación</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-medium">85%</span>
+                    <span class="meta-reason">fast_slow_difference</span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(34)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-35" data-index="35" data-start="146.46" data-end="150.46">
+            <td>02:26.460</td>
+            <td>02:30.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">entre populares y nacionalistas vascos no pasaba por un buen momento</div>
+                <div class="text-fast">entre populares y nacionalistas vascos no pasaba por un buen momento,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(35)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-36" data-index="36" data-start="150.14" data-end="153.46">
+            <td>02:30.139</td>
+            <td>02:33.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">incluso hoy desde el país vasco Feijo insistía</div>
+                <div class="text-fast">incluso hoy desde el país vasco Feijo insistía que no entendía</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-medium">85%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(36)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-37" data-index="37" data-start="152.78" data-end="159.46">
+            <td>02:32.780</td>
+            <td>02:39.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">que no entendía que fuesen socios de Pedro Sánchez, pero también aseguraba que la vía de comunicación con el PNV</div>
+                <div class="text-fast">que fuesen socios de Pedro Sánchez, pero también aseguraba que la vía de comunicación con el PNV está abierta,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-medium">87%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(37)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-review segment-row" id="row-38" data-index="38" data-start="158.82" data-end="161.58">
+            <td>02:38.819</td>
+            <td>02:41.580</td>
+            
+            <td>
+                <span class="badge badge-review">Revisar</span>
+                
+            <div class="review-box">
+                <div class="text-slow">está abierta de manera sincera, decía, y respetuosa.</div>
+                <div class="text-fast">de manera sincera decía, irrespetuosa.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-medium">80%</span>
+                    <span class="meta-reason">fast_slow_difference</span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(38)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-39" data-index="39" data-start="161.46" data-end="164.46">
+            <td>02:41.460</td>
+            <td>02:44.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Insisto, desde el respeto de la educación,</div>
+                <div class="text-fast">Insisto, desde el respeto de la educación,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(39)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-40" data-index="40" data-start="164.06" data-end="171.74">
+            <td>02:44.060</td>
+            <td>02:51.740</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">pues vamos a mantener una relación de comunicación con el PNV</div>
+                <div class="text-fast">vamos a mantener una relación de comunicación con el PNV</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">96%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(40)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-41" data-index="41" data-start="171.46" data-end="175.26">
+            <td>02:51.460</td>
+            <td>02:55.259</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">y una relación de lealta a Euskadi.</div>
+                <div class="text-fast">y una relación de lealta a Uscadi.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">96%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(41)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-42" data-index="42" data-start="174.46" data-end="177.5">
+            <td>02:54.460</td>
+            <td>02:57.500</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Palabras que escuchaba el mismo líder del PNV,</div>
+                <div class="text-fast">Palabras que escuchaba el mismo líder del PNV,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(42)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-43" data-index="43" data-start="177.46" data-end="180.06">
+            <td>02:57.460</td>
+            <td>03:00.060</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Haitor Esteban, presente en este acto en Vitoria.</div>
+                <div class="text-fast">y Aytor Esteban, presente en este acto en Vitoria.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">95%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(43)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-44" data-index="44" data-start="179.46" data-end="183.98">
+            <td>02:59.460</td>
+            <td>03:03.979</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Familiares de amigos siguen despidiendo a Fernando Únega,</div>
+                <div class="text-fast">Familiares de amigos, siguen despidiendo a Fernando Ñoñega,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">96%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(44)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-45" data-index="45" data-start="183.46" data-end="192.7">
+            <td>03:03.460</td>
+            <td>03:12.699</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">una de las voces de la transición desde la casa de Galicia en Madrid. Sus hijas son Soles y Cristina Únega, agradecen las muestras de cariño.</div>
+                <div class="text-fast">una de las voces de la transición desde la casa de Galicia en Madrid. Sus hijas son Soles y Cristina Ñoñega, agradecen las muestras de cariño.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">98%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(45)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-46" data-index="46" data-start="192.46" data-end="203.94">
+            <td>03:12.460</td>
+            <td>03:23.939</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Nos habéis hecho sentir muy orgullosos de nuestro padre, que fue también un poco padre de esta profesión y de todos vosotros, y ha sido emocionante escucharos</div>
+                <div class="text-fast">Nos habéis hecho sentir muy orgullosos de nuestro padre, que fue también un poco padre de esta profesión libre y de todos vosotros, y ha sido emocionante escucharos</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">98%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(46)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-47" data-index="47" data-start="203.46" data-end="207.46">
+            <td>03:23.460</td>
+            <td>03:27.460</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">y saber que siempre tuvo un minuto para escuchar</div>
+                <div class="text-fast">y saber que siempre tuvo un minuto para escuchar a cada uno</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">90%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(47)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-48" data-index="48" data-start="207.02" data-end="216.44">
+            <td>03:27.020</td>
+            <td>03:36.439</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">a cada uno de los compañeros con los que trabajó. Fútbol en Vallecas, partido aplazado entre Rayo y Oviedo, Lucas García.</div>
+                <div class="text-fast">de los compañeros con los que trabajó. Fútbol en Vallecas, partido aplazado entre Rayo y Oviedo, Lucas García.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">95%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(48)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-49" data-index="49" data-start="216.44" data-end="222.6">
+            <td>03:36.439</td>
+            <td>03:42.599</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">El partido ha aplazado el pasado 7 de febrero, por el mal estado en el césped aquí, en el estadio de Vallecas,</div>
+                <div class="text-fast">El partido ha aplazado el pasado 7 de febrero por el mal estado en el césped aquí en el estadio de Vallecas,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(49)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-50" data-index="50" data-start="222.44" data-end="226.44">
+            <td>03:42.439</td>
+            <td>03:46.439</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">juegan el Rayo Vallecano, 15-27.3 por encima del descenso,</div>
+                <div class="text-fast">juegan el Rayo Vallecano, 15-27 puntos, 3 por encima el descenso</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">92%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(50)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-51" data-index="51" data-start="226.24" data-end="229.2">
+            <td>03:46.240</td>
+            <td>03:49.199</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">y el colista lo vio con 17 puntos.</div>
+                <div class="text-fast">y el colista lo vieron con 17 puntos,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">96%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(51)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-52" data-index="52" data-start="228.44" data-end="231.44">
+            <td>03:48.439</td>
+            <td>03:51.439</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">Llegamos al minuto 2 de la primera parte,</div>
+                <div class="text-fast">llegamos al minuto 2 de la primera parte,</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(52)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        <tr class="row-ok segment-row" id="row-53" data-index="53" data-start="231.4" data-end="234.44">
+            <td>03:51.400</td>
+            <td>03:54.439</td>
+            
+            <td>
+                <span class="badge badge-ok">Correcto</span>
+                
+            <div class="review-box">
+                <div class="text-slow">todavía sin goles, Rayo Vallecano 0, Real Oviedo 0.</div>
+                <div class="text-fast">todavía sin goles Rayo Vallecano, 0 real Oviedo, 0.</div>
+
+                <div class="meta">
+                    <span class="sim-pill sim-good">100%</span>
+                    <span class="meta-reason"></span>
+                </div>
+            </div>
+            
+            </td>
+            <td>
+                <button class="action-btn" onclick="playSegment(53)">▶</button>
+                <button class="action-btn" onclick="deleteRow(this)">🗑</button>
+            </td>
+        </tr>
+        
+        </table>
+
+        <div class="note">
+            Verde = segmento estable. Amarillo o rojo = conviene revisar. La barra superior muestra marcas verticales para orientarte en toda la reunión.
+        </div>
+    </div>
+</div>
+
+<script>
+const media = document.getElementById("media");
+const rows = Array.from(document.querySelectorAll(".segment-row"));
+let stopTimer = null;
+
+function setActiveSegment(index) {
+    rows.forEach(row => row.classList.remove("active-row"));
+    document.querySelectorAll(".marker").forEach(m => m.classList.remove("active"));
+
+    const row = document.getElementById(`row-${index}`);
+    const marker = document.getElementById(`marker-${index}`);
+
+    if (row) row.classList.add("active-row");
+    if (marker) marker.classList.add("active");
+}
+
+function playSegment(index) {
+    const row = document.getElementById(`row-${index}`);
+    const start = parseFloat(row.dataset.start);
+    const end = parseFloat(row.dataset.end);
+
+    setActiveSegment(index);
+    media.currentTime = start;
+    media.play();
+
+    row.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    if (stopTimer) {
+        clearInterval(stopTimer);
+    }
+
+    stopTimer = setInterval(() => {
+        if (media.currentTime >= end) {
+            media.pause();
+            clearInterval(stopTimer);
+        }
+    }, 100);
+}
+
+function deleteRow(btn) {
+    const row = btn.closest("tr");
+    const index = row.dataset.index;
+    const marker = document.getElementById(`marker-${index}`);
+
+    if (marker) marker.remove();
+    row.remove();
+}
+
+rows.forEach((row) => {
+    row.addEventListener("click", () => {
+        const index = row.dataset.index;
+        setActiveSegment(index);
+    });
+});
+</script>
+
+</body>
+</html>

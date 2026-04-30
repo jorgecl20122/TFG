@@ -1,3 +1,5 @@
+from concurrent.futures import thread
+
 from flask import (
     Flask,
     render_template,
@@ -273,24 +275,17 @@ def login():
             session["user_id"] = user["id"]
             return redirect(url_for("index"))
 
-        return """
-        <h1>Login</h1>
-        <p style="color:red;">Usuario o contraseña incorrectos</p>
-        <form method="post">
-            <input name="username" placeholder="Usuario" required>
-            <input name="password" type="password" placeholder="Contraseña" required>
-            <button type="submit">Entrar</button>
-        </form>
-        """
+        return render_template(
+            "login.html",
+            error="Usuario o contraseña incorrectos",
+            current_user=None
+        )
 
-    return """
-    <h1>Login</h1>
-    <form method="post">
-        <input name="username" placeholder="Usuario" required>
-        <input name="password" type="password" placeholder="Contraseña" required>
-        <button type="submit">Entrar</button>
-    </form>
-    """
+    return render_template(
+        "login.html",
+        error=None,
+        current_user=None
+    )
 
 
 @app.route("/logout")
@@ -314,7 +309,7 @@ def index():
 
     return render_template(
         "index.html",
-        calibration_factor=round(factor, 3),
+        seconds_per_minute=round(factor * 60, 1),
         current_user=user
     )
 
@@ -357,7 +352,7 @@ def upload_file():
     if factor is None:
         factor = 0.27
 
-    estimated_seconds = duration * factor * 2.2
+    estimated_seconds = duration * factor
 
     user = get_current_user()
 
@@ -385,22 +380,26 @@ def upload_file():
     conn.close()
 
     jobs[job_id] = {
-        "meeting_id": meeting_id,
-        "status": "pending",
-        "upload_path": upload_path,
-        "upload_name": upload_name,
-        "output_dir": job_output_dir,
-        "duration": duration,
-        "estimated_seconds": estimated_seconds,
-        "owner_id": user["id"]
-    }
+    "meeting_id": meeting_id,
+    "status": "pending",
+    "upload_path": upload_path,
+    "upload_name": upload_name,
+    "output_dir": job_output_dir,
+    "duration": duration,
+    "estimated_seconds": estimated_seconds,
+    "owner_id": user["id"]
+}
+
+    thread = threading.Thread(target=run_transcription, args=(job_id,))
+    thread.start()
 
     return render_template(
         "processing.html",
         job_id=job_id,
         audio_duration=format_duration(duration),
         estimated_time=format_duration(estimated_seconds),
-        factor=round(factor, 3)
+        seconds_per_minute=round(factor * 60, 1),
+        current_user=user
     )
 
 
@@ -552,10 +551,34 @@ def result(job_id):
     if not user_can_access_meeting(meeting, user):
         return "Acceso denegado", 403
 
+    if meeting["status"] in ("pending", "processing"):
+        factor = load_calibration_factor()
+        if factor is None:
+            factor = 0.27
+
+        try:
+            duration = get_audio_duration(meeting["upload_path"])
+        except Exception:
+            duration = 0
+
+        estimated_seconds = duration * factor
+
+        return render_template(
+            "processing.html",
+            job_id=job_id,
+            audio_duration=format_duration(duration),
+            estimated_time=format_duration(estimated_seconds),
+            seconds_per_minute=round(factor * 60, 1),
+            current_user=user
+    )
+
+    if meeting["status"] == "error":
+        return f"Error procesando la reunión: {meeting['error_message']}", 500
+
     html_path = os.path.join(app.config["OUTPUT_FOLDER"], job_id, "editor.html")
 
     if not os.path.exists(html_path):
-        abort(404)
+        return "La transcripción todavía no está disponible. Vuelve a intentarlo en unos segundos.", 202
 
     return render_template("result.html", job_id=job_id, meeting=meeting)
 
@@ -620,26 +643,11 @@ def meetings():
 
     conn.close()
 
-    html = """
-    <h1>Reuniones</h1>
-    <p>
-        <a href="/">Inicio</a> |
-        <a href="/logout">Cerrar sesión</a>
-    </p>
-    """
-
-    for row in rows:
-        html += f"""
-        <div style="border:1px solid #ccc; padding:12px; margin-bottom:12px;">
-            <strong>{row["title"]}</strong><br>
-            Usuario: {row["username"]}<br>
-            Estado: {row["status"]}<br>
-            Fecha: {row["created_at"]}<br><br>
-            <a href="/result/{row["job_id"]}">Ver resultado</a>
-        </div>
-        """
-
-    return html
+    return render_template(
+        "meetings.html",
+        meetings=rows,
+        current_user=user
+    )
 
 
 # =========================
@@ -657,40 +665,11 @@ def admin_users():
     """).fetchall()
     conn.close()
 
-    html = """
-    <h1>Gestión de usuarios</h1>
-    <p>
-        <a href="/">Inicio</a> |
-        <a href="/meetings">Reuniones</a> |
-        <a href="/logout">Cerrar sesión</a>
-    </p>
-
-    <h2>Crear usuario</h2>
-    <form method="post" action="/admin/users/create">
-        <input name="username" placeholder="Usuario" required>
-        <input name="password" type="password" placeholder="Contraseña" required>
-        <select name="role">
-            <option value="user">user</option>
-            <option value="admin">admin</option>
-        </select>
-        <button type="submit">Crear</button>
-    </form>
-
-    <hr>
-    <h2>Usuarios existentes</h2>
-    """
-
-    for u in users:
-        html += f"""
-        <div style="margin-bottom:12px;">
-            <strong>{u["username"]}</strong> - {u["role"]} - {u["created_at"]}
-            <form method="post" action="/admin/users/delete/{u["id"]}" style="display:inline;">
-                <button type="submit">Eliminar</button>
-            </form>
-        </div>
-        """
-
-    return html
+    return render_template(
+        "admin_users.html",
+        users=users,
+        current_user=get_current_user()
+    )
 
 
 @app.route("/admin/users/create", methods=["POST"])
@@ -720,7 +699,7 @@ def create_user():
     except sqlite3.IntegrityError:
         conn.close()
         return "Ese usuario ya existe", 400
-
+    meetings
     conn.close()
     return redirect(url_for("admin_users"))
 
@@ -759,6 +738,78 @@ def delete_user(user_id):
 
     return redirect(url_for("admin_users"))
 
+@app.route("/profile")
+@login_required
+def profile():
+    user = get_current_user()
+    conn = get_connection()
+
+    recent_meetings = conn.execute("""
+        SELECT *
+        FROM meetings
+        WHERE owner_id = ?
+        ORDER BY created_at DESC
+        LIMIT 5
+    """, (user["id"],)).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "profile.html",
+        current_user=user,
+        recent_meetings=recent_meetings,
+        message=request.args.get("message", ""),
+        error=request.args.get("error", "")
+    )
+
+
+@app.route("/profile/update_username", methods=["POST"])
+@login_required
+def update_username():
+    user = get_current_user()
+    new_username = request.form.get("new_username", "").strip()
+
+    if not new_username:
+        return redirect(url_for("profile", error="El username no puede estar vacío"))
+
+    conn = get_connection()
+    try:
+        conn.execute(
+            "UPDATE users SET username = ? WHERE id = ?",
+            (new_username, user["id"])
+        )
+        conn.commit()
+    except sqlite3.IntegrityError:
+        conn.close()
+        return redirect(url_for("profile", error="Ese nombre de usuario ya existe"))
+
+    conn.close()
+    return redirect(url_for("profile", message="Username actualizado correctamente"))
+
+
+@app.route("/profile/update_password", methods=["POST"])
+@login_required
+def update_password():
+    user = get_current_user()
+    current_password = request.form.get("current_password", "").strip()
+    new_password = request.form.get("new_password", "").strip()
+
+    if not current_password or not new_password:
+        return redirect(url_for("profile", error="Debes completar ambos campos"))
+
+    if not check_password_hash(user["password_hash"], current_password):
+        return redirect(url_for("profile", error="La contraseña actual no es correcta"))
+
+    conn = get_connection()
+    conn.execute(
+        "UPDATE users SET password_hash = ? WHERE id = ?",
+        (generate_password_hash(new_password), user["id"])
+    )
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("profile", message="Contraseña actualizada correctamente"))
+
 
 # =========================
 # ARRANQUE
@@ -770,4 +821,4 @@ if __name__ == "__main__":
     if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
         calibrate_machine()
 
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)

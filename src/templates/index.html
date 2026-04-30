@@ -1,53 +1,32 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Transcriptor de reuniones</title>
-</head>
-<body>
-    <h1>Transcriptor de reuniones</h1>
+{% extends "base.html" %}
 
-    <p>
-        Usuario: <strong>{{ current_user["username"] }}</strong>
-        ({{ current_user["role"] }})
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 860px; margin: 0 auto;">
+    <h1 class="section-title">Subir Archivo de Audio</h1>
+
+    <p class="muted">
+        Esta versión realiza una pasada rápida y otra más precisa para detectar zonas con menor confianza.
     </p>
 
-    <p><strong>Factor actual de estimación:</strong> {{ calibration_factor }}</p>
+    <div style="margin: 24px 0; padding: 18px; border: 2px dashed #d6e1ef; border-radius: 12px; background: #f8fbff;">
+        <p style="margin:0 0 8px 0;"><strong>Velocidad estimada:</strong> {{ seconds_per_minute }} segundos por minuto de audio</p>
+        <p class="muted" style="margin:0;">Formatos permitidos: MP3, WAV, M4A, MPEG, MP4.</p>
+    </div>
 
-    <p>
-        Esta versión realiza una pasada rápida y otra más precisa sobre el audio
-        para detectar posibles diferencias entre ambas transcripciones.
-    </p>
-
-    <p>
-        Los fragmentos donde haya más incertidumbre se marcarán después en el editor
-        para que puedan revisarse manualmente.
-    </p>
-
-    <p>
-        <a href="{{ url_for('meetings') }}">Ver reuniones</a> |
-        {% if current_user["role"] == "admin" %}
-            <a href="{{ url_for('admin_users') }}">Gestionar usuarios</a> |
-        {% endif %}
-        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
-    </p>
-
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <div>
-            <label>Título de la reunión:</label><br>
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Título de la reunión</label>
             <input type="text" name="title" placeholder="Ej. Reunión semanal" required>
         </div>
 
-        <br>
-
-        <div>
-            <label>Archivo de audio:</label><br>
+        <div class="form-group">
+            <label>Archivo de audio</label>
             <input type="file" name="audio" required>
         </div>
 
-        <br>
-
-        <button type="submit">Subir y transcribir</button>
+        <button type="submit" class="btn">Subir archivo</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

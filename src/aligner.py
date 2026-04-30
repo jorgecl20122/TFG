@@ -6,7 +6,7 @@ def join_text(segments):
     return " ".join(seg["text"].strip() for seg in segments if seg["text"].strip())
 
 
-def align_segments(segments_a, segments_b, tolerance=0.35):
+def align_segments(segments_a, segments_b, tolerance=0.80):
     """
     Alinea dos listas de segmentos por tiempo, agrupando varios segmentos
     de cada lado si hace falta para formar bloques comparables.

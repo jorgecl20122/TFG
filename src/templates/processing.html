@@ -1,220 +1,132 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Procesando transcripción</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+{% extends "base.html" %}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
-        }
+{% block title %}Procesando{% endblock %}
 
-        .container {
-            max-width: 700px;
-            margin: 60px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 14px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
+{% block extra_head %}
+<style>
+    .processing-card {
+        max-width: 760px;
+        margin: 30px auto;
+        text-align: center;
+        padding: 46px;
+    }
 
-        h1 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 28px;
-            color: #1f3b5b;
-        }
+    .progress-bar-bg {
+        width: 100%;
+        height: 18px;
+        background: #e6ebf1;
+        border-radius: 999px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
 
-        .subtitle {
-            margin-bottom: 30px;
-            color: #555;
-        }
+    .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #5a7fb4, #3f6ca8);
+        transition: width 1s linear;
+    }
 
-        .info-box {
-            background: #f8fafc;
-            border: 1px solid #dbe4ee;
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 25px;
-        }
+    .status-box {
+        margin-top: 20px;
+        padding: 14px;
+        border-radius: 10px;
+        background: #eef4fb;
+        border: 1px solid #d4e2f2;
+    }
 
-        .info-row {
-            margin: 10px 0;
-            font-size: 16px;
-        }
+    .done {
+        background: #edf8ee;
+        border: 1px solid #b7dfbb;
+        color: #256c2d;
+    }
 
-        .label {
-            font-weight: bold;
-            color: #1f3b5b;
-        }
+    .error {
+        background: #fdecec;
+        border: 1px solid #f5b5b5;
+        color: #a12626;
+    }
+</style>
+{% endblock %}
 
-        .progress-wrapper {
-            margin: 30px 0 15px 0;
-        }
+{% block content %}
+<div class="card processing-card">
+    <h1 class="section-title">Procesando archivo...</h1>
+    <p class="muted">La transcripción está en progreso, por favor espera.</p>
 
-        .progress-bar-bg {
-            width: 100%;
-            height: 22px;
-            background: #e6ebf1;
-            border-radius: 999px;
-            overflow: hidden;
-        }
+    <p><strong>Duración:</strong> {{ audio_duration }}</p>
+    <p><strong>Tiempo estimado:</strong> {{ estimated_time }}</p>
+    <p><strong>Velocidad estimada:</strong> {{ seconds_per_minute }} segundos por minuto de audio</p>
 
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #4a90e2, #357abd);
-            border-radius: 999px;
-            transition: width 1s linear;
-        }
-
-        .progress-text {
-            margin-top: 10px;
-            font-size: 15px;
-            color: #444;
-        }
-
-        .status-box {
-            margin-top: 25px;
-            padding: 14px 16px;
-            border-radius: 10px;
-            background: #eef4fb;
-            border: 1px solid #d4e2f2;
-            font-size: 15px;
-        }
-
-        .note {
-            margin-top: 25px;
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .error {
-            background: #fdecec;
-            border: 1px solid #f5b5b5;
-            color: #a12626;
-        }
-
-        .done {
-            background: #edf8ee;
-            border: 1px solid #b7dfbb;
-            color: #256c2d;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Procesando transcripción</h1>
-        <p class="subtitle">El archivo se ha subido correctamente. La transcripción comenzará en unos instantes.</p>
-
-        <div class="info-box">
-            <div class="info-row">
-                <span class="label">Duración del audio:</span> {{ audio_duration }}
-            </div>
-            <div class="info-row">
-                <span class="label">Tiempo estimado de transcripción:</span> {{ estimated_time }}
-            </div>
-            <div class="info-row">
-                <span class="label">Factor actual de esta máquina:</span> {{ factor }}
-            </div>
-        </div>
-
-        <div class="progress-wrapper">
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progressBar"></div>
-            </div>
-            <div class="progress-text" id="progressText">Preparando proceso...</div>
-        </div>
-
-        <div class="status-box" id="estado">
-            Estado: preparando transcripción...
-        </div>
-
-        <p class="note">
-            La estimación es aproximada y puede variar según la carga del equipo, el tamaño del archivo y el tiempo necesario para procesar el audio.
-        </p>
+    <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
     </div>
 
-    <script>
-        const jobId = "{{ job_id }}";
-        const estimatedTimeText = "{{ estimated_time }}";
-        const estado = document.getElementById("estado");
-        const progressBar = document.getElementById("progressBar");
-        const progressText = document.getElementById("progressText");
+    <div style="margin-top:10px;" id="progressText">Preparando proceso...</div>
+    <div class="status-box" id="estado">Estado: preparando transcripción...</div>
+</div>
+{% endblock %}
 
-        function parseTimeToSeconds(mmss) {
-            const parts = mmss.split(":");
-            const minutes = parseInt(parts[0], 10);
-            const seconds = parseInt(parts[1], 10);
-            return minutes * 60 + seconds;
-        }
+{% block extra_scripts %}
+<script>
+    const jobId = "{{ job_id }}";
+    const estimatedTimeText = "{{ estimated_time }}";
+    const estado = document.getElementById("estado");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
 
-        const estimatedSeconds = Math.max(parseTimeToSeconds(estimatedTimeText), 1);
-        const startTime = Date.now();
+    function parseTimeToSeconds(mmss) {
+        const parts = mmss.split(":");
+        const minutes = parseInt(parts[0], 10);
+        const seconds = parseInt(parts[1], 10);
+        return minutes * 60 + seconds;
+    }
 
-        let visualProgress = 0;
+    const estimatedSeconds = Math.max(parseTimeToSeconds(estimatedTimeText), 1);
+    const startTime = Date.now();
+    let visualProgress = 0;
 
-        fetch(`/start_process/${jobId}`, { method: "POST" });
+    const progressInterval = setInterval(() => {
+        const elapsed = (Date.now() - startTime) / 1000;
+        visualProgress = Math.min((elapsed / estimatedSeconds) * 95, 95);
+        progressBar.style.width = visualProgress + "%";
+        progressText.textContent = `Progreso estimado: ${Math.round(visualProgress)}%`;
+    }, 1000);
 
-        const progressInterval = setInterval(() => {
-            const elapsed = (Date.now() - startTime) / 1000;
+    const statusInterval = setInterval(async () => {
+        try {
+            const response = await fetch(`/job_status/${jobId}`);
+            const data = await response.json();
 
-            // La barra llega hasta el 95% mientras espera el resultado real
-            visualProgress = Math.min((elapsed / estimatedSeconds) * 95, 95);
+            estado.textContent = "Estado: " + data.status;
 
-            progressBar.style.width = visualProgress + "%";
-            progressText.textContent = `Progreso estimado: ${Math.round(visualProgress)}%`;
-        }, 1000);
-
-        const statusInterval = setInterval(async () => {
-            try {
-                const response = await fetch(`/job_status/${jobId}`);
-                const data = await response.json();
-
-                estado.textContent = "Estado: " + data.status;
-
-                if (data.status === "processing") {
-                    progressText.textContent = `Progreso estimado: ${Math.round(visualProgress)}%`;
-                }
-
-                if (data.status === "done") {
-                    clearInterval(statusInterval);
-                    clearInterval(progressInterval);
-
-                    progressBar.style.width = "100%";
-                    progressText.textContent = "Progreso estimado: 100%";
-                    estado.textContent = "Estado: transcripción completada";
-                    estado.classList.add("done");
-
-                    setTimeout(() => {
-                        window.location.href = `/result/${jobId}`;
-                    }, 800);
-                }
-
-                if (data.status === "error") {
-                    clearInterval(statusInterval);
-                    clearInterval(progressInterval);
-
-                    estado.textContent = "Error: " + data.error;
-                    estado.classList.add("error");
-                    progressText.textContent = "No se ha podido completar la transcripción";
-                }
-            } catch (error) {
+            if (data.status === "done") {
                 clearInterval(statusInterval);
                 clearInterval(progressInterval);
+                progressBar.style.width = "100%";
+                progressText.textContent = "Progreso estimado: 100%";
+                estado.textContent = "Estado: transcripción completada";
+                estado.classList.add("done");
 
-                estado.textContent = "Error al consultar el estado del proceso";
-                estado.classList.add("error");
-                progressText.textContent = "No se ha podido actualizar el progreso";
+                setTimeout(() => {
+                    window.location.href = `/result/${jobId}`;
+                }, 800);
             }
-        }, 2000);
-    </script>
-</body>
-</html>
+
+            if (data.status === "error") {
+                clearInterval(statusInterval);
+                clearInterval(progressInterval);
+                estado.textContent = "Error: " + data.error;
+                estado.classList.add("error");
+                progressText.textContent = "No se ha podido completar la transcripción";
+            }
+        } catch (error) {
+            clearInterval(statusInterval);
+            clearInterval(progressInterval);
+            estado.textContent = "Error al consultar el estado del proceso";
+            estado.classList.add("error");
+            progressText.textContent = "No se ha podido actualizar el progreso";
+        }
+    }, 2000);
+</script>
+{% endblock %}

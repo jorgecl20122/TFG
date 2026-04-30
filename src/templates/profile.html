@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    <div class="card">
+        <h1 class="section-title">Mi Perfil</h1>
+
+        {% if message %}
+            <div style="background:#e7f7ed; color:#207245; border:1px solid #c9e8d4; padding:12px; border-radius:10px; margin-bottom:16px;">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div style="background:#fdeaea; color:#b53a3a; border:1px solid #f2caca; padding:12px; border-radius:10px; margin-bottom:16px;">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <p><strong>Usuario actual:</strong> {{ current_user["username"] }}</p>
+        <p><strong>Rol:</strong> {{ current_user["role"] }}</p>
+
+        <hr style="margin: 24px 0; border:none; border-top:1px solid #e5ecf4;">
+
+        <form method="post" action="{{ url_for('update_username') }}">
+            <div class="form-group">
+                <label>Nuevo username</label>
+                <input name="new_username" required>
+            </div>
+            <button type="submit" class="btn">Cambiar username</button>
+        </form>
+
+        <hr style="margin: 24px 0; border:none; border-top:1px solid #e5ecf4;">
+
+        <form method="post" action="{{ url_for('update_password') }}">
+            <div class="form-group">
+                <label>Contraseña actual</label>
+                <input name="current_password" type="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>Nueva contraseña</label>
+                <input name="new_password" type="password" required>
+            </div>
+
+            <button type="submit" class="btn">Cambiar contraseña</button>
+        </form>
+
+        <div style="margin-top: 30px;">
+            <a href="{{ url_for('logout') }}" class="btn btn-secondary">LogOut</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">Últimas transcripciones</h2>
+
+        {% if recent_meetings %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for meeting in recent_meetings %}
+                    <tr>
+                        <td>{{ meeting["title"] }}</td>
+                        <td>{{ meeting["status"] }}</td>
+                        <td>{{ meeting["created_at"] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="muted">Aún no has participado en reuniones.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

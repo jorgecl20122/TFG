@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Mis Reuniones{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 class="section-title">Mis Reuniones</h1>
+
+    {% if meetings %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Usuario</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in meetings %}
+                <tr>
+                    <td>{{ row["title"] }}</td>
+                    <td>{{ row["username"] }}</td>
+                    <td>
+                        <span class="status-pill status-{{ row['status'] }}">
+                            {{ row["status"] }}
+                        </span>
+                    </td>
+                    <td>{{ row["created_at"] }}</td>
+                    <td>
+                        {% if row["status"] == "done" %}
+                            <a class="btn" style="padding:8px 12px;" href="{{ url_for('result', job_id=row['job_id']) }}">
+                                Ver
+                            </a>
+                        {% elif row["status"] in ["pending", "processing"] %}
+                            <a class="btn btn-secondary" style="padding:8px 12px;" href="{{ url_for('result', job_id=row['job_id']) }}">
+                                Procesando
+                            </a>
+                        {% else %}
+                            <span class="status-pill status-error">Error</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="muted">Todavía no hay reuniones.</p>
+    {% endif %}
+</div>
+{% endblock %}

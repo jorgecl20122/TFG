@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Gestionar Usuarios{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 class="section-title">Gestionar Usuarios</h1>
+
+    <div style="margin-bottom: 28px;">
+        <h2 style="font-size: 20px; color:#304463;">Crear usuario</h2>
+
+        <form method="post" action="{{ url_for('create_user') }}" style="display:grid; grid-template-columns: 1fr 1fr 180px 160px; gap: 12px; align-items:end;">
+            <div>
+                <label>Usuario</label>
+                <input name="username" required>
+            </div>
+            <div>
+                <label>Contraseña</label>
+                <input name="password" type="password" required>
+            </div>
+            <div>
+                <label>Rol</label>
+                <select name="role">
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn" style="width:100%;">Crear</button>
+            </div>
+        </form>
+    </div>
+
+    <h2 style="font-size: 20px; color:#304463;">Usuarios existentes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th>Fecha de alta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+            <tr>
+                <td>{{ u["username"] }}</td>
+                <td>{{ u["role"] }}</td>
+                <td>{{ u["created_at"] }}</td>
+                <td>
+                    <form method="post" action="{{ url_for('delete_user', user_id=u['id']) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-secondary">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
