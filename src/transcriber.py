@@ -103,7 +103,7 @@ def format_text_for_display(text):
     return text
 
 
-def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.85):
+def merge_and_flag_segments(fast_segments, slow_segments, threshold=0.90):
     aligned_blocks = align_segments(fast_segments, slow_segments)
     merged = []
 

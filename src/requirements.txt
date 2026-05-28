@@ -3,3 +3,6 @@ ctranslate2==4.7.1
 flask
 werkzeug
 mutagen
+pyannote.audio
+python-dotenv
+soundfile

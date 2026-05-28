@@ -421,7 +421,8 @@ def run_transcription(job_id):
         result = process_audio(
             audio_path=job["upload_path"],
             output_dir=job["output_dir"],
-            web_audio_path=web_audio_path
+            web_audio_path=web_audio_path,
+            job_id=job_id
         )
 
         conn = get_connection()
@@ -527,6 +528,92 @@ def job_status(job_id):
     return jsonify({
         "status": meeting["status"],
         "error": meeting["error_message"] or ""
+    })
+
+
+@app.route("/review_segment/<job_id>/<int:segment_index>", methods=["POST"])
+@login_required
+def review_segment(job_id, segment_index):
+    conn = get_connection()
+    meeting = conn.execute(
+        "SELECT * FROM meetings WHERE job_id = ?",
+        (job_id,)
+    ).fetchone()
+
+    if meeting is None:
+        conn.close()
+        abort(404)
+
+    user = get_current_user()
+    if not user_can_access_meeting(meeting, user):
+        conn.close()
+        return jsonify({"ok": False, "error": "Acceso denegado"}), 403
+
+    transcript = conn.execute(
+        "SELECT * FROM transcripts WHERE meeting_id = ?",
+        (meeting["id"],)
+    ).fetchone()
+
+    if transcript is None or not transcript["json_path"]:
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "No se ha encontrado la transcripción"
+        }), 404
+
+    json_path = transcript["json_path"]
+    html_path = transcript["html_path"]
+
+    data = request.get_json(silent=True) or {}
+    reviewed_text = data.get("text", "").strip()
+
+    if not reviewed_text:
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "El texto revisado no puede estar vacío"
+        }), 400
+
+    if not os.path.exists(json_path):
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "No existe el archivo JSON de segmentos"
+        }), 404
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        segments = json.load(f)
+
+    if segment_index < 0 or segment_index >= len(segments):
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "Índice de segmento no válido"
+        }), 400
+
+    segments[segment_index]["text"] = reviewed_text
+    segments[segment_index]["human_reviewed"] = True
+    segments[segment_index]["reviewed_by"] = user["username"]
+    segments[segment_index]["review_status"] = "human_reviewed"
+
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(segments, f, indent=2, ensure_ascii=False)
+
+    conn.execute(
+        """
+        UPDATE transcripts
+        SET updated_at = CURRENT_TIMESTAMP
+        WHERE meeting_id = ?
+        """,
+        (meeting["id"],)
+    )
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        "ok": True,
+        "text": reviewed_text,
+        "status": "human_reviewed"
     })
 
 
@@ -818,7 +905,6 @@ def update_password():
 if __name__ == "__main__":
     init_db()
 
-    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
-        calibrate_machine()
+    calibrate_machine()
 
     app.run(debug=True, use_reloader=False)
