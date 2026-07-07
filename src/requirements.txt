@@ -6,3 +6,7 @@ mutagen
 pyannote.audio
 python-dotenv
 soundfile
+reportlab
+numpy
+torch
+gunicorn

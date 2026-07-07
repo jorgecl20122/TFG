@@ -5,6 +5,7 @@ from flask import (
     render_template,
     request,
     send_from_directory,
+    send_file,
     abort,
     jsonify,
     redirect,
@@ -17,6 +18,11 @@ from functools import wraps
 from main import process_audio
 from mutagen import File as MutagenFile
 from transcriber import transcribe_for_calibration
+from segments import generate_html
+from pdf_generator import generate_transcript_pdf
+from datetime import datetime
+from logger import write_log
+from dotenv import load_dotenv
 
 import os
 import uuid
@@ -26,26 +32,41 @@ import threading
 import sqlite3
 import secrets
 
+load_dotenv()
+
 app = Flask(__name__)
-app.secret_key = "cambia_esta_clave_por_una_muy_larga_y_privada"
+app.secret_key = os.getenv("SECRET_KEY", "clave_temporal_solo_desarrollo")
 
 UPLOAD_FOLDER = "data/uploads"
 OUTPUT_FOLDER = "data/out"
 CONFIG_FOLDER = "data/config"
 TEST_FOLDER = "data/test"
 DB_FOLDER = "data/db"
+PROFILE_PHOTO_FOLDER = "data/profile_photos"
 DB_PATH = os.path.join(DB_FOLDER, "app.db")
 
 CALIBRATION_FILE = os.path.join(CONFIG_FOLDER, "calibration.json")
 CALIBRATION_AUDIO = os.path.join(TEST_FOLDER, "calibration_audio.mp3")
 
 ALLOWED_EXTENSIONS = {"mp3", "wav", "m4a", "mpeg", "mp4"}
+ALLOWED_IMAGE_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
+AVATAR_COLORS = [
+    "#3f7ad9",
+    "#16a34a",
+    "#ea580c",
+    "#9333ea",
+    "#0891b2",
+    "#be123c",
+    "#ca8a04",
+    "#4f46e5"
+]
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 os.makedirs(CONFIG_FOLDER, exist_ok=True)
 os.makedirs(TEST_FOLDER, exist_ok=True)
 os.makedirs(DB_FOLDER, exist_ok=True)
+os.makedirs(PROFILE_PHOTO_FOLDER, exist_ok=True)
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["OUTPUT_FOLDER"] = OUTPUT_FOLDER
@@ -117,6 +138,29 @@ def init_db():
         FOREIGN KEY(meeting_id) REFERENCES meetings(id)
     )
     """)
+
+    existing_columns = [
+        row["name"]
+        for row in cur.execute("PRAGMA table_info(users)").fetchall()
+    ]
+
+    if "profile_photo" not in existing_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN profile_photo TEXT DEFAULT ''")
+
+    if "avatar_color" not in existing_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN avatar_color TEXT DEFAULT ''")
+
+    users_without_color = cur.execute("""
+        SELECT id
+        FROM users
+        WHERE avatar_color IS NULL OR avatar_color = ''
+    """).fetchall()
+
+    for user_row in users_without_color:
+        cur.execute(
+            "UPDATE users SET avatar_color = ? WHERE id = ?",
+            (random_avatar_color(), user_row["id"])
+        )
 
     conn.commit()
 
@@ -191,6 +235,19 @@ def admin_required(view):
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def allowed_image(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS
+
+
+def random_avatar_color():
+    return secrets.choice(AVATAR_COLORS)
+
+
+def get_user_initial(user):
+    username = user["username"] if user and user["username"] else "?"
+    return username[0].upper()
 
 
 def get_audio_duration(path):
@@ -380,15 +437,28 @@ def upload_file():
     conn.close()
 
     jobs[job_id] = {
-    "meeting_id": meeting_id,
-    "status": "pending",
-    "upload_path": upload_path,
-    "upload_name": upload_name,
-    "output_dir": job_output_dir,
-    "duration": duration,
-    "estimated_seconds": estimated_seconds,
-    "owner_id": user["id"]
-}
+        "meeting_id": meeting_id,
+        "status": "pending",
+        "upload_path": upload_path,
+        "upload_name": upload_name,
+        "output_dir": job_output_dir,
+        "duration": duration,
+        "estimated_seconds": estimated_seconds,
+        "owner_id": user["id"]
+    }
+
+    write_log(
+        module="upload",
+        action="audio_uploaded",
+        user=user["username"],
+        job_id=job_id,
+        details={
+            "title": title,
+            "original_filename": original_name,
+            "duration": duration,
+            "estimated_seconds": estimated_seconds
+        }
+    )
 
     thread = threading.Thread(target=run_transcription, args=(job_id,))
     thread.start()
@@ -406,6 +476,16 @@ def upload_file():
 def run_transcription(job_id):
     job = jobs[job_id]
     job["status"] = "processing"
+
+    write_log(
+        module="transcription",
+        action="transcription_started",
+        job_id=job_id,
+        details={
+            "meeting_id": job["meeting_id"],
+            "upload_path": job["upload_path"]
+        }
+    )
 
     conn = get_connection()
     conn.execute(
@@ -447,6 +527,15 @@ def run_transcription(job_id):
 
         job["status"] = "done"
 
+        write_log(
+            module="transcription",
+            action="transcription_finished",
+            job_id=job_id,
+            details={
+                "meeting_id": job["meeting_id"]
+            }
+        )
+
     except Exception as e:
         error_text = str(e)
 
@@ -460,6 +549,16 @@ def run_transcription(job_id):
 
         job["status"] = "error"
         job["error"] = error_text
+
+        write_log(
+            module="transcription",
+            action="transcription_error",
+            job_id=job_id,
+            details={
+                "meeting_id": job["meeting_id"],
+                "error": error_text
+            }
+        )
 
 
 @app.route("/start_process/<job_id>", methods=["POST"])
@@ -591,13 +690,36 @@ def review_segment(job_id, segment_index):
             "error": "Índice de segmento no válido"
         }), 400
 
+    reviewed_at = datetime.now().strftime("%d/%m/%Y %H:%M")
+
     segments[segment_index]["text"] = reviewed_text
     segments[segment_index]["human_reviewed"] = True
     segments[segment_index]["reviewed_by"] = user["username"]
     segments[segment_index]["review_status"] = "human_reviewed"
+    segments[segment_index]["reviewed_at"] = reviewed_at
 
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(segments, f, indent=2, ensure_ascii=False)
+
+    write_log(
+        module="editor",
+        action="segment_reviewed",
+        user=user["username"],
+        job_id=job_id,
+        details={
+            "segment_index": segment_index,
+            "reviewed_at": reviewed_at
+        }
+    )
+
+    web_audio_path = f"/uploads/{meeting['stored_filename']}"
+
+    generate_html(
+        segments,
+        web_audio_path,
+        html_path,
+        job_id=job_id
+    )
 
     conn.execute(
         """
@@ -613,8 +735,145 @@ def review_segment(job_id, segment_index):
     return jsonify({
         "ok": True,
         "text": reviewed_text,
-        "status": "human_reviewed"
+        "status": "human_reviewed",
+        "reviewed_at": reviewed_at
     })
+
+@app.route("/update_speaker_name/<job_id>", methods=["POST"])
+@login_required
+def update_speaker_name(job_id):
+    conn = get_connection()
+    meeting = conn.execute(
+        "SELECT * FROM meetings WHERE job_id = ?",
+        (job_id,)
+    ).fetchone()
+
+    if meeting is None:
+        conn.close()
+        abort(404)
+
+    user = get_current_user()
+    if not user_can_access_meeting(meeting, user):
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "Acceso denegado"
+        }), 403
+
+    transcript = conn.execute(
+        "SELECT * FROM transcripts WHERE meeting_id = ?",
+        (meeting["id"],)
+    ).fetchone()
+
+    if transcript is None or not transcript["json_path"]:
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "No se ha encontrado la transcripción"
+        }), 404
+
+    json_path = transcript["json_path"]
+    html_path = transcript["html_path"]
+
+    data = request.get_json(silent=True) or {}
+    original_speaker = data.get("speaker", "").strip()
+    speaker_name = data.get("name", "").strip()
+
+    if not original_speaker:
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "No se ha recibido el hablante original"
+        }), 400
+
+    if not os.path.exists(json_path):
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "No existe el archivo JSON de segmentos"
+        }), 404
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        segments = json.load(f)
+
+    updated = 0
+
+    for segment in segments:
+        if segment.get("speaker", "SPEAKER_UNKNOWN") == original_speaker:
+            segment["speaker_name"] = speaker_name
+            updated += 1
+
+    if updated == 0:
+        conn.close()
+        return jsonify({
+            "ok": False,
+            "error": "No se ha encontrado ningún segmento con ese hablante"
+        }), 404
+
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(segments, f, indent=2, ensure_ascii=False)
+
+    write_log(
+        module="speakers",
+        action="speaker_name_updated",
+        user=user["username"],
+        job_id=job_id,
+        details={
+            "original_speaker": original_speaker,
+            "new_name": speaker_name,
+            "segments_updated": updated
+        }
+    )
+
+    web_audio_path = f"/uploads/{meeting['stored_filename']}"
+
+    generate_html(
+        segments,
+        web_audio_path,
+        html_path,
+        job_id=job_id
+    )
+
+    conn.execute(
+        """
+        UPDATE transcripts
+        SET updated_at = CURRENT_TIMESTAMP
+        WHERE meeting_id = ?
+        """,
+        (meeting["id"],)
+    )
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        "ok": True,
+        "speaker": original_speaker,
+        "name": speaker_name,
+        "updated": updated
+    })
+
+@app.route("/log_event", methods=["POST"])
+@login_required
+def log_event():
+    user = get_current_user()
+    data = request.get_json(silent=True) or {}
+
+    module = data.get("module", "frontend")
+    action = data.get("action", "unknown")
+    job_id = data.get("job_id", "")
+    shortcut = data.get("shortcut", "")
+    details = data.get("details", {})
+
+    write_log(
+        module=module,
+        action=action,
+        user=user["username"] if user else None,
+        job_id=job_id,
+        shortcut=shortcut,
+        details=details
+    )
+
+    return jsonify({"ok": True})
 
 
 # =========================
@@ -678,28 +937,129 @@ def viewer(job_id):
         "SELECT * FROM meetings WHERE job_id = ?",
         (job_id,)
     ).fetchone()
-    conn.close()
 
     if meeting is None:
+        conn.close()
         abort(404)
 
     user = get_current_user()
     if not user_can_access_meeting(meeting, user):
+        conn.close()
         return "Acceso denegado", 403
 
-    folder = os.path.join(app.config["OUTPUT_FOLDER"], job_id)
-    html_path = os.path.join(folder, "editor.html")
+    transcript = conn.execute(
+        "SELECT * FROM transcripts WHERE meeting_id = ?",
+        (meeting["id"],)
+    ).fetchone()
 
-    if not os.path.exists(html_path):
+    conn.close()
+
+    if transcript is None or not transcript["json_path"]:
         abort(404)
 
-    return send_from_directory(folder, "editor.html")
+    json_path = transcript["json_path"]
+    html_path = transcript["html_path"]
+
+    if not os.path.exists(json_path):
+        abort(404)
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        segments = json.load(f)
+
+    web_audio_path = f"/uploads/{meeting['stored_filename']}"
+
+    generate_html(
+        segments,
+        web_audio_path,
+        html_path,
+        job_id=job_id
+    )
+
+    folder = os.path.dirname(html_path)
+    filename = os.path.basename(html_path)
+
+    return send_from_directory(folder, filename)
+
+
+@app.route("/acta_pdf/<job_id>")
+@login_required
+def acta_pdf(job_id):
+    conn = get_connection()
+    meeting = conn.execute(
+        "SELECT * FROM meetings WHERE job_id = ?",
+        (job_id,)
+    ).fetchone()
+
+    if meeting is None:
+        conn.close()
+        abort(404)
+
+    user = get_current_user()
+    if not user_can_access_meeting(meeting, user):
+        conn.close()
+        return "Acceso denegado", 403
+
+    transcript = conn.execute(
+        "SELECT * FROM transcripts WHERE meeting_id = ?",
+        (meeting["id"],)
+    ).fetchone()
+
+    conn.close()
+
+    if transcript is None or not transcript["json_path"]:
+        return "No se ha encontrado la transcripción", 404
+
+    json_path = transcript["json_path"]
+
+    if not os.path.exists(json_path):
+        return "No existe el archivo JSON de segmentos", 404
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        segments = json.load(f)
+
+    pdf_path = os.path.join(
+        meeting["output_dir"],
+        "transcripcion_acta.pdf"
+    )
+
+    generate_transcript_pdf(
+        segments=segments,
+        meeting=meeting,
+        output_path=pdf_path
+    )
+
+    safe_title = secure_filename(meeting["title"]) or "transcripcion"
+    download_name = f"{safe_title}_acta.pdf"
+
+    write_log(
+        module="pdf",
+        action="pdf_generated",
+        user=user["username"],
+        job_id=job_id,
+        details={
+            "meeting_title": meeting["title"],
+            "output_path": pdf_path
+        }
+    )
+
+    return send_file(
+        pdf_path,
+        as_attachment=True,
+        download_name=download_name,
+        mimetype="application/pdf"
+    ) 
 
 
 @app.route("/uploads/<filename>")
 @login_required
 def uploaded_file(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
+
+
+@app.route("/profile_photos/<filename>")
+@login_required
+def profile_photo(filename):
+    return send_from_directory(PROFILE_PHOTO_FOLDER, filename)
 
 
 # =========================
@@ -714,14 +1074,18 @@ def meetings():
 
     if user["role"] == "admin":
         rows = conn.execute("""
-            SELECT meetings.*, users.username
+            SELECT 
+                meetings.*, 
+                users.username,
+                users.profile_photo,
+                users.avatar_color
             FROM meetings
             JOIN users ON users.id = meetings.owner_id
             ORDER BY meetings.created_at DESC
         """).fetchall()
     else:
         rows = conn.execute("""
-            SELECT meetings.*, users.username
+            SELECT meetings.*, users.username, users.profile_photo, users.avatar_color
             FROM meetings
             JOIN users ON users.id = meetings.owner_id
             WHERE meetings.owner_id = ?
@@ -775,18 +1139,18 @@ def create_user():
     conn = get_connection()
     try:
         conn.execute("""
-            INSERT INTO users (username, password_hash, role)
-            VALUES (?, ?, ?)
+            INSERT INTO users (username, password_hash, role, avatar_color)
+            VALUES (?, ?, ?, ?)
         """, (
             username,
             generate_password_hash(password),
-            role
+            role,
+            random_avatar_color()
         ))
         conn.commit()
     except sqlite3.IntegrityError:
         conn.close()
         return "Ese usuario ya existe", 400
-    meetings
     conn.close()
     return redirect(url_for("admin_users"))
 
@@ -872,6 +1236,51 @@ def update_username():
 
     conn.close()
     return redirect(url_for("profile", message="Username actualizado correctamente"))
+
+
+@app.route("/profile/update_photo", methods=["POST"])
+@login_required
+def update_photo():
+    user = get_current_user()
+
+    if "photo" not in request.files:
+        return redirect(url_for("profile", error="No se ha enviado ninguna foto"))
+
+    file = request.files["photo"]
+
+    if file.filename == "":
+        return redirect(url_for("profile", error="No se ha seleccionado ninguna foto"))
+
+    if not allowed_image(file.filename):
+        return redirect(url_for("profile", error="Formato de imagen no permitido"))
+
+    original_name = secure_filename(file.filename)
+    extension = original_name.rsplit(".", 1)[1].lower()
+    photo_name = f"user_{user['id']}_{uuid.uuid4().hex}.{extension}"
+    photo_path = os.path.join(PROFILE_PHOTO_FOLDER, photo_name)
+
+    file.save(photo_path)
+
+    old_photo = user["profile_photo"] if "profile_photo" in user.keys() else ""
+
+    conn = get_connection()
+    conn.execute(
+        "UPDATE users SET profile_photo = ? WHERE id = ?",
+        (photo_name, user["id"])
+    )
+    conn.commit()
+    conn.close()
+
+    if old_photo:
+        old_path = os.path.join(PROFILE_PHOTO_FOLDER, old_photo)
+
+        if os.path.exists(old_path):
+            try:
+                os.remove(old_path)
+            except OSError:
+                pass
+
+    return redirect(url_for("profile", message="Foto de perfil actualizada correctamente"))
 
 
 @app.route("/profile/update_password", methods=["POST"])

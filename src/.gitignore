@@ -6,17 +6,8 @@ env/
 # Variables privadas
 .env
 
-# Base de datos local
-data/db/*.db
-*.db
-
-# Audios subidos y resultados generados
-data/uploads/
-data/out/
-
-# Configuración/calibración local
-data/config/
-data/test/
+# Datos de la aplicación
+data
 
 # Cachés de Python
 __pycache__/

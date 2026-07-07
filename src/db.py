@@ -23,6 +23,8 @@ def init_db():
         username TEXT NOT NULL UNIQUE,
         password_hash TEXT NOT NULL,
         role TEXT NOT NULL CHECK(role IN ('admin', 'user')),
+        profile_photo TEXT DEFAULT '',
+        avatar_color TEXT DEFAULT '',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
@@ -66,6 +68,29 @@ def init_db():
     )
     """)
 
+    existing_columns = [
+        row["name"]
+        for row in cur.execute("PRAGMA table_info(users)").fetchall()
+    ]
+
+    if "profile_photo" not in existing_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN profile_photo TEXT DEFAULT ''")
+
+    if "avatar_color" not in existing_columns:
+        cur.execute("ALTER TABLE users ADD COLUMN avatar_color TEXT DEFAULT ''")
+
+    users_without_color = cur.execute("""
+        SELECT id
+        FROM users
+        WHERE avatar_color IS NULL OR avatar_color = ''
+    """).fetchall()
+
+    for user_row in users_without_color:
+        cur.execute(
+            "UPDATE users SET avatar_color = ? WHERE id = ?",
+            (random_avatar_color(), user_row["id"])
+        )
+
     conn.commit()
 
     # Crear admin inicial si no existe ninguno
@@ -77,9 +102,9 @@ def init_db():
         password_hash = generate_password_hash(random_password)
 
         cur.execute("""
-        INSERT INTO users (username, password_hash, role)
-        VALUES (?, ?, ?)
-        """, ("admin", password_hash, "admin"))
+            INSERT INTO users (username, password_hash, role, avatar_color)
+            VALUES (?, ?, ?, ?)
+        """, ("admin", password_hash, "admin", random_avatar_color()))
 
         conn.commit()
 

@@ -21,7 +21,26 @@
                 {% for row in meetings %}
                 <tr>
                     <td>{{ row["title"] }}</td>
-                    <td>{{ row["username"] }}</td>
+                    <td>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            {% if row["profile_photo"] %}
+                                <img
+                                    src="{{ url_for('profile_photo', filename=row['profile_photo']) }}"
+                                    class="avatar avatar-small"
+                                    alt="Foto de perfil"
+                                >
+                            {% else %}
+                                <span
+                                    class="avatar-fallback avatar-small"
+                                    style="background-color: {{ row['avatar_color'] or '#3f7ad9' }};"
+                                >
+                                    {{ row["username"][0].upper() }}
+                                </span>
+                            {% endif %}
+
+                            <span>{{ row["username"] }}</span>
+                        </div>
+                    </td>
                     <td>
                         <span class="status-pill status-{{ row['status'] }}">
                             {{ row["status"] }}

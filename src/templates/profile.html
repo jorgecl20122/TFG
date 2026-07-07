@@ -19,8 +19,37 @@
             </div>
         {% endif %}
 
-        <p><strong>Usuario actual:</strong> {{ current_user["username"] }}</p>
-        <p><strong>Rol:</strong> {{ current_user["role"] }}</p>
+        <div style="display:flex; align-items:center; gap:18px; margin-bottom:20px;">
+            {% if current_user["profile_photo"] %}
+                <img
+                    src="{{ url_for('profile_photo', filename=current_user['profile_photo']) }}"
+                    class="avatar"
+                    style="width:86px; height:86px;"
+                    alt="Foto de perfil"
+                >
+            {% else %}
+                <div
+                    class="avatar-fallback"
+                    style="width:86px; height:86px; font-size:34px; background-color: {{ current_user['avatar_color'] or '#3f7ad9' }};"
+                >
+                    {{ current_user["username"][0].upper() }}
+                </div>
+            {% endif %}
+
+            <div>
+                <p style="margin:0 0 6px 0;"><strong>Usuario actual:</strong> {{ current_user["username"] }}</p>
+                <p style="margin:0;"><strong>Rol:</strong> {{ current_user["role"] }}</p>
+            </div>
+        </div>
+
+        <form method="post" action="{{ url_for('update_photo') }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Cambiar foto de perfil</label>
+                <input type="file" name="photo" accept="image/png,image/jpeg,image/webp" required>
+            </div>
+
+            <button type="submit" class="btn">Cambiar foto</button>
+        </form>
 
         <hr style="margin: 24px 0; border:none; border-top:1px solid #e5ecf4;">
 
