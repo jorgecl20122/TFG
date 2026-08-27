@@ -13,7 +13,7 @@ def run_case(name, fast_segments, slow_segments):
         print("Tiempo:", r["start"], "->", r["end"])
         print("Fast:", r.get("fast_text"))
         print("Slow:", r.get("slow_text"))
-        print("Similitud:", r.get("similarity"))
+        print("Similitud:", r.get("similarity_percent"), "%")
         print("Incierto:", r.get("uncertain"))
         print("Motivo:", r.get("review_reason"))
 
