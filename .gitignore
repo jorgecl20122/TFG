@@ -63,7 +63,7 @@ logs/
 *.sqlite-journal
 
 # Vídeo utilizado durante la evaluación
-/ExplicaciónTranscribeMatic.mp4
+/docs/videos/*.mp4
 
 # ============================================================
 # Archivos temporales y de compilación
