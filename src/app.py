@@ -17,7 +17,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 from main import process_audio
 from mutagen import File as MutagenFile
-from transcriber import transcribe_for_calibration
 from segments import generate_html
 from pdf_generator import generate_transcript_pdf
 from datetime import datetime
@@ -31,6 +30,7 @@ import time
 import threading
 import sqlite3
 import secrets
+import tempfile
 
 load_dotenv()
 
@@ -274,25 +274,78 @@ def save_calibration_factor(factor):
 
 def calibrate_machine():
     if not os.path.exists(CALIBRATION_AUDIO):
-        print("No se ha encontrado el audio de calibración. Se usará 0.27 por defecto.")
+        print(
+            "No se ha encontrado el audio de calibración. "
+            "Se usará el factor anterior o 0.27 por defecto."
+        )
+
+        previous_factor = load_calibration_factor()
+
+        if previous_factor is not None:
+            return previous_factor
+
         save_calibration_factor(0.27)
         return 0.27
 
     duration = get_audio_duration(CALIBRATION_AUDIO)
 
-    start = time.perf_counter()
-    transcribe_for_calibration(CALIBRATION_AUDIO)
-    elapsed = time.perf_counter() - start
+    if duration <= 0:
+        raise ValueError(
+            "El audio de calibración no tiene una duración válida"
+        )
 
-    factor = elapsed / duration if duration > 0 else 0.27
+    print("=" * 60)
+    print("INICIANDO CALIBRACIÓN COMPLETA")
+    print(f"Duración del audio: {duration:.2f} segundos")
+    print("Se ejecutarán las dos transcripciones y la diarización.")
+    print("=" * 60)
+
+    try:
+        with tempfile.TemporaryDirectory(
+            prefix="transcribematic_calibration_"
+        ) as calibration_output_dir:
+
+            start = time.perf_counter()
+
+            process_audio(
+                audio_path=CALIBRATION_AUDIO,
+                output_dir=calibration_output_dir,
+                web_audio_path="/calibration_audio.mp3",
+                job_id="calibration",
+                require_diarization=True
+            )
+
+            elapsed = time.perf_counter() - start
+
+    except Exception as e:
+        print(f"Error durante la calibración completa: {e}")
+
+        previous_factor = load_calibration_factor()
+
+        if previous_factor is not None:
+            print(
+                f"Se mantiene el factor anterior: "
+                f"{previous_factor:.3f}"
+            )
+            return previous_factor
+
+        print("Se utilizará el factor 0.27 por defecto.")
+        save_calibration_factor(0.27)
+        return 0.27
+
+    factor = elapsed / duration
+
     save_calibration_factor(factor)
 
-    print(f"Calibración completada. Duración audio: {duration:.2f}s")
-    print(f"Tiempo real: {elapsed:.2f}s")
+    print("=" * 60)
+    print("CALIBRACIÓN COMPLETADA")
+    print(f"Duración del audio: {duration:.2f} s")
+    print(f"Tiempo total de procesamiento: {elapsed:.2f} s")
     print(f"Factor guardado: {factor:.3f}")
+    print(f"Estimación: {factor * 60:.1f} segundos por minuto")
+    print("=" * 60)
 
     return factor
-
 
 def format_duration(seconds):
     seconds = max(0, int(round(seconds)))
@@ -477,9 +530,12 @@ def run_transcription(job_id):
     job = jobs[job_id]
     job["status"] = "processing"
 
+    username = get_username_by_id(job["owner_id"])
+
     write_log(
         module="transcription",
         action="transcription_started",
+        user=username,
         job_id=job_id,
         details={
             "meeting_id": job["meeting_id"],
@@ -530,6 +586,7 @@ def run_transcription(job_id):
         write_log(
             module="transcription",
             action="transcription_finished",
+            user=username,
             job_id=job_id,
             details={
                 "meeting_id": job["meeting_id"]
@@ -553,12 +610,26 @@ def run_transcription(job_id):
         write_log(
             module="transcription",
             action="transcription_error",
+            user=username,
             job_id=job_id,
             details={
                 "meeting_id": job["meeting_id"],
                 "error": error_text
             }
         )
+
+def get_username_by_id(user_id):
+    conn = get_connection()
+    user = conn.execute(
+        "SELECT username FROM users WHERE id = ?",
+        (user_id,)
+    ).fetchone()
+    conn.close()
+
+    if user is None:
+        return f"usuario_id_{user_id}"
+
+    return user["username"]
 
 
 @app.route("/start_process/<job_id>", methods=["POST"])

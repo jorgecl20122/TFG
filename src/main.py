@@ -43,7 +43,7 @@ def format_duration(seconds):
     return f"{minutes:02d}:{secs:02d}"
 
 
-def process_audio(audio_path, output_dir, web_audio_path, job_id=None):
+def process_audio(audio_path, output_dir, web_audio_path, job_id=None, require_diarization=False):
     fast_segments = transcribe_fast(audio_path)
     slow_segments = transcribe_slow(audio_path)
     final_segments = merge_and_flag_segments(fast_segments, slow_segments)
@@ -56,6 +56,11 @@ def process_audio(audio_path, output_dir, web_audio_path, job_id=None):
         )
     except Exception as e:
         print("No se ha podido completar la diarización:", e)
+
+        if require_diarization:
+            raise RuntimeError(
+                "La calibración no puede completarse porque ha fallado la diarización"
+            ) from e
 
         for segment in final_segments:
             segment["speaker"] = "SPEAKER_UNKNOWN"

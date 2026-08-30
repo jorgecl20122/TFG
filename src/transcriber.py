@@ -89,8 +89,6 @@ def transcribe_slow(audio_path):
     )
 
 
-def transcribe_for_calibration(audio_path):
-    return transcribe_fast(audio_path)
 
 def format_text_for_display(text):
     if not text:
